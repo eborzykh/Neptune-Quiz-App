@@ -1,0 +1,4 @@
+
+DialogRename.close();
+
+

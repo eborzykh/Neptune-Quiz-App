@@ -1,0 +1,185 @@
+/* 
+ * ZNEPT_QZ_APP
+ * 23.10.0001
+ */
+
+/* -------------------------------------------- PageLoading */
+
+.textLoadingLogo {
+    font-size: 1.2rem;
+    padding-top: 4rem;
+    color: #ff4da6;
+    font-weight: bold;
+}
+
+.IconLoading {
+    font-size: 5rem;
+    color: #ffffff;
+    text-align: center;
+    animation: glow 0.5s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+    from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+    }
+    to {
+        text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+    }
+}
+
+/* -------------------------------------------- PageTestSelect */
+
+.HBoxTestOut {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0rem;
+
+}
+
+.TextTestHeader {
+    font-size: 1rem;
+    font-weight: bold;
+    padding-bottom: 0.25rem;
+}
+
+.TextListTestInfo {
+    font-size: 0.75rem;
+}
+
+/* -------------------------------------------- PagePQSelect */
+
+.HBoxPartSelect{
+    min-height: 3rem;
+}
+
+.TextPartSelectName{
+    font-size: 0.8rem;
+}
+
+.HBoxQuestionSelect {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.ListPQSelectItemIcon{
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.TextQuestionSelect {
+    font-size: 0.8rem;
+}
+
+/* -------------------------------------------- PageQuestion */
+
+.oHBoxQuestionTestPart {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.TextQuestionTestPart {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.oHBoxQuestion {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.TextQuestion {
+    font-size: 1.2rem;
+    line-height: 1.5;
+}
+
+.answer_variant_box {
+    padding-left: 0.25rem;
+    padding-right: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
+.answer_variant_text {
+    font-size: 1rem;
+    line-height: 1.25;
+    padding-left: 0.5rem;
+}
+
+.answer_variant_type_text {
+    padding-left: 1rem;
+    padding-right: 0.5rem;
+    width: 9rem;
+    text-align: right;
+}
+
+.oHBoxExplanation {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.TextExplanation {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* -------------------------------------------- PageResults */
+
+.HBoxResultsQuestion {
+    padding-left: 1rem;
+    padding-right: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.75rem;
+}
+
+.ResultsQuestionText {
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+.ProgressResults {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.ResultsFailedText {
+    padding-top: 1rem;
+    font-size: 2.5rem;
+    color: red;
+}
+
+.ResultsPassText {
+    padding-top: 1rem;
+    font-size: 2.5rem;
+    color: green;
+}
+
+/* -------------------------------------------- DialogParameters */
+
+.TextParameters {
+    padding-top: 1rem;
+}
+
+.VBoxParameters {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 1rem;
+}
+
+.dialog_upload_box {
+    padding: 0.5rem;
+}
+
+.dialog_upload_text {
+    font-size: 1rem;
+}

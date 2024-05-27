@@ -8,7 +8,7 @@ You can start practicing (quiz / exam / certification) on one device and then co
 
 # Installation
 
-SAP ABAP platform: https://community.sap.com/t5/application-development-blog-posts/now-available-abap-platform-trial/ba-p/13569137 
+SAP ABAP trial platform: https://hub.docker.com/r/sapse/abap-cloud-developer-trial
 
 Neptune Software SAP edition: https://community.neptune-software.com/topics/planet-8/blogs/installation-of--neptune--d-x-p--s-a-p--edition-on--a-b-a-p--pl 
 

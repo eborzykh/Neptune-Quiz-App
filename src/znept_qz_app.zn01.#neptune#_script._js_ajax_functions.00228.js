@@ -61,8 +61,18 @@ window.addEventListener('online', function() {
 });
 
 setTimeout(function() {
-    _ajax_refresh();
+    _first_refresh();
 }, _SYNC_DELAY);
+
+function _first_refresh() {
+
+    if (navigator.onLine) {
+        _ajax_refresh();
+    } else {
+        _set_UI_PageTestSelect();
+        oApp.to(PageTestSelect);
+    }
+}
 
 // Navigation
 
@@ -1035,6 +1045,8 @@ function _ajax_refresh() {
         }
         _set_UI_busy(true);
         getOnlineAjaxRefresh();
+    } else {
+        _set_UI_busy(false);
     }
 }
 

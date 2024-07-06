@@ -11,9 +11,13 @@ function OpenMessageBox() {
 if (_practice_mode === _MODE_PREPARE) {
     _set_UI_reset();
 
-    setTimeout(function() {
-        _ajax_metrics(false);
-    }, _SYNC_DELAY);
+    if (navigator.onLine) {
+        setTimeout(function() {
+            _ajax_metrics(false);
+        }, _SYNC_DELAY);
+    } else {
+        _set_UI_progress();
+    }
 }
 
 if (_practice_mode === _MODE_PRACTICE && !_kill_timer) {

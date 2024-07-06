@@ -795,10 +795,6 @@ function _submit_results() {
         oHBoxResultsFailed.setVisible(true);
     }
 
-    setTimeout(function() {
-        _ajax_metrics(false);
-    }, _SYNC_DELAY);
-
     oApp.to(PageResults);
 }
 

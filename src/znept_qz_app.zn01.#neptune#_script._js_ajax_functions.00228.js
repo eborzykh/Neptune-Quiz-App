@@ -49,6 +49,7 @@ var _pause_timer = false;
 var _practice_mode = _MODE_PREVIEW;
 var _current_question = 0;
 var _navigate_after_metrics = false;
+var _ajax_error = false;
 
 window.addEventListener('offline', function() {
     jQuery.sap.require("sap.m.MessageToast");
@@ -1257,8 +1258,18 @@ function _ajax_publish_success() {
 
 function _ajax_reset() {
 
+    var _ui_tests = PageTestSelect.getModel().getData();
+
+    // Update local storage
+    ModelData.UpdateField(ListQuestionsLS, "LS_TEST_ID", _ui_tests.UI_TEST_ID, ["LS_SYNC_METRICS", "LS_PROGRESS", "LS_BOOKMARK"], [false, _PROGRESS_UNANSWERED, _BOOKMARK_UNMARKED]);
+
+    // Cache local storage
+    setCacheListQuestionsLS();
+
+    // Update current UI
+    ModelData.UpdateField(ListPQSelect, "UI_VISIBLE_QUESTION", true, "UI_CORRECT_HIGHLIGHT", _get_correct_highlight(_PROGRESS_UNANSWERED));
+
     if (navigator.onLine) {
-        var _ui_tests = PageTestSelect.getModel().getData();
         var _sy_tests = PageTestsSY.getModel().getData();
 
         _sy_tests.UPLOAD_ON = _ui_tests.UPLOAD_ON;
@@ -1267,19 +1278,8 @@ function _ajax_reset() {
 
         PageTestsSY.getModel().setData(_sy_tests);
 
-        // Update local storage
-        ModelData.UpdateField(ListQuestionsLS, "LS_TEST_ID", _ui_tests.UI_TEST_ID, ["LS_SYNC_METRICS", "LS_PROGRESS", "LS_BOOKMARK"], [false, _PROGRESS_UNANSWERED, _BOOKMARK_UNMARKED]);
-
-        // Cache local storage
-        setCacheListQuestionsLS();
-
-        // Update current UI
-        ModelData.UpdateField(ListPQSelect, "UI_VISIBLE_QUESTION", true, "UI_CORRECT_HIGHLIGHT", _get_correct_highlight(_PROGRESS_UNANSWERED));
-
         _set_UI_busy(true);
         getOnlineAjaxReset();
-    } else {
-        _ajax_toast_offline();
     }
 }
 
@@ -1368,7 +1368,7 @@ function _ajax_metrics(_sync_all) {
             }
         }
 
-        if (ListSyncSY.getModel().getData().length > 0) {
+        if (ListSyncSY.getModel().getData().length > 0 && (_sync_all || _navigate_after_metrics || ListMetricsSY.getModel().getData().length > 0)) {
             _set_UI_busy(true);
             getOnlineAjaxMetrics();
         }
@@ -1454,10 +1454,5 @@ function _ajax_delete_success() {
 
 function _ajax_toast_offline() {
     jQuery.sap.require("sap.m.MessageToast");
-    sap.m.MessageToast.show("You need to be online");
-}
-
-function _ajax_toast_failed() {
-    jQuery.sap.require("sap.m.MessageToast");
-    sap.m.MessageToast.show("Action failed");
+    sap.m.MessageToast.show(TextAjaxOffline.getText());
 }

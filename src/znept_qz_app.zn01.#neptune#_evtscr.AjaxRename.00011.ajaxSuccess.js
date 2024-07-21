@@ -1,5 +1,7 @@
 _set_UI_busy(false);
 
+_ajax_error = false;
+
 _ajax_rename_success();
 
 jQuery.sap.require("sap.m.MessageToast");

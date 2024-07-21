@@ -1,5 +1,7 @@
 _set_UI_busy(false);
 
+_ajax_error = false;
+
 _ajax_publish_success();
 
 var _ui_tests = PageTestSelect.getModel().getData();

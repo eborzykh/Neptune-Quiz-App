@@ -2394,5 +2394,17 @@
     "attribute": "textAlign",
     "grouping": "Properties",
     "value": "Center"
+  },
+  {
+    "field_id": "00325",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "You need to be online"
+  },
+  {
+    "field_id": "00326",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Action failed"
   }
 ]

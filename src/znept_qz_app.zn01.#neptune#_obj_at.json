@@ -15198,5 +15198,173 @@
     "attribute": "wrappingType",
     "grouping": "Properties",
     "value": "Normal"
+  },
+  {
+    "field_id": "00325",
+    "version": "0001",
+    "attribute": "busy",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00325",
+    "version": "0001",
+    "attribute": "busyIndicatorDelay",
+    "grouping": "Properties",
+    "value": "1000"
+  },
+  {
+    "field_id": "00325",
+    "version": "0001",
+    "attribute": "busyIndicatorSize",
+    "grouping": "Properties",
+    "value": "Medium"
+  },
+  {
+    "field_id": "00325",
+    "version": "0001",
+    "attribute": "emptyIndicatorMode",
+    "grouping": "Properties",
+    "value": "Off"
+  },
+  {
+    "field_id": "00325",
+    "version": "0001",
+    "attribute": "enableCompactMode",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00325",
+    "version": "0001",
+    "attribute": "renderWhitespace",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00325",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "You need to be online"
+  },
+  {
+    "field_id": "00325",
+    "version": "0001",
+    "attribute": "textAlign",
+    "grouping": "Properties",
+    "value": "Begin"
+  },
+  {
+    "field_id": "00325",
+    "version": "0001",
+    "attribute": "textDirection",
+    "grouping": "Properties",
+    "value": "Inherit"
+  },
+  {
+    "field_id": "00325",
+    "version": "0001",
+    "attribute": "visible",
+    "grouping": "Properties",
+    "value": "true"
+  },
+  {
+    "field_id": "00325",
+    "version": "0001",
+    "attribute": "wrapping",
+    "grouping": "Properties",
+    "value": "true"
+  },
+  {
+    "field_id": "00325",
+    "version": "0001",
+    "attribute": "wrappingType",
+    "grouping": "Properties",
+    "value": "Normal"
+  },
+  {
+    "field_id": "00326",
+    "version": "0001",
+    "attribute": "busy",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00326",
+    "version": "0001",
+    "attribute": "busyIndicatorDelay",
+    "grouping": "Properties",
+    "value": "1000"
+  },
+  {
+    "field_id": "00326",
+    "version": "0001",
+    "attribute": "busyIndicatorSize",
+    "grouping": "Properties",
+    "value": "Medium"
+  },
+  {
+    "field_id": "00326",
+    "version": "0001",
+    "attribute": "emptyIndicatorMode",
+    "grouping": "Properties",
+    "value": "Off"
+  },
+  {
+    "field_id": "00326",
+    "version": "0001",
+    "attribute": "enableCompactMode",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00326",
+    "version": "0001",
+    "attribute": "renderWhitespace",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00326",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Action failed"
+  },
+  {
+    "field_id": "00326",
+    "version": "0001",
+    "attribute": "textAlign",
+    "grouping": "Properties",
+    "value": "Begin"
+  },
+  {
+    "field_id": "00326",
+    "version": "0001",
+    "attribute": "textDirection",
+    "grouping": "Properties",
+    "value": "Inherit"
+  },
+  {
+    "field_id": "00326",
+    "version": "0001",
+    "attribute": "visible",
+    "grouping": "Properties",
+    "value": "true"
+  },
+  {
+    "field_id": "00326",
+    "version": "0001",
+    "attribute": "wrapping",
+    "grouping": "Properties",
+    "value": "true"
+  },
+  {
+    "field_id": "00326",
+    "version": "0001",
+    "attribute": "wrappingType",
+    "grouping": "Properties",
+    "value": "Normal"
   }
 ]

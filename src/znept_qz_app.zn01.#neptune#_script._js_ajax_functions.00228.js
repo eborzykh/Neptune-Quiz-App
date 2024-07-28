@@ -377,6 +377,8 @@ function _show_question(_index) {
     ListSingleSelect.setVisible(_get_question_type(_ui_questions.QUESTION_ID) === _QUESTION_TYPE_SINGLE);
     ListMultiSelect.setVisible(_get_question_type(_ui_questions.QUESTION_ID) === _QUESTION_TYPE_MULTIPLE);
 
+    oHBoxType.setVisible(_practice_mode === _MODE_PREPARE || _practice_mode === _MODE_PRACTICE);
+
     oHBoxExplanation.setVisible(false);
 
     // Part description visibility

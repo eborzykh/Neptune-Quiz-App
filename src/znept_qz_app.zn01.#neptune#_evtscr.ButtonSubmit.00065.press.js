@@ -17,21 +17,17 @@ for (var i = 0; i < ListQuestionsUI.getModel().getData().length; i++) {
 
 if (_answers_given < ListQuestionsUI.getModel().getData().length) {
 
-    _pause_timer = true;
+    _practice_mode = _MODE_PAUSE;
 
     var message_box_callback = function(_action) {
         if (_action == "Submit") {
-            _kill_timer = true;
             _submit_results();
         } else {
-            _pause_timer = false;
+            _practice_mode = _MODE_PRACTICE;
         }
     };
     OpenMessageBox();
 
 } else {
-
-    _kill_timer = true;
     _submit_results();
-
 }

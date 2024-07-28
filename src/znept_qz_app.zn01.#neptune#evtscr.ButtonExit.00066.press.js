@@ -1,4 +1,3 @@
-
 function OpenMessageBox() {
     jQuery.sap.require("sap.m.MessageBox");
     sap.m.MessageBox.show(
@@ -20,18 +19,20 @@ if (_practice_mode === _MODE_PREPARE) {
     }
 }
 
-if (_practice_mode === _MODE_PRACTICE && !_kill_timer) {
-    _pause_timer = true;
+if (_practice_mode === _MODE_PRACTICE) {
+    _practice_mode = _MODE_PAUSE;
 
     var message_box_callback = function(_action) {
         if (_action == "Stop") {
-            _kill_timer = true;
+            _practice_mode = _MODE_PREVIEW;
+
+            _set_UI_reset();
 
             _set_UI_progress(); // progress will not be updated but success percentage might
 
             oApp.to(PagePQSelect);
         } else {
-            _pause_timer = false;
+            _practice_mode = _MODE_PRACTICE;
         }
     };
 

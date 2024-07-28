@@ -31,6 +31,8 @@ const _MODE_PREVIEW = 0;
 const _MODE_LEARN = 1;
 const _MODE_PREPARE = 2;
 const _MODE_PRACTICE = 3;
+const _MODE_RESULTS = 4;
+const _MODE_PAUSE = 5;
 
 const _QUICK_BUTTON_HIDE = 0;
 const _QUICK_BUTTON_CONTINUE = 1;
@@ -44,8 +46,6 @@ const _ICON_PROGRESS_CORRECT = 'sap-icon://message-success';
 const _ICON_UNFAVORITE = 'sap-icon://unfavorite';
 const _ICON_FAVORITE = 'sap-icon://favorite';
 
-var _kill_timer = true;
-var _pause_timer = false;
 var _practice_mode = _MODE_PREVIEW;
 var _current_question = 0;
 var _navigate_after_metrics = false;
@@ -352,7 +352,7 @@ function _show_question(_index) {
             _ui_variants.UI_SELECT_HIGHLIGHT = 'None';
             _ui_variants.UI_SHOW_ANSWER = false; // for type-answer question
 
-            if (_practice_mode === _MODE_PREVIEW || _practice_mode === _MODE_LEARN || (_practice_mode === _MODE_PREPARE && _ui_questions.UI_QUESTION_EVALUATED) || (_practice_mode === _MODE_PRACTICE && _kill_timer)) {
+            if (_practice_mode === _MODE_PREVIEW || _practice_mode === _MODE_LEARN || (_practice_mode === _MODE_PREPARE && _ui_questions.UI_QUESTION_EVALUATED) || _practice_mode === _MODE_RESULTS) {
                 _ui_variants.UI_EDITABLE = false;
             } else {
                 _ui_variants.UI_EDITABLE = true;
@@ -377,7 +377,7 @@ function _show_question(_index) {
     ListSingleSelect.setVisible(_get_question_type(_ui_questions.QUESTION_ID) === _QUESTION_TYPE_SINGLE);
     ListMultiSelect.setVisible(_get_question_type(_ui_questions.QUESTION_ID) === _QUESTION_TYPE_MULTIPLE);
 
-    oHBoxType.setVisible(_practice_mode === _MODE_PREPARE || _practice_mode === _MODE_PRACTICE);
+    oHBoxType.setVisible(_practice_mode === _MODE_PREPARE || _practice_mode === _MODE_PRACTICE || _practice_mode === _MODE_RESULTS);
 
     oHBoxExplanation.setVisible(false);
 
@@ -394,11 +394,11 @@ function _show_question(_index) {
         _show_answer(_index);
     }
 
-    if (_practice_mode === _MODE_PRACTICE && _kill_timer) {
+    if (_practice_mode === _MODE_RESULTS) {
         _show_answer(_index);
     }
 
-    ButtonSubmit.setVisible(_practice_mode === _MODE_PRACTICE && !_kill_timer);
+    ButtonSubmit.setVisible(_practice_mode === _MODE_PRACTICE);
 
     // Display progress icon
     _set_UI_IconProgress(_index);
@@ -416,7 +416,7 @@ function _set_UI_IconProgress(_index) {
 
     var _button_icon = _ICON_PROGRESS_HIDDEN;
     var _button_type = 'Default';
-    var _button_visible = _kill_timer;
+    var _button_visible = (_practice_mode !== _MODE_PRACTICE);
 
     if (_practice_mode === _MODE_PREVIEW || _practice_mode === _MODE_LEARN || _practice_mode === _MODE_PREPARE) {
         var _progress = ModelData.LookupValue(ListQuestionsLS, ["LS_TEST_ID", "QUESTION_ID"], [_ui_tests.UI_TEST_ID, _ui_questions.QUESTION_ID], "LS_PROGRESS");
@@ -527,7 +527,7 @@ function _show_answer(_index) {
     }
 
     // Explanation section visibility
-    if (_practice_mode === _MODE_PREVIEW || _practice_mode === _MODE_LEARN || (_practice_mode === _MODE_PREPARE && _ui_questions.UI_QUESTION_EVALUATED) || (_practice_mode === _MODE_PRACTICE && _kill_timer)) {
+    if (_practice_mode === _MODE_PREVIEW || _practice_mode === _MODE_LEARN || (_practice_mode === _MODE_PREPARE && _ui_questions.UI_QUESTION_EVALUATED) || _practice_mode === _MODE_RESULTS) {
         oHBoxExplanation.setVisible(true);
     }
 }
@@ -776,6 +776,8 @@ function _shuffle_array(_array) {
 
 function _submit_results() {
 
+    _practice_mode = _MODE_RESULTS;
+
     // Evaluate answers
     var _correct_answers = 0;
     for (var i = 0; i < ListQuestionsUI.getModel().getData().length; i++) {
@@ -807,13 +809,29 @@ function _start_timer(_duration_minutes) {
     var _minutes;
     var _seconds;
 
-    _kill_timer = false;
-    _pause_timer = false;
-
     if (_timer > 0) {
         ButtonSubmit.setText("--:--");
 
         const _interval = setInterval(function() {
+
+            // paused
+            if (_practice_mode === _MODE_PAUSE) {
+                return;
+            }
+
+            // manual submit
+            if (_practice_mode !== _MODE_PRACTICE) {
+                clearInterval(_interval);
+                return;
+            }
+
+            // timer submit
+            if (_timer < 0) {
+                clearInterval(_interval);
+                _submit_results();
+                return;
+            }
+
             _minutes = parseInt(_timer / 60, 10);
             _seconds = parseInt(_timer % 60, 10);
 
@@ -822,19 +840,7 @@ function _start_timer(_duration_minutes) {
 
             ButtonSubmit.setText(_minutes + ":" + _seconds);
 
-            if (!_pause_timer) {
-                _timer--;
-            }
-
-            if (_kill_timer) {
-                clearInterval(_interval);
-            }
-
-            if (_timer < 0) {
-                _kill_timer = true;
-                clearInterval(_interval);
-                _submit_results();
-            }
+            _timer--;
         }, 1000);
     } else {
         // timer can be disabled and it will wait for the user to Submit

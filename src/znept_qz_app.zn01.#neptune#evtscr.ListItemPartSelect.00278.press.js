@@ -21,7 +21,7 @@ if (_ui_pq.UI_VISIBLE_PART) {
 
 } else {
 
-    var _question_index = _get_question_index(_ui_pq.QUESTION_ID);
+    var _question_index = _get_ui_question_index(_ui_pq.QUESTION_ID);
     _practice_mode = _MODE_PREVIEW;
 
     _show_question(_question_index);

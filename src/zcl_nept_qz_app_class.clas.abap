@@ -11,22 +11,29 @@ public section.
   data GT_SY_PARTS type ZNEPT_QZ_SY_PARTS_T .
   data GT_SY_QUESTIONS type ZNEPT_QZ_SY_QUESTIONS_T .
   data GT_SY_VARIANTS type ZNEPT_QZ_SY_VARIANTS_T .
-  data GT_SY_SYNC type ZNEPT_QZ_SY_SYNC_T .
+  data GT_SY_SYNC_METRICS type ZNEPT_QZ_SY_SYNC_T .
   data GT_SY_METRICS type ZNEPT_QZ_SY_METRICS_T .
+  data GT_SY_SYNC_BOOKMARKS type ZNEPT_QZ_SY_SYNC_T .
+  data GT_SY_BOOKMARKS type ZNEPT_QZ_SY_BOOKMARKS_T .
   data GS_SY_TESTS type ZNEPT_QZ_SY_TESTS_S .
   data GS_SY_PARTS type ZNEPT_QZ_SY_PARTS_S .
   data GS_SY_QUESTIONS type ZNEPT_QZ_SY_QUESTIONS_S .
   data GS_SY_VARIANTS type ZNEPT_QZ_SY_VARIANTS_S .
   data GS_SY_SYNC type ZNEPT_QZ_SY_SYNC_S .
   data GS_SY_METRICS type ZNEPT_QZ_SY_METRICS_S .
+  data GS_SY_BOOKMARKS type ZNEPT_QZ_SY_BOOKMARKS_S .
   data GT_LS_TESTS type ZNEPT_QZ_LS_TESTS_T .
   data GT_LS_PARTS type ZNEPT_QZ_LS_PARTS_T .
   data GT_LS_QUESTIONS type ZNEPT_QZ_LS_QUESTIONS_T .
   data GT_LS_VARIANTS type ZNEPT_QZ_LS_VARIANTS_T .
+  data GT_LS_SYNC_METRICS type ZNEPT_QZ_LS_SYNC_T .
+  data GT_LS_METRICS type ZNEPT_QZ_LS_METRICS_T .
   data GS_LS_TESTS type ZNEPT_QZ_LS_TESTS_S .
   data GS_LS_PARTS type ZNEPT_QZ_LS_PARTS_S .
   data GS_LS_QUESTIONS type ZNEPT_QZ_LS_QUESTIONS_S .
   data GS_LS_VARIANTS type ZNEPT_QZ_LS_VARIANTS_S .
+  data GS_LS_SYNC type ZNEPT_QZ_LS_SYNC_S .
+  data GS_LS_METRICS type ZNEPT_QZ_LS_METRICS_S .
   data GT_UI_TESTS type ZNEPT_QZ_UI_TESTS_T .
   data GT_UI_PQ type ZNEPT_QZ_UI_PQ_T .
   data GT_UI_QUESTIONS type ZNEPT_QZ_UI_QUESTIONS_T .
@@ -36,7 +43,7 @@ public section.
   data GS_UI_QUESTIONS type ZNEPT_QZ_UI_QUESTIONS_S .
   data GS_UI_VARIANTS type ZNEPT_QZ_UI_VARIANTS_S .
   data GS_SY type ZNEPT_QZ_SY_S .
-  data GS_PARAMETERS type ZNEPT_QZ_PARAMETERS_S .
+  data GS_UI_PARAMETERS type ZNEPT_QZ_UI_PARAMETERS_S .
 protected section.
 private section.
 
@@ -49,13 +56,12 @@ private section.
   methods AJAX_DELETE .
   methods AJAX_RENAME .
   methods AJAX_REFRESH .
-  methods AJAX_METRICS .
+  methods AJAX_ACTIVITIES .
   methods AJAX_DOWNLOAD .
   methods AJAX_UPLOAD
     importing
       !IS_REQUEST type /NEPTUNE/DATA_REQUEST .
   methods AJAX_PUBLISH .
-  methods AJAX_RESET .
   methods GET_USER_NAME
     importing
       !IV_USER_ID type ZNEPT_QZ_UPLOAD_USER_DE
@@ -69,11 +75,23 @@ ENDCLASS.
 CLASS ZCL_NEPT_QZ_APP_CLASS IMPLEMENTATION.
 
 
-  METHOD /NEPTUNE/IF_NAD_SERVER~HANDLE_ON_AJAX.
+  METHOD /neptune/if_nad_server~handle_on_ajax.
 
     CLEAR: return, gv_db_error, gv_do_commit.
 
-    me->create_example( ). " creates an example (optional)
+* ------------------------------------------------------------
+    me->create_example( ). " Creates an example (optional)
+* ------------------------------------------------------------
+
+    gs_sy-sap_user = sy-uname.
+
+    SELECT SINGLE upddat, updtim FROM /neptune/app INTO @DATA(ls_nept_app)
+      WHERE applid = @applid.
+    IF sy-subrc = 0.
+      CONCATENATE ls_nept_app-upddat+3(1) ls_nept_app-upddat+4(2) ls_nept_app-upddat+6(2)
+                  ls_nept_app-updtim+0(2) ls_nept_app-updtim+2(2)
+        INTO gs_sy-active_ui_version SEPARATED BY '.'.
+    ENDIF.
 
     CASE ajax_id.
 
@@ -85,13 +103,9 @@ CLASS ZCL_NEPT_QZ_APP_CLASS IMPLEMENTATION.
 
         me->ajax_download( ).
 
-      WHEN 'METRICS'.
+      WHEN 'ACTIVITIES'.
 
-        me->ajax_metrics( ).
-
-      WHEN 'RESET'.
-
-        me->ajax_reset( ).
+        me->ajax_activities( ).
 
       WHEN 'UPLOAD'.
 
@@ -119,18 +133,6 @@ CLASS ZCL_NEPT_QZ_APP_CLASS IMPLEMENTATION.
       return-status_code = 500.                          "#EC NUMBER_OK
     ENDIF.
 
-    CLEAR gs_sy.
-    gs_sy-sap_user = sy-uname.
-
-    SELECT SINGLE upddat, updtim FROM /neptune/app INTO @DATA(ls_nept_app)
-      WHERE applid = @applid.
-    IF sy-subrc = 0.
-      CONCATENATE
-          ls_nept_app-upddat+3(1) ls_nept_app-upddat+4(2) ls_nept_app-upddat+6(2)
-          ls_nept_app-updtim+0(2) ls_nept_app-updtim+2(2)
-        INTO gs_sy-active_ui_version SEPARATED BY '.'.
-    ENDIF.
-
   ENDMETHOD.
 
 
@@ -156,8 +158,7 @@ CLASS ZCL_NEPT_QZ_APP_CLASS IMPLEMENTATION.
 
   METHOD ajax_delete.
 
-    DATA:
-      ls_db_tests_key TYPE znept_qz_db_tests_key_s.
+    DATA: ls_db_tests_key TYPE znept_qz_db_tests_key_s.
 
     MOVE-CORRESPONDING gs_sy_tests TO ls_db_tests_key.
 
@@ -173,11 +174,10 @@ CLASS ZCL_NEPT_QZ_APP_CLASS IMPLEMENTATION.
 
   METHOD ajax_download.
 
-    DATA:
-      ls_db_tests_key TYPE znept_qz_db_tests_key_s,
-      lt_db_parts     TYPE znept_qz_db_parts_t,
-      lt_db_questions TYPE znept_qz_db_questions_t,
-      lt_db_variants  TYPE znept_qz_db_variants_t.
+    DATA: ls_db_tests_key TYPE znept_qz_db_tests_key_s,
+          lt_db_parts     TYPE znept_qz_db_parts_t,
+          lt_db_questions TYPE znept_qz_db_questions_t,
+          lt_db_variants  TYPE znept_qz_db_variants_t.
 
     MOVE-CORRESPONDING gs_sy_tests TO ls_db_tests_key.
 
@@ -197,70 +197,10 @@ CLASS ZCL_NEPT_QZ_APP_CLASS IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD ajax_metrics.
-
-    DATA:
-      ls_sy_sync            TYPE znept_qz_sy_sync_s,
-      ls_sy_metrics         TYPE znept_qz_sy_metrics_s,
-      ls_db_sync            TYPE znept_qz_db_sync_s,
-      ls_db_metrics         TYPE znept_qz_db_metrics_s,
-      lt_db_metrics         TYPE znept_qz_db_metrics_t,
-      lt_db_sync_collect    TYPE znept_qz_db_sync_t,
-      lt_db_metrics_collect TYPE znept_qz_db_metrics_t.
-
-    LOOP AT gt_sy_sync INTO ls_sy_sync.
-
-      MOVE-CORRESPONDING ls_sy_sync TO ls_db_sync.
-      ls_db_sync-sync_by = sy-uname.
-
-      CLEAR lt_db_metrics[].
-      LOOP AT gt_sy_metrics INTO ls_sy_metrics WHERE sync_id = ls_sy_sync-sync_id.
-        CLEAR ls_db_metrics.
-        MOVE-CORRESPONDING ls_sy_metrics TO ls_db_metrics.
-        ls_db_metrics-sync_by = sy-uname.
-        APPEND ls_db_metrics TO lt_db_metrics.
-        CLEAR ls_sy_metrics.
-      ENDLOOP.
-
-      CALL METHOD zcl_nept_qz_data_provider=>sync_metrics
-        EXPORTING
-          is_db_sync    = ls_db_sync
-          it_db_metrics = lt_db_metrics
-        IMPORTING
-          es_db_sync    = ls_db_sync
-          et_db_metrics = lt_db_metrics
-          ev_db_error   = gv_db_error
-          ev_do_commit  = gv_do_commit.
-
-      IF NOT gv_db_error IS INITIAL.
-        EXIT.
-      ENDIF.
-
-      APPEND ls_db_sync TO lt_db_sync_collect.
-      APPEND LINES OF lt_db_metrics TO lt_db_metrics_collect.
-
-      CLEAR ls_sy_sync.
-    ENDLOOP.
-
-    IF gv_db_error IS INITIAL.
-
-      MOVE-CORRESPONDING lt_db_sync_collect[] TO gt_sy_sync[].
-      MOVE-CORRESPONDING lt_db_metrics_collect[] TO gt_sy_metrics[].
-
-    ELSE.
-
-      CLEAR: gt_sy_sync[], gt_sy_metrics[].
-
-    ENDIF.
-
-  ENDMETHOD.
-
-
   METHOD ajax_publish.
 
-    DATA:
-      ls_db_tests_key TYPE znept_qz_db_tests_key_s,
-      lv_published    TYPE znept_qz_published_de.
+    DATA: ls_db_tests_key TYPE znept_qz_db_tests_key_s,
+          lv_published    TYPE znept_qz_published_de.
 
     MOVE-CORRESPONDING gs_sy_tests TO ls_db_tests_key.
 
@@ -279,14 +219,13 @@ CLASS ZCL_NEPT_QZ_APP_CLASS IMPLEMENTATION.
 
   METHOD ajax_refresh.
 
-    DATA:
-      ls_db_tests_key TYPE znept_qz_db_tests_key_s,
-      lt_db_tests     TYPE znept_qz_db_tests_t,
-      ls_db_tests     TYPE znept_qz_db_tests_s,
-      lt_sy_tests     TYPE znept_qz_sy_tests_t,
-      ls_sy_tests     TYPE znept_qz_sy_tests_s.
+    DATA: ls_db_tests_key TYPE znept_qz_db_tests_key_s,
+          lt_db_tests     TYPE znept_qz_db_tests_t,
+          ls_db_tests     TYPE znept_qz_db_tests_s,
+          lt_sy_tests     TYPE znept_qz_sy_tests_t,
+          ls_sy_tests     TYPE znept_qz_sy_tests_s.
 
-    CALL METHOD zcl_nept_qz_data_provider=>refresh
+    CALL METHOD zcl_nept_qz_data_provider=>read_available_test
       IMPORTING
         et_db_tests = lt_db_tests.
 
@@ -343,9 +282,8 @@ CLASS ZCL_NEPT_QZ_APP_CLASS IMPLEMENTATION.
 
   METHOD ajax_rename.
 
-    DATA:
-      ls_db_tests_key TYPE znept_qz_db_tests_key_s,
-      lv_description  TYPE znept_qz_test_name_de.
+    DATA: ls_db_tests_key TYPE znept_qz_db_tests_key_s,
+          lv_description  TYPE znept_qz_test_name_de.
 
     MOVE-CORRESPONDING gs_sy_tests TO ls_db_tests_key.
     lv_description = gs_sy_tests-description.
@@ -361,43 +299,25 @@ CLASS ZCL_NEPT_QZ_APP_CLASS IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD ajax_reset.
-
-    DATA:
-      ls_db_tests_key TYPE znept_qz_db_tests_key_s.
-
-    MOVE-CORRESPONDING gs_sy_tests TO ls_db_tests_key.
-
-    CALL METHOD zcl_nept_qz_data_provider=>reset_metrics
-      EXPORTING
-        is_db_tests_key = ls_db_tests_key
-      IMPORTING
-        ev_db_error     = gv_db_error
-        ev_do_commit    = gv_do_commit.
-
-  ENDMETHOD.
-
-
   METHOD ajax_upload.
 
-    DATA:
-      lt_db_parts     TYPE znept_qz_db_parts_t,
-      lt_db_questions TYPE znept_qz_db_questions_t,
-      lt_db_variants  TYPE znept_qz_db_variants_t,
-      ls_db_parts     TYPE znept_qz_db_parts_s,
-      ls_db_questions TYPE znept_qz_db_questions_s,
-      ls_db_variants  TYPE znept_qz_db_variants_s,
-      lv_test_name    TYPE znept_qz_test_name_de,
-      lv_xcontent     TYPE xstring,
-      lv_content      TYPE string,
-      lt_file         TYPE TABLE OF string,
-      lt_block        TYPE TABLE OF string,
-      lv_line         TYPE string,
-      lv_block        TYPE string,
-      lv_dummy        TYPE string,                          "#EC NEEDED
-      lv_block_size   TYPE i,
-      lv_total_lines  TYPE i,
-      lv_tabix        TYPE i.
+    DATA: lt_db_parts     TYPE znept_qz_db_parts_t,
+          lt_db_questions TYPE znept_qz_db_questions_t,
+          lt_db_variants  TYPE znept_qz_db_variants_t,
+          ls_db_parts     TYPE znept_qz_db_parts_s,
+          ls_db_questions TYPE znept_qz_db_questions_s,
+          ls_db_variants  TYPE znept_qz_db_variants_s,
+          lv_test_name    TYPE znept_qz_test_name_de,
+          lv_xcontent     TYPE xstring,
+          lv_content      TYPE string,
+          lt_file         TYPE TABLE OF string,
+          lt_block        TYPE TABLE OF string,
+          lv_line         TYPE string,
+          lv_block        TYPE string,
+          lv_dummy        TYPE string,                      "#EC NEEDED
+          lv_block_size   TYPE i,
+          lv_total_lines  TYPE i,
+          lv_tabix        TYPE i.
 
     IF is_request-it_files[] IS INITIAL.
       RETURN.
@@ -464,7 +384,7 @@ CLASS ZCL_NEPT_QZ_APP_CLASS IMPLEMENTATION.
           APPEND ls_db_questions TO lt_db_questions.
           ls_db_variants-variant_id = 1.
         ELSE.
-          ls_db_variants-part_id     = ls_db_parts-part_id.
+*          ls_db_variants-part_id     = ls_db_parts-part_id.
           ls_db_variants-question_id = ls_db_questions-question_id.
 
           SPLIT lv_block AT cl_abap_char_utilities=>horizontal_tab INTO ls_db_variants-variant ls_db_variants-correct.
@@ -486,6 +406,10 @@ CLASS ZCL_NEPT_QZ_APP_CLASS IMPLEMENTATION.
       CLEAR lv_line.
     ENDLOOP.
 
+    IF lt_db_questions[] IS INITIAL.
+      RETURN.
+    ENDIF.
+
     CALL METHOD zcl_nept_qz_data_provider=>add
       EXPORTING
         iv_description  = lv_test_name
@@ -502,12 +426,11 @@ CLASS ZCL_NEPT_QZ_APP_CLASS IMPLEMENTATION.
 
   METHOD create_example.
 
-    DATA:
-      lt_db_parts     TYPE znept_qz_db_parts_t,
-      lt_db_questions TYPE znept_qz_db_questions_t,
-      lt_db_variants  TYPE znept_qz_db_variants_t.
+    DATA: lt_db_parts     TYPE znept_qz_db_parts_t,
+          lt_db_questions TYPE znept_qz_db_questions_t,
+          lt_db_variants  TYPE znept_qz_db_variants_t.
 
-    SELECT COUNT(*) FROM znept_qz_tst INTO @DATA(lv_dummy_count).
+    SELECT COUNT(*) FROM znept_qz_tst INTO @DATA(lv_dummy_count). "#EC NEEDED
     IF sy-subrc <> 0.
 
       lt_db_parts = VALUE #(
@@ -544,37 +467,37 @@ CLASS ZCL_NEPT_QZ_APP_CLASS IMPLEMENTATION.
                                       explanation = 'Free choice questions give the user an input field where they must type the correct answer.' ) ).
 
       lt_db_variants = VALUE #(
-        ( part_id = 1 question_id = 1 variant_id = 1 variant = 'A. TRUE' correct = '' )
-        ( part_id = 1 question_id = 1 variant_id = 2 variant = 'B. FALSE' correct = 'X' )
+        ( question_id = 1 variant_id = 1 variant = 'A. TRUE' correct = '' )
+        ( question_id = 1 variant_id = 2 variant = 'B. FALSE' correct = 'X' )
 
-        ( part_id = 1 question_id = 2 variant_id = 1 variant = 'A. Browser applications.' correct = 'X' )
-        ( part_id = 1 question_id = 2 variant_id = 2 variant = 'B. Microsoft Windows desktop application.' correct = '' )
-        ( part_id = 1 question_id = 2 variant_id = 3 variant = 'C. Native Android applications.' correct = '' )
-        ( part_id = 1 question_id = 2 variant_id = 4 variant = 'D. Mobile cross platforms.' correct = 'X' )
+        ( question_id = 2 variant_id = 1 variant = 'A. Browser applications.' correct = 'X' )
+        ( question_id = 2 variant_id = 2 variant = 'B. Microsoft Windows desktop application.' correct = '' )
+        ( question_id = 2 variant_id = 3 variant = 'C. Native Android applications.' correct = '' )
+        ( question_id = 2 variant_id = 4 variant = 'D. Mobile cross platforms.' correct = 'X' )
 
-        ( part_id = 1 question_id = 3 variant_id = 1 variant = '2' correct = '' )
+        ( question_id = 3 variant_id = 1 variant = '2' correct = '' )
 
-        ( part_id = 2 question_id = 4 variant_id = 1 variant = 'A. Deleted or set as private quiz will be removed from all users.' correct = '' )
-        ( part_id = 2 question_id = 4 variant_id = 2 variant = 'B. Users will be able to continue the quiz they have already started.' correct = 'X' )
-        ( part_id = 2 question_id = 4 variant_id = 3 variant = 'C. The app will notify and block from deleting or making content as private if someone is using it.' correct = '' )
+        ( question_id = 4 variant_id = 1 variant = 'A. Deleted or set as private quiz will be removed from all users.' correct = '' )
+        ( question_id = 4 variant_id = 2 variant = 'B. Users will be able to continue the quiz they have already started.' correct = 'X' )
+        ( question_id = 4 variant_id = 3 variant = 'C. The app will notify and block from deleting or making content as private if someone is using it.' correct = '' )
 
-        ( part_id = 2 question_id = 5 variant_id = 1 variant = 'A. TRUE' correct = '' )
-        ( part_id = 2 question_id = 5 variant_id = 2 variant = 'B. FALSE' correct = 'X' )
+        ( question_id = 5 variant_id = 1 variant = 'A. TRUE' correct = '' )
+        ( question_id = 5 variant_id = 2 variant = 'B. FALSE' correct = 'X' )
 
-        ( part_id = 2 question_id = 6 variant_id = 1 variant = 'A. Multiple choice' correct = 'X' )
-        ( part_id = 2 question_id = 6 variant_id = 2 variant = 'B. Single choice' correct = 'X' )
-        ( part_id = 2 question_id = 6 variant_id = 3 variant = 'C. Fill in the blank' correct = '' )
-        ( part_id = 2 question_id = 6 variant_id = 4 variant = 'D. Free choice (typing)' correct = 'X' )
-        ( part_id = 2 question_id = 6 variant_id = 5 variant = 'E. All above' correct = '' )
+        ( question_id = 6 variant_id = 1 variant = 'A. Multiple choice' correct = 'X' )
+        ( question_id = 6 variant_id = 2 variant = 'B. Single choice' correct = 'X' )
+        ( question_id = 6 variant_id = 3 variant = 'C. Fill in the blank' correct = '' )
+        ( question_id = 6 variant_id = 4 variant = 'D. Free choice (typing)' correct = 'X' )
+        ( question_id = 6 variant_id = 5 variant = 'E. All above' correct = '' )
 
-        ( part_id = 3 question_id = 7 variant_id = 1 variant = 'A. Wrong variant' correct = '' )
-        ( part_id = 3 question_id = 7 variant_id = 2 variant = 'B. Correct variant' correct = 'X' )
+        ( question_id = 7 variant_id = 1 variant = 'A. Wrong variant' correct = '' )
+        ( question_id = 7 variant_id = 2 variant = 'B. Correct variant' correct = 'X' )
 
-        ( part_id = 3 question_id = 8 variant_id = 1 variant = 'A. Correct variant' correct = 'X' )
-        ( part_id = 3 question_id = 8 variant_id = 2 variant = 'B. Wrong variant' correct = '' )
-        ( part_id = 3 question_id = 8 variant_id = 3 variant = 'C. Correct variant' correct = 'X' )
+        ( question_id = 8 variant_id = 1 variant = 'A. Correct variant' correct = 'X' )
+        ( question_id = 8 variant_id = 2 variant = 'B. Wrong variant' correct = '' )
+        ( question_id = 8 variant_id = 3 variant = 'C. Correct variant' correct = 'X' )
 
-        ( part_id = 3 question_id = 9 variant_id = 1 variant = '4' correct = '' ) ).
+        ( question_id = 9 variant_id = 1 variant = '4' correct = '' ) ).
 
       CALL METHOD zcl_nept_qz_data_provider=>add
         EXPORTING
@@ -619,6 +542,163 @@ CLASS ZCL_NEPT_QZ_APP_CLASS IMPLEMENTATION.
       rv_user_name = ls_user_address-name_text.
     ELSE.
       rv_user_name = iv_user_id.
+    ENDIF.
+
+  ENDMETHOD.
+
+
+  METHOD ajax_activities.
+
+    DATA: lt_db_tests_key      TYPE znept_qz_db_tests_key_t,
+          ls_db_tests_key      TYPE znept_qz_db_tests_key_s,
+          ls_sy_sync           TYPE znept_qz_sy_sync_s,
+          lt_sy_sync_metrics   TYPE znept_qz_sy_sync_t,
+          lt_sy_sync_bookmarks TYPE znept_qz_sy_sync_t,
+          ls_sy_metrics        TYPE znept_qz_sy_metrics_s,
+          lt_sy_metrics        TYPE znept_qz_sy_metrics_t,
+          ls_sy_bookmarks      TYPE znept_qz_sy_bookmarks_s,
+          lt_sy_bookmarks      TYPE znept_qz_sy_bookmarks_t,
+          ls_db_metrics        TYPE znept_qz_db_metrics_s,
+          lt_db_metrics        TYPE znept_qz_db_metrics_t,
+          ls_db_bookmarks      TYPE znept_qz_db_bookmarks_s,
+          lt_db_bookmarks      TYPE znept_qz_db_bookmarks_t,
+          lv_new_sync_on       TYPE znept_qz_sync_date_de,
+          lv_new_sync_at       TYPE znept_qz_sync_time_de.
+
+    lv_new_sync_on = sy-datum.
+    lv_new_sync_at = sy-timlo.
+
+    IF NOT gt_sy_sync_metrics[] IS INITIAL.
+
+      READ TABLE gt_sy_sync_metrics INDEX 1 INTO ls_sy_sync.
+      IF sy-subrc = 0 AND NOT ls_sy_sync-sync_id IS INITIAL.
+
+        CALL METHOD zcl_nept_qz_data_provider=>read_available_metrics
+          IMPORTING
+            et_db_tests_key = lt_db_tests_key.
+
+        LOOP AT lt_db_tests_key INTO ls_db_tests_key.
+          READ TABLE gt_sy_sync_metrics WITH KEY test_id   = ls_db_tests_key-test_id
+                                                 upload_on = ls_db_tests_key-upload_on
+                                                 upload_at = ls_db_tests_key-upload_at TRANSPORTING NO FIELDS.
+          IF sy-subrc = 0.
+            CONTINUE.
+          ENDIF.
+
+          CLEAR ls_sy_sync.
+          MOVE-CORRESPONDING ls_db_tests_key TO ls_sy_sync.
+          APPEND ls_sy_sync TO gt_sy_sync_metrics.
+
+          CLEAR ls_db_tests_key.
+        ENDLOOP.
+      ENDIF.
+
+      LOOP AT gt_sy_sync_metrics INTO ls_sy_sync.
+
+        LOOP AT gt_sy_metrics INTO ls_sy_metrics WHERE sync_id = ls_sy_sync-sync_id.
+          CLEAR ls_db_metrics.
+          MOVE-CORRESPONDING ls_sy_metrics TO ls_db_metrics.
+          APPEND ls_db_metrics TO lt_db_metrics.
+          CLEAR ls_sy_metrics.
+        ENDLOOP.
+
+        MOVE-CORRESPONDING ls_sy_sync TO ls_db_tests_key.
+
+        CALL METHOD zcl_nept_qz_data_provider=>sync_metrics
+          EXPORTING
+            iv_old_sync_on  = ls_sy_sync-sync_on
+            iv_old_sync_at  = ls_sy_sync-sync_at
+            iv_new_sync_on  = lv_new_sync_on
+            iv_new_sync_at  = lv_new_sync_at
+            is_db_tests_key = ls_db_tests_key
+            it_db_metrics   = lt_db_metrics
+          IMPORTING
+            et_db_metrics   = lt_db_metrics
+            ev_db_error     = gv_db_error
+            ev_do_commit    = gv_do_commit.
+
+        IF NOT gv_db_error IS INITIAL.
+          EXIT.
+        ENDIF.
+
+        IF NOT lt_db_metrics IS INITIAL.
+          LOOP AT lt_db_metrics INTO ls_db_metrics.
+            IF sy-tabix = 1.
+              ls_sy_sync-sync_id = ls_db_metrics-sync_id.
+              ls_sy_sync-sync_on = lv_new_sync_on.
+              ls_sy_sync-sync_at = lv_new_sync_at.
+              APPEND ls_sy_sync TO lt_sy_sync_metrics.
+            ENDIF.
+            MOVE-CORRESPONDING ls_db_metrics TO ls_sy_metrics.
+            APPEND ls_sy_metrics TO lt_sy_metrics.
+            CLEAR ls_db_metrics.
+          ENDLOOP.
+        ENDIF.
+
+        REFRESH lt_db_metrics.
+        CLEAR ls_sy_sync.
+      ENDLOOP.
+
+    ENDIF.
+
+    IF NOT gt_sy_sync_bookmarks[] IS INITIAL AND gv_db_error IS INITIAL.
+
+      LOOP AT gt_sy_sync_bookmarks INTO ls_sy_sync.
+
+        LOOP AT gt_sy_bookmarks INTO ls_sy_bookmarks WHERE sync_id = ls_sy_sync-sync_id.
+          CLEAR ls_db_bookmarks.
+          MOVE-CORRESPONDING ls_sy_bookmarks TO ls_db_bookmarks.
+          APPEND ls_db_bookmarks TO lt_db_bookmarks.
+          CLEAR ls_sy_bookmarks.
+        ENDLOOP.
+
+        MOVE-CORRESPONDING ls_sy_sync TO ls_db_tests_key.
+
+        CALL METHOD zcl_nept_qz_data_provider=>sync_bookmarks
+          EXPORTING
+            iv_old_sync_on  = ls_sy_sync-sync_on
+            iv_old_sync_at  = ls_sy_sync-sync_at
+            iv_new_sync_on  = lv_new_sync_on
+            iv_new_sync_at  = lv_new_sync_at
+            is_db_tests_key = ls_db_tests_key
+            it_db_bookmarks = lt_db_bookmarks
+          IMPORTING
+            et_db_bookmarks = lt_db_bookmarks
+            ev_db_error     = gv_db_error
+            ev_do_commit    = gv_do_commit.
+
+        IF NOT gv_db_error IS INITIAL.
+          EXIT.
+        ENDIF.
+
+        IF NOT lt_db_bookmarks IS INITIAL.
+          LOOP AT lt_db_bookmarks INTO ls_db_bookmarks.
+            IF sy-tabix = 1.
+              ls_sy_sync-sync_id = ls_db_bookmarks-test_id.
+              ls_sy_sync-sync_on = lv_new_sync_on.
+              ls_sy_sync-sync_at = lv_new_sync_at.
+              APPEND ls_sy_sync TO lt_sy_sync_bookmarks.
+            ENDIF.
+            MOVE-CORRESPONDING ls_db_bookmarks TO ls_sy_bookmarks.
+            ls_sy_bookmarks-sync_id = ls_db_bookmarks-test_id.
+            APPEND ls_sy_bookmarks TO lt_sy_bookmarks.
+            CLEAR ls_db_bookmarks.
+          ENDLOOP.
+        ENDIF.
+
+        REFRESH lt_db_bookmarks.
+        CLEAR ls_sy_sync.
+      ENDLOOP.
+
+    ENDIF.
+
+    IF gv_db_error IS INITIAL.
+      gt_sy_sync_metrics[] = lt_sy_sync_metrics[].
+      gt_sy_metrics[] = lt_sy_metrics[].
+      gt_sy_sync_bookmarks[] = lt_sy_sync_bookmarks[].
+      gt_sy_bookmarks[] = lt_sy_bookmarks[].
+    ELSE.
+      REFRESH: gt_sy_sync_metrics, gt_sy_metrics, gt_sy_sync_bookmarks, gt_sy_bookmarks.
     ENDIF.
 
   ENDMETHOD.

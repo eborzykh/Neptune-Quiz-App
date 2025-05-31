@@ -10,6 +10,8 @@
     "ui5_suite": "X",
     "ui5_language": "EN",
     "ui5_suite_ui": "X",
-    "sapui5_version": "1.96 (CDN)"
+    "sapui5_version": "1.96 (CDN)",
+    "origin": "023100008",
+    "sqlite_type": 0
   }
 ]

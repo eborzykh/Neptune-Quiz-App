@@ -5,7 +5,7 @@ _ajax_error = false;
 _ajax_refresh_success();
 
 setTimeout(function() {
-    _ajax_metrics(true);
+    _ajax_activities(true);
 }, _SYNC_DELAY);
 
 _set_UI_PageTestSelect();

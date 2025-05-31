@@ -49,18 +49,6 @@
     "receive": "X"
   },
   {
-    "field_id": "00187",
-    "model_id": "00207",
-    "model": "PageTestsSY",
-    "send": "X"
-  },
-  {
-    "field_id": "00187",
-    "model_id": "00301",
-    "model": "PageSY",
-    "receive": "X"
-  },
-  {
     "field_id": "00188",
     "model_id": "00110",
     "model": "ListPartsSY",
@@ -93,7 +81,7 @@
   {
     "field_id": "00189",
     "model_id": "00190",
-    "model": "ListSyncSY",
+    "model": "ListSyncMetricsSY",
     "send": "X",
     "receive": "X"
   },
@@ -101,6 +89,26 @@
     "field_id": "00189",
     "model_id": "00191",
     "model": "ListMetricsSY",
+    "send": "X",
+    "receive": "X"
+  },
+  {
+    "field_id": "00189",
+    "model_id": "00301",
+    "model": "PageSY",
+    "receive": "X"
+  },
+  {
+    "field_id": "00189",
+    "model_id": "00327",
+    "model": "ListBookmarksSY",
+    "send": "X",
+    "receive": "X"
+  },
+  {
+    "field_id": "00189",
+    "model_id": "00345",
+    "model": "ListSyncBookmarksSY",
     "send": "X",
     "receive": "X"
   }

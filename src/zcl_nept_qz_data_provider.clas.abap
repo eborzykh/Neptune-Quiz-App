@@ -5,7 +5,24 @@ class ZCL_NEPT_QZ_DATA_PROVIDER definition
 
 public section.
 
-  class-methods REFRESH
+  constants GC_PROGRESS_UNANSWERED type ZNEPT_QZ_PROGRESS_DE value '0' ##NO_TEXT.
+  constants GC_PROGRESS_INCORRECT type ZNEPT_QZ_PROGRESS_DE value '1' ##NO_TEXT.
+  constants GC_PROGRESS_IMPROVED_LOW type ZNEPT_QZ_PROGRESS_DE value '2' ##NO_TEXT.
+  constants GC_PROGRESS_IMPROVED_MEDIUM type ZNEPT_QZ_PROGRESS_DE value '3' ##NO_TEXT.
+  constants GC_PROGRESS_IMPROVED_HIGH type ZNEPT_QZ_PROGRESS_DE value '4' ##NO_TEXT.
+  constants GC_PROGRESS_CORRECT type ZNEPT_QZ_PROGRESS_DE value '5' ##NO_TEXT.
+  constants GC_BOOKMARK_UNMARKED type ZNEPT_QZ_BOOKMARK_DE value ' ' ##NO_TEXT.
+  constants GC_BOOKMARK_BOOKMARKED type ZNEPT_QZ_BOOKMARK_DE value 'X' ##NO_TEXT.
+  constants GC_SYNC_DATE_INITIAL type ZNEPT_QZ_SYNC_DATE_DE value '00000000' ##NO_TEXT.
+  constants GC_SYNC_TIME_INITIAL type ZNEPT_QZ_SYNC_TIME_DE value '000000' ##NO_TEXT.
+  constants GC_SYNC_DATE_FINAL type ZNEPT_QZ_SYNC_DATE_DE value '99991231' ##NO_TEXT.
+  constants GC_QUIZ_PUBLISHED type ZNEPT_QZ_PUBLISHED_DE value 'X' ##NO_TEXT.
+  constants GC_QUIZ_PRIVATE type ZNEPT_QZ_PUBLISHED_DE value ' ' ##NO_TEXT.
+
+  class-methods READ_AVAILABLE_METRICS
+    exporting
+      !ET_DB_TESTS_KEY type ZNEPT_QZ_DB_TESTS_KEY_T .
+  class-methods READ_AVAILABLE_TEST
     exporting
       !ET_DB_TESTS type ZNEPT_QZ_DB_TESTS_T .
   class-methods PUBLISH
@@ -29,6 +46,7 @@ public section.
       !IT_DB_QUESTIONS type ZNEPT_QZ_DB_QUESTIONS_T
       !IT_DB_VARIANTS type ZNEPT_QZ_DB_VARIANTS_T
     exporting
+      !ES_DB_TESTS type ZNEPT_QZ_DB_TESTS_S
       !EV_DB_ERROR type ABAP_BOOL
       !EV_DO_COMMIT type ABAP_BOOL .
   class-methods RENAME
@@ -46,19 +64,28 @@ public section.
       !ET_DB_QUESTIONS type ZNEPT_QZ_DB_QUESTIONS_T
       !ET_DB_VARIANTS type ZNEPT_QZ_DB_VARIANTS_T
       !EV_DB_ERROR type ABAP_BOOL .
-  class-methods SYNC_METRICS
+  class-methods SYNC_BOOKMARKS
     importing
-      value(IS_DB_SYNC) type ZNEPT_QZ_DB_SYNC_S
-      value(IT_DB_METRICS) type ZNEPT_QZ_DB_METRICS_T
+      value(IV_OLD_SYNC_ON) type ZNEPT_QZ_SYNC_DATE_DE
+      value(IV_OLD_SYNC_AT) type ZNEPT_QZ_SYNC_TIME_DE
+      value(IV_NEW_SYNC_ON) type ZNEPT_QZ_SYNC_DATE_DE
+      value(IV_NEW_SYNC_AT) type ZNEPT_QZ_SYNC_TIME_DE
+      value(IS_DB_TESTS_KEY) type ZNEPT_QZ_DB_TESTS_KEY_S
+      value(IT_DB_BOOKMARKS) type ZNEPT_QZ_DB_BOOKMARKS_T
     exporting
-      !ES_DB_SYNC type ZNEPT_QZ_DB_SYNC_S
-      !ET_DB_METRICS type ZNEPT_QZ_DB_METRICS_T
+      !ET_DB_BOOKMARKS type ZNEPT_QZ_DB_BOOKMARKS_T
       !EV_DB_ERROR type ABAP_BOOL
       !EV_DO_COMMIT type ABAP_BOOL .
-  class-methods RESET_METRICS
+  class-methods SYNC_METRICS
     importing
-      !IS_DB_TESTS_KEY type ZNEPT_QZ_DB_TESTS_KEY_S
+      value(IV_OLD_SYNC_ON) type ZNEPT_QZ_SYNC_DATE_DE
+      value(IV_OLD_SYNC_AT) type ZNEPT_QZ_SYNC_TIME_DE
+      value(IV_NEW_SYNC_ON) type ZNEPT_QZ_SYNC_DATE_DE
+      value(IV_NEW_SYNC_AT) type ZNEPT_QZ_SYNC_TIME_DE
+      value(IS_DB_TESTS_KEY) type ZNEPT_QZ_DB_TESTS_KEY_S
+      value(IT_DB_METRICS) type ZNEPT_QZ_DB_METRICS_T
     exporting
+      !ET_DB_METRICS type ZNEPT_QZ_DB_METRICS_T
       !EV_DB_ERROR type ABAP_BOOL
       !EV_DO_COMMIT type ABAP_BOOL .
   class-methods INFO
@@ -82,22 +109,16 @@ ENDCLASS.
 CLASS ZCL_NEPT_QZ_DATA_PROVIDER IMPLEMENTATION.
 
 
-  METHOD ADD.
+  METHOD add.
 
-    DATA:
-      ls_db_tests     TYPE znept_qz_db_tests_s,
-      lt_db_parts     TYPE znept_qz_db_parts_t,
-      lt_db_questions TYPE znept_qz_db_questions_t,
-      lt_db_variants  TYPE znept_qz_db_variants_t.
-
-    FIELD-SYMBOLS:
-      <fs_db_parts>     TYPE znept_qz_db_parts_s,
-      <fs_db_questions> TYPE znept_qz_db_questions_s,
-      <fs_db_variants>  TYPE znept_qz_db_variants_s.
+    DATA: ls_db_tests     TYPE znept_qz_db_tests_s,
+          lt_db_parts     TYPE znept_qz_db_parts_t,
+          lt_db_questions TYPE znept_qz_db_questions_t,
+          lt_db_variants  TYPE znept_qz_db_variants_t.
 
     CLEAR: ev_db_error, ev_do_commit.
 
-    CHECK NOT it_db_questions[] IS INITIAL.
+    CLEAR es_db_tests.
 
     lt_db_parts[] = it_db_parts[].
     lt_db_questions[] = it_db_questions[].
@@ -108,6 +129,7 @@ CLASS ZCL_NEPT_QZ_DATA_PROVIDER IMPLEMENTATION.
       SELECT test_id UP TO 1 ROWS FROM znept_qz_tst INTO ls_db_tests-test_id
         WHERE test_id = ls_db_tests-test_id.
       ENDSELECT.
+
       IF sy-subrc <> 0.
         EXIT.
       ENDIF.
@@ -119,56 +141,66 @@ CLASS ZCL_NEPT_QZ_DATA_PROVIDER IMPLEMENTATION.
     ls_db_tests-description = iv_description.
     ls_db_tests-published = iv_published.
 
-    LOOP AT lt_db_parts ASSIGNING <fs_db_parts>.
+    LOOP AT lt_db_parts ASSIGNING FIELD-SYMBOL(<fs_db_parts>).
       <fs_db_parts>-test_id = ls_db_tests-test_id.
     ENDLOOP.
 
-    LOOP AT lt_db_questions ASSIGNING <fs_db_questions>.
+    LOOP AT lt_db_questions ASSIGNING FIELD-SYMBOL(<fs_db_questions>).
       <fs_db_questions>-test_id = ls_db_tests-test_id.
     ENDLOOP.
 
-    LOOP AT lt_db_variants ASSIGNING <fs_db_variants>.
+    LOOP AT lt_db_variants ASSIGNING FIELD-SYMBOL(<fs_db_variants>).
       <fs_db_variants>-test_id = ls_db_tests-test_id.
     ENDLOOP.
 
     INSERT znept_qz_tst FROM ls_db_tests.
+
     IF sy-subrc <> 0.
       ev_db_error = abap_true.
       RETURN.
+    ELSE.
+      ev_do_commit = abap_true.
     ENDIF.
 
     INSERT znept_qz_prt FROM TABLE lt_db_parts.
+
     IF sy-subrc <> 0.
       ev_db_error = abap_true.
       RETURN.
+    ELSE.
+      ev_do_commit = abap_true.
     ENDIF.
 
     INSERT znept_qz_qst FROM TABLE lt_db_questions.
+
     IF sy-subrc <> 0.
       ev_db_error = abap_true.
       RETURN.
+    ELSE.
+      ev_do_commit = abap_true.
     ENDIF.
 
     INSERT znept_qz_var FROM TABLE lt_db_variants.
+
     IF sy-subrc <> 0.
       ev_db_error = abap_true.
       RETURN.
+    ELSE.
+      ev_do_commit = abap_true.
     ENDIF.
 
-    ev_do_commit = abap_true.
+    es_db_tests = ls_db_tests.
 
   ENDMETHOD.
 
 
-  METHOD DELETE.
+  METHOD delete.
 
-    DATA:
-      lv_test_id TYPE znept_qz_test_id_de,
-      lv_sync_id TYPE znept_qz_sync_id_de.
+    DATA: lv_test_id    TYPE znept_qz_test_id_de.
 
     CLEAR: ev_db_error, ev_do_commit.
 
-    IF key_check( is_db_tests_key ) = abap_true. " check for call from CDS
+    IF key_check( is_db_tests_key ) = abap_true.
 
       SELECT SINGLE test_id FROM znept_qz_tst INTO lv_test_id
         WHERE test_id   = is_db_tests_key-test_id
@@ -177,70 +209,58 @@ CLASS ZCL_NEPT_QZ_DATA_PROVIDER IMPLEMENTATION.
       IF sy-subrc = 0.
 
         DELETE FROM znept_qz_tst WHERE test_id = lv_test_id.
+
         IF sy-subrc = 0.
           ev_do_commit = abap_true.
         ENDIF.
 
         DELETE FROM znept_qz_prt WHERE test_id = lv_test_id.
+
         IF sy-subrc = 0.
           ev_do_commit = abap_true.
         ENDIF.
 
         DELETE FROM znept_qz_qst WHERE test_id = lv_test_id.
+
         IF sy-subrc = 0.
           ev_do_commit = abap_true.
         ENDIF.
 
         DELETE FROM znept_qz_var WHERE test_id = lv_test_id.
+
+        IF sy-subrc = 0.
+          ev_do_commit = abap_true.
+        ENDIF.
+
+        DELETE FROM znept_qz_bmr WHERE test_id = lv_test_id.
+
         IF sy-subrc = 0.
           ev_do_commit = abap_true.
         ENDIF.
 
       ENDIF.
 
-      SELECT SINGLE sync_id FROM znept_qz_mts INTO lv_sync_id
-        WHERE sync_by   = sy-uname
-          AND test_id   = is_db_tests_key-test_id
-          AND upload_on = is_db_tests_key-upload_on
-          AND upload_at = is_db_tests_key-upload_at.
-
-      IF sy-subrc = 0.
-
-        DELETE FROM znept_qz_mts WHERE sync_by   = sy-uname
-                                   AND test_id   = is_db_tests_key-test_id
-                                   AND upload_on = is_db_tests_key-upload_on
-                                   AND upload_at = is_db_tests_key-upload_at.
-        IF sy-subrc = 0.
-          ev_do_commit = abap_true.
-        ENDIF.
-
-        DELETE FROM znept_qz_mtd WHERE sync_id = lv_sync_id
-                                   AND sync_by = sy-uname.
-        IF sy-subrc = 0.
-          ev_do_commit = abap_true.
-        ENDIF.
-
-      ENDIF.
     ENDIF.
 
   ENDMETHOD.
 
 
-  METHOD GET.
+  METHOD get.
 
-    DATA:
-      lv_test_id      TYPE znept_qz_test_id_de,
-      lt_db_parts     TYPE znept_qz_db_parts_t,
-      lt_db_questions TYPE znept_qz_db_questions_t,
-      lt_db_variants  TYPE znept_qz_db_variants_t.
+    DATA: lv_test_id      TYPE znept_qz_test_id_de,
+          lt_db_parts     TYPE znept_qz_db_parts_t,
+          lt_db_questions TYPE znept_qz_db_questions_t,
+          lt_db_variants  TYPE znept_qz_db_variants_t.
 
-    CLEAR: ev_db_error, et_db_parts[], et_db_questions[], et_db_variants[].
+    CLEAR: ev_db_error.
 
-    IF key_check( is_db_tests_key ) = abap_true. " check for call from CDS
+    REFRESH: et_db_parts[], et_db_questions[], et_db_variants[].
+
+    IF key_check( is_db_tests_key ) = abap_true.
 
       SELECT SINGLE test_id FROM znept_qz_tst INTO lv_test_id
-        WHERE test_id   = is_db_tests_key-test_id
-          AND ( published = 'X' OR upload_by = sy-uname ).
+        WHERE test_id = is_db_tests_key-test_id
+          AND ( published = gc_quiz_published OR upload_by = sy-uname ).
 
       IF sy-subrc = 0.
 
@@ -262,7 +282,7 @@ CLASS ZCL_NEPT_QZ_DATA_PROVIDER IMPLEMENTATION.
           WHERE test_id = lv_test_id.
 
         IF sy-subrc = 0.
-          SORT lt_db_variants BY test_id part_id question_id variant_id.
+          SORT lt_db_variants BY test_id question_id variant_id.
         ENDIF.
 
         et_db_parts[] = lt_db_parts[].
@@ -280,20 +300,19 @@ CLASS ZCL_NEPT_QZ_DATA_PROVIDER IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD INFO.
+  METHOD info.
 
-    DATA:
-      lv_test_id         TYPE znept_qz_test_id_de,
-      lv_total_parts     TYPE i,
-      lv_total_questions TYPE i.
+    DATA: lv_test_id         TYPE znept_qz_test_id_de,
+          lv_total_parts     TYPE i,
+          lv_total_questions TYPE i.
 
     CLEAR: ev_total_parts, ev_total_questions.
 
-    IF key_check( is_db_tests_key ) = abap_true. " check for call from CDS
+    IF key_check( is_db_tests_key ) = abap_true.
 
       SELECT SINGLE test_id FROM znept_qz_tst INTO lv_test_id
         WHERE test_id = is_db_tests_key-test_id
-          AND ( published = 'X' OR upload_by = sy-uname ).
+          AND ( published = gc_quiz_published OR upload_by = sy-uname ).
 
       IF sy-subrc = 0.
 
@@ -318,12 +337,11 @@ CLASS ZCL_NEPT_QZ_DATA_PROVIDER IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD KEY_CHECK.
+  METHOD key_check.
 
-    DATA:
-      test_id_dummy   TYPE znept_qz_test_id_de,
-      lt_upload_on_ra TYPE RANGE OF znept_qz_upload_date_de,
-      lt_upload_at_ra TYPE RANGE OF znept_qz_upload_time_de.
+    DATA: test_id_dummy   TYPE znept_qz_test_id_de,
+          lt_upload_on_ra TYPE RANGE OF znept_qz_upload_date_de,
+          lt_upload_at_ra TYPE RANGE OF znept_qz_upload_time_de.
 
     CLEAR rv_result.
 
@@ -339,22 +357,19 @@ CLASS ZCL_NEPT_QZ_DATA_PROVIDER IMPLEMENTATION.
         AND upload_at IN lt_upload_at_ra.
 
     IF sy-subrc = 0.
-
       rv_result = abap_true.
-
     ENDIF.
 
   ENDMETHOD.
 
 
-  METHOD PUBLISH.
+  METHOD publish.
 
-    DATA:
-      lv_published TYPE znept_qz_published_de.
+    DATA: lv_published TYPE znept_qz_published_de.
 
     CLEAR: ev_db_error, ev_do_commit.
 
-    IF key_check( is_db_tests_key ) = abap_true. " check for call from CDS
+    IF key_check( is_db_tests_key ) = abap_true.
 
       SELECT SINGLE published FROM znept_qz_tst
         INTO lv_published
@@ -367,11 +382,11 @@ CLASS ZCL_NEPT_QZ_DATA_PROVIDER IMPLEMENTATION.
           SET published = iv_published
           WHERE test_id = is_db_tests_key-test_id.
 
-        IF sy-subrc <> 0.
+        IF sy-subrc = 0.
+          ev_do_commit = abap_true.
+        ELSE.
           ev_db_error = abap_true.
         ENDIF.
-
-        ev_do_commit = abap_true.
 
       ELSE.
         ev_db_error = abap_true.
@@ -384,31 +399,10 @@ CLASS ZCL_NEPT_QZ_DATA_PROVIDER IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD REFRESH.
+  METHOD rename.
 
-    DATA:
-      lt_db_tests TYPE znept_qz_db_tests_t.
-
-    CLEAR et_db_tests[].
-
-    SELECT * FROM znept_qz_tst INTO TABLE lt_db_tests
-      WHERE upload_by = sy-uname
-         OR published = 'X'.
-
-    IF sy-subrc = 0.
-
-      et_db_tests[] = lt_db_tests[].
-
-    ENDIF.
-
-  ENDMETHOD.
-
-
-  METHOD RENAME.
-
-    DATA:
-      lv_test_id     TYPE znept_qz_test_id_de,
-      lv_description TYPE znept_qz_test_name_de.
+    DATA: lv_test_id     TYPE znept_qz_test_id_de,
+          lv_description TYPE znept_qz_test_name_de.
 
     CLEAR: ev_db_error, ev_do_commit.
 
@@ -416,7 +410,7 @@ CLASS ZCL_NEPT_QZ_DATA_PROVIDER IMPLEMENTATION.
       RETURN.
     ENDIF.
 
-    IF key_check( is_db_tests_key ) = abap_true. " check for call from CDS
+    IF key_check( is_db_tests_key ) = abap_true.
 
       SELECT SINGLE test_id description INTO ( lv_test_id, lv_description )
         FROM znept_qz_tst
@@ -446,14 +440,105 @@ CLASS ZCL_NEPT_QZ_DATA_PROVIDER IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD RESET_METRICS.
+  METHOD read_available_test.
 
-    DATA:
-      lv_sync_id TYPE znept_qz_sync_id_de.
+    DATA: lt_db_tests TYPE znept_qz_db_tests_t.
+
+    REFRESH et_db_tests[].
+
+    SELECT * FROM znept_qz_tst INTO TABLE lt_db_tests
+      WHERE upload_by = sy-uname
+         OR published = gc_quiz_published.
+
+    IF sy-subrc = 0.
+      et_db_tests[] = lt_db_tests[].
+    ENDIF.
+
+  ENDMETHOD.
+
+
+  METHOD read_available_metrics.
+
+    DATA: lt_db_sync TYPE znept_qz_db_sync_t.
+
+    REFRESH et_db_tests_key[].
+
+    SELECT * FROM znept_qz_mts INTO TABLE lt_db_sync
+      WHERE sync_by = sy-uname.
+
+    IF sy-subrc = 0.
+      MOVE-CORRESPONDING lt_db_sync[] TO et_db_tests_key[].
+    ENDIF.
+
+  ENDMETHOD.
+
+
+  METHOD sync_bookmarks.
+
+    DATA: ls_db_tests     TYPE znept_qz_db_tests_s,
+          ls_db_bookmarks TYPE znept_qz_db_bookmarks_s,
+          lt_db_bookmarks TYPE znept_qz_db_bookmarks_t.
 
     CLEAR: ev_db_error, ev_do_commit.
 
-    SELECT SINGLE sync_id FROM znept_qz_mts INTO lv_sync_id
+    REFRESH et_db_bookmarks.
+
+    SELECT SINGLE * FROM znept_qz_tst INTO ls_db_tests
+      WHERE test_id   = is_db_tests_key-test_id
+        AND upload_on = is_db_tests_key-upload_on
+        AND upload_at = is_db_tests_key-upload_at.
+
+    IF sy-subrc <> 0.
+      RETURN.
+    ENDIF.
+
+    SELECT * FROM znept_qz_bmr INTO TABLE lt_db_bookmarks
+      WHERE sync_by = sy-uname
+        AND test_id = ls_db_tests-test_id
+        AND ( sync_on > iv_old_sync_on OR
+              sync_on = iv_old_sync_on AND sync_at > iv_old_sync_at ).
+
+    IF sy-subrc = 0.
+      et_db_bookmarks[] = lt_db_bookmarks[].
+    ENDIF.
+
+    IF NOT it_db_bookmarks[] IS INITIAL.
+
+      REFRESH lt_db_bookmarks.
+      LOOP AT it_db_bookmarks INTO ls_db_bookmarks.
+        ls_db_bookmarks-sync_by = sy-uname.
+        ls_db_bookmarks-test_id = ls_db_tests-test_id.
+        ls_db_bookmarks-sync_on = iv_new_sync_on.
+        ls_db_bookmarks-sync_at = iv_new_sync_at.
+        APPEND ls_db_bookmarks TO lt_db_bookmarks.
+        CLEAR ls_db_bookmarks.
+      ENDLOOP.
+
+      MODIFY znept_qz_bmr FROM TABLE lt_db_bookmarks.
+
+      IF sy-subrc <> 0.
+        ev_db_error = abap_true.
+        RETURN.
+      ENDIF.
+
+      ev_do_commit = abap_true.
+
+    ENDIF.
+
+  ENDMETHOD.
+
+
+  METHOD sync_metrics.
+
+    DATA: ls_db_sync     TYPE znept_qz_db_sync_s,
+          ls_db_metrics  TYPE znept_qz_db_metrics_s,
+          lt_db_metrics  TYPE znept_qz_db_metrics_t.
+
+    CLEAR: ev_db_error, ev_do_commit.
+
+    REFRESH et_db_metrics.
+
+    SELECT SINGLE * FROM znept_qz_mts INTO ls_db_sync
       WHERE sync_by   = sy-uname
         AND test_id   = is_db_tests_key-test_id
         AND upload_on = is_db_tests_key-upload_on
@@ -461,57 +546,72 @@ CLASS ZCL_NEPT_QZ_DATA_PROVIDER IMPLEMENTATION.
 
     IF sy-subrc = 0.
 
-      DELETE FROM znept_qz_mtd WHERE sync_by = sy-uname
-                               AND sync_id = lv_sync_id.
-      IF sy-subrc = 0.
-        ev_do_commit = abap_true.
+      IF NOT it_db_metrics[] IS INITIAL.
+* select and delete Unanswered activities from the DB if we are replacing them with the latest data
+
+        SELECT * FROM znept_qz_mtd INTO TABLE lt_db_metrics
+          FOR ALL ENTRIES IN it_db_metrics
+          WHERE sync_id     = ls_db_sync-sync_id
+            AND question_id = it_db_metrics-question_id
+            AND progress    = gc_progress_unanswered
+            AND ( active_on < it_db_metrics-active_on OR
+                  active_on = it_db_metrics-active_on AND active_at < it_db_metrics-active_at ).
+
+        IF sy-subrc = 0.
+          DELETE znept_qz_mtd FROM TABLE lt_db_metrics.
+
+          IF sy-subrc <> 0.
+            ev_db_error = abap_true.
+            RETURN.
+          ENDIF.
+        ENDIF.
+
       ENDIF.
 
-    ENDIF.
+      SELECT * FROM znept_qz_mtd INTO TABLE lt_db_metrics
+        WHERE sync_id = ls_db_sync-sync_id
+          AND ( sync_on > iv_old_sync_on OR
+                sync_on = iv_old_sync_on AND sync_at > iv_old_sync_at ).
 
-  ENDMETHOD.
+      IF sy-subrc = 0.
+        et_db_metrics[] = lt_db_metrics[].
+      ENDIF.
 
+    ELSE.
 
-  METHOD SYNC_METRICS.
-
-    DATA:
-      ls_db_sync    TYPE znept_qz_db_sync_s,
-      ls_db_metrics TYPE znept_qz_db_metrics_s,
-      lt_db_metrics TYPE znept_qz_db_metrics_t.
-
-    CLEAR: es_db_sync, et_db_metrics[], ev_db_error, ev_do_commit.
-
-    SELECT SINGLE * FROM znept_qz_mts INTO ls_db_sync
-      WHERE sync_by   = sy-uname
-        AND upload_on = is_db_sync-upload_on
-        AND upload_at = is_db_sync-upload_at
-        AND test_id   = is_db_sync-test_id.
-
-    IF sy-subrc <> 0.
-
-      ls_db_sync = is_db_sync.
-
-      CLEAR ls_db_sync-sync_id.
+      MOVE-CORRESPONDING is_db_tests_key TO ls_db_sync.
 
       DO.
         ls_db_sync-sync_id = ls_db_sync-sync_id + 1.
 
         SELECT sync_id UP TO 1 ROWS
           FROM znept_qz_mts INTO ls_db_sync-sync_id
-          WHERE sync_by = sy-uname
-            AND sync_id = ls_db_sync-sync_id.
+          WHERE sync_id = ls_db_sync-sync_id.
         ENDSELECT.
+
         IF sy-subrc <> 0.
           EXIT.
         ENDIF.
       ENDDO.
 
+      ls_db_sync-sync_by = sy-uname.
+
+      MODIFY znept_qz_mts FROM ls_db_sync.
+
+      IF sy-subrc <> 0.
+        ev_db_error = abap_true.
+        RETURN.
+      ENDIF.
+
     ENDIF.
 
     IF NOT it_db_metrics[] IS INITIAL.
 
+      REFRESH lt_db_metrics.
       LOOP AT it_db_metrics INTO ls_db_metrics.
         ls_db_metrics-sync_id = ls_db_sync-sync_id.
+        ls_db_metrics-sync_on = iv_new_sync_on.
+        ls_db_metrics-sync_at = iv_new_sync_at.
         APPEND ls_db_metrics TO lt_db_metrics.
         CLEAR ls_db_metrics.
       ENDLOOP.
@@ -525,46 +625,7 @@ CLASS ZCL_NEPT_QZ_DATA_PROVIDER IMPLEMENTATION.
 
     ENDIF.
 
-    IF NOT ( ls_db_sync-sync_on = is_db_sync-sync_on AND ls_db_sync-sync_at = is_db_sync-sync_at ).
-
-      SELECT * FROM znept_qz_mtd INTO TABLE lt_db_metrics
-        WHERE sync_by = sy-uname
-          AND sync_id = ls_db_sync-sync_id.
-
-      IF sy-subrc = 0.
-
-        et_db_metrics[] = lt_db_metrics[].
-
-      ELSE.
-
-* send a dummy record to reset other devices
-        CLEAR ls_db_metrics.
-        ls_db_metrics-sync_by = sy-uname.
-        ls_db_metrics-sync_id = ls_db_sync-sync_id.
-        APPEND ls_db_metrics TO lt_db_metrics.
-
-      ENDIF.
-
-      et_db_metrics[] = lt_db_metrics[].
-
-    ENDIF.
-
-    ls_db_sync-sync_on = sy-datum.
-    ls_db_sync-sync_at = sy-timlo.
-
-    MODIFY znept_qz_mts FROM ls_db_sync.
-
-    IF sy-subrc = 0.
-
-      es_db_sync = ls_db_sync.
-
-      ev_do_commit = abap_true.
-
-    ELSE.
-
-      ev_db_error = abap_true.
-
-    ENDIF.
+    ev_do_commit = abap_true.
 
   ENDMETHOD.
 ENDCLASS.

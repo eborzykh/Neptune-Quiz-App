@@ -30,11 +30,6 @@
     "file_name": "znept_qz_app.zn01.#neptune#_evtscr.AjaxRename.00011.ajaxSuccess.js"
   },
   {
-    "field_id": "00017",
-    "event": "press",
-    "file_name": "znept_qz_app.zn01.#neptune#_evtscr.ButtonAddContent.00017.press.js"
-  },
-  {
     "field_id": "00051",
     "event": "liveChange",
     "file_name": "znept_qz_app.zn01.#neptune#_evtscr.InputType.00051.liveChange.js"
@@ -120,24 +115,9 @@
     "file_name": "znept_qz_app.zn01.#neptune#_evtscr.ButtonParametersCancel.00091.press.js"
   },
   {
-    "field_id": "00100",
-    "event": "press",
-    "file_name": "znept_qz_app.zn01.#neptune#_evtscr.ButtonReset.00100.press.js"
-  },
-  {
     "field_id": "00101",
     "event": "press",
-    "file_name": "znept_qz_app.zn01.#neptune#_evtscr.ButtonDownload.00101.press.js"
-  },
-  {
-    "field_id": "00102",
-    "event": "press",
-    "file_name": "znept_qz_app.zn01.#neptune#_evtscr.ButtonRename.00102.press.js"
-  },
-  {
-    "field_id": "00103",
-    "event": "press",
-    "file_name": "znept_qz_app.zn01.#neptune#_evtscr.ButtonDelete.00103.press.js"
+    "file_name": "znept_qz_app.zn01.#neptune#_evtscr.ButtonResetDevice.00101.press.js"
   },
   {
     "field_id": "00130",
@@ -147,7 +127,7 @@
   {
     "field_id": "00179",
     "event": "press",
-    "file_name": "znept_qz_app.zn01.#neptune#_evtscr.ButtonPublish.00179.press.js"
+    "file_name": "znept_qz_app.zn01.#neptune#_evtscr.ButtonAdd.00179.press.js"
   },
   {
     "field_id": "00180",
@@ -170,16 +150,6 @@
     "file_name": "znept_qz_app.zn01.#neptune#_evtscr.ButtonAbout.00183.press.js"
   },
   {
-    "field_id": "00187",
-    "event": "ajaxError",
-    "file_name": "znept_qz_app.zn01.#neptune#_evtscr.AjaxReset.00187.ajaxError.js"
-  },
-  {
-    "field_id": "00187",
-    "event": "ajaxSuccess",
-    "file_name": "znept_qz_app.zn01.#neptune#_evtscr.AjaxReset.00187.ajaxSuccess.js"
-  },
-  {
     "field_id": "00188",
     "event": "ajaxError",
     "file_name": "znept_qz_app.zn01.#neptune#_evtscr.AjaxDownload.00188.ajaxError.js"
@@ -190,19 +160,14 @@
     "file_name": "znept_qz_app.zn01.#neptune#_evtscr.AjaxDownload.00188.ajaxSuccess.js"
   },
   {
-    "field_id": "00188",
-    "event": "press",
-    "file_name": "znept_qz_app.zn01.#neptune#_evtscr.AjaxDownload.00188.press.js"
-  },
-  {
     "field_id": "00189",
     "event": "ajaxError",
-    "file_name": "znept_qz_app.zn01.#neptune#_evtscr.AjaxMetrics.00189.ajaxError.js"
+    "file_name": "znept_qz_app.zn01.#neptune#_evtscr.AjaxActivities.00189.ajaxError.js"
   },
   {
     "field_id": "00189",
     "event": "ajaxSuccess",
-    "file_name": "znept_qz_app.zn01.#neptune#_evtscr.AjaxMetrics.00189.ajaxSuccess.js"
+    "file_name": "znept_qz_app.zn01.#neptune#_evtscr.AjaxActivities.00189.ajaxSuccess.js"
   },
   {
     "field_id": "00195",
@@ -253,5 +218,35 @@
     "field_id": "00320",
     "event": "press",
     "file_name": "znept_qz_app.zn01.#neptune#_evtscr.ButtonFavorite.00320.press.js"
+  },
+  {
+    "field_id": "00338",
+    "event": "press",
+    "file_name": "znept_qz_app.zn01.#neptune#_evtscr.ButtonMenuTestSelect.00338.press.js"
+  },
+  {
+    "field_id": "00340",
+    "event": "press",
+    "file_name": "znept_qz_app.zn01.#neptune#_evtscr.ButtonPublish.00340.press.js"
+  },
+  {
+    "field_id": "00341",
+    "event": "press",
+    "file_name": "znept_qz_app.zn01.#neptune#_evtscr.ButtonDownload.00341.press.js"
+  },
+  {
+    "field_id": "00342",
+    "event": "press",
+    "file_name": "znept_qz_app.zn01.#neptune#_evtscr.ButtonReset.00342.press.js"
+  },
+  {
+    "field_id": "00343",
+    "event": "press",
+    "file_name": "znept_qz_app.zn01.#neptune#_evtscr.ButtonRename.00343.press.js"
+  },
+  {
+    "field_id": "00344",
+    "event": "press",
+    "file_name": "znept_qz_app.zn01.#neptune#_evtscr.ButtonDelete.00344.press.js"
   }
 ]

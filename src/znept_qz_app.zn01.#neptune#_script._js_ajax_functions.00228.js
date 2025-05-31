@@ -1,6 +1,13 @@
 const _SYNC_DELAY = 500;
+const _DELAY_KEEP_CORRECT = 1500;
+
+const _ID_ZERO_TEST = '0000'; // domain _ID_TEST_DM
 const _ID_ZERO_QUESTION = '0000'; // domain _ID_QUESTION_DM
 const _ID_ZERO_PART = '00'; // domain _ID_PART_DM
+
+const _INITIAL_DATE = '00000000';
+const _INITIAL_TIME = '000000';
+const _FINAL_DATE = '99991231';
 
 const _DEFAULT_COUNT = 20; // default number of questions for Practice
 const _DEFAULT_TIMER = 10; // default timer (minutes) for Practice
@@ -23,9 +30,9 @@ const _BOOKMARK_BOOKMARKED = 'X'; // domain _BOOKMARK_DM
 const _ABAP_FALSE = '';
 const _ABAP_TRUE = 'X';
 
-const _QUESTION_TYPE_INPUT = 0;
-const _QUESTION_TYPE_SINGLE = 1;
-const _QUESTION_TYPE_MULTIPLE = 2;
+const _QUESTION_TYPE_INPUT = 0; // free choice (typing) answer
+const _QUESTION_TYPE_SINGLE = 1; // single choice question
+const _QUESTION_TYPE_MULTIPLE = 2; // multiple choice question
 
 const _MODE_PREVIEW = 0;
 const _MODE_LEARN = 1;
@@ -40,9 +47,11 @@ const _QUICK_BUTTON_CHECK = 2;
 
 const _ICON_PART_COLLAPSED = 'sap-icon://expand-all';
 const _ICON_PART_EXPANDED = 'sap-icon://collapse-all';
+
 const _ICON_PROGRESS_HIDDEN = '';
 const _ICON_PROGRESS_WRONG = 'sap-icon://message-warning';
 const _ICON_PROGRESS_CORRECT = 'sap-icon://message-success';
+
 const _ICON_UNFAVORITE = 'sap-icon://unfavorite';
 const _ICON_FAVORITE = 'sap-icon://favorite';
 
@@ -50,6 +59,8 @@ var _practice_mode = _MODE_PREVIEW;
 var _current_question = 0;
 var _navigate_after_metrics = false;
 var _ajax_error = false;
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 window.addEventListener('offline', function() {
     jQuery.sap.require("sap.m.MessageToast");
@@ -65,6 +76,7 @@ setTimeout(function() {
     _first_refresh();
 }, _SYNC_DELAY);
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _first_refresh() {
 
     if (navigator.onLine) {
@@ -75,8 +87,7 @@ function _first_refresh() {
     }
 }
 
-// Navigation
-
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _navigate_PagePQSelect() {
 
     var _ui_tests = PageTestSelect.getModel().getData();
@@ -88,8 +99,7 @@ function _navigate_PagePQSelect() {
     }
 }
 
-// layout properties and content
-
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _set_UI_busy(_busy) {
 
     if (_busy) {
@@ -101,6 +111,7 @@ function _set_UI_busy(_busy) {
     }
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _set_UI_PageTestSelect() {
 
     ListTestsUI.getModel().setData([]);
@@ -141,21 +152,23 @@ function _set_UI_PageTestSelect() {
     _set_UI_progress();
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _set_UI_PagePQSelect() {
 
     var _ui_tests = PageTestSelect.getModel().getData();
-    var i;
-    var _ui_pq;
 
     _navigate_after_metrics = false; // reset navigation after Metrics
 
+    // Sort Metrics local storage before using _get_progress
+    _sort_metrics_ls();
+
     ListPQSelect.getModel().setData([]);
 
-    for (i = 0; i < ListQuestionsLS.getModel().getData().length; i++) {
+    for (var i = 0; i < ListQuestionsLS.getModel().getData().length; i++) {
         var _ls_questions = ListQuestionsLS.getModel().getData()[i];
 
         if (_ls_questions.LS_TEST_ID === _ui_tests.UI_TEST_ID) {
-            _ui_pq = new modelPagePQUI.getData();
+            var _ui_pq = new modelPagePQUI.getData();
 
             _ui_pq.PART_ID = _ls_questions.PART_ID;
             _ui_pq.QUESTION_ID = _ls_questions.QUESTION_ID;
@@ -165,7 +178,7 @@ function _set_UI_PagePQSelect() {
             _ui_pq.UI_VISIBLE_ITEM = true;
             _ui_pq.UI_SRC_ICON = _ICON_PART_COLLAPSED; // icon property must be always provided here
             _ui_pq.DESCRIPTION = _ls_questions.QUESTION;
-            _ui_pq.UI_CORRECT_HIGHLIGHT = _get_correct_highlight(_ls_questions.LS_PROGRESS);
+            _ui_pq.UI_CORRECT_HIGHLIGHT = _get_correct_highlight(_get_ui_progress(_ls_questions.QUESTION_ID));
 
             ModelData.Add(ListPQSelect, _ui_pq);
         }
@@ -207,6 +220,7 @@ function _set_UI_PagePQSelect() {
     oApp.to(PagePQSelect);
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _get_correct_highlight(_progress) {
 
     var _highlight;
@@ -232,6 +246,7 @@ function _get_correct_highlight(_progress) {
     return _highlight;
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _is_part_selected() {
 
     var _ui_tests = PageTestSelect.getModel().getData();
@@ -249,6 +264,7 @@ function _is_part_selected() {
     return false;
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _goto_test(_new_practice_mode) {
 
     var _ui_tests = PageTestSelect.getModel().getData();
@@ -291,7 +307,8 @@ function _goto_test(_new_practice_mode) {
     oApp.to(PageQuestion);
 }
 
-function _get_question_index(_question_id) {
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+function _get_ui_question_index(_question_id) {
 
     for (var i = 0; i < ListQuestionsUI.getModel().getData().length; i++) {
         if (ListQuestionsUI.getModel().getData()[i].QUESTION_ID === _question_id) {
@@ -300,6 +317,7 @@ function _get_question_index(_question_id) {
     }
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _get_question_type(_question_id) {
 
     var _answers_count = 0;
@@ -325,6 +343,7 @@ function _get_question_type(_question_id) {
     }
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _show_question(_index) {
 
     var _ui_tests = PageTestSelect.getModel().getData();
@@ -409,6 +428,7 @@ function _show_question(_index) {
     _show_continue(_QUICK_BUTTON_HIDE);
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _set_UI_IconProgress(_index) {
 
     var _ui_tests = PageTestSelect.getModel().getData();
@@ -419,8 +439,7 @@ function _set_UI_IconProgress(_index) {
     var _button_visible = (_practice_mode !== _MODE_PRACTICE);
 
     if (_practice_mode === _MODE_PREVIEW || _practice_mode === _MODE_LEARN || _practice_mode === _MODE_PREPARE) {
-        var _progress = ModelData.LookupValue(ListQuestionsLS, ["LS_TEST_ID", "QUESTION_ID"], [_ui_tests.UI_TEST_ID, _ui_questions.QUESTION_ID], "LS_PROGRESS");
-        switch (_progress) {
+        switch (_ui_questions.UI_PROGRESS) {
             case _PROGRESS_UNANSWERED:
                 // use default values
                 break;
@@ -437,11 +456,13 @@ function _set_UI_IconProgress(_index) {
                 break;
         }
     }
+
     IconProgress.setVisible(_button_visible);
     IconProgress.setIcon(_button_icon);
     IconProgress.setType(_button_type);
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _set_UI_ButtonBookmark(_index) {
 
     var _ui_questions = ListQuestionsUI.getModel().getData()[_index];
@@ -471,6 +492,7 @@ function _set_UI_ButtonBookmark(_index) {
     }
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _show_continue(_mode_continue) {
 
     var _show = false;
@@ -494,6 +516,7 @@ function _show_continue(_mode_continue) {
     oActionListContinue.setText(_caption);
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _show_answer(_index) {
 
     var _ui_tests = PageTestSelect.getModel().getData();
@@ -532,12 +555,12 @@ function _show_answer(_index) {
     }
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _evaluate_answer(_index) {
 
     var _ui_tests = PageTestSelect.getModel().getData();
     var i;
     var _ui_variants;
-    var _progress;
     var _is_correct = true;
     var _ui_questions = ListQuestionsUI.getModel().getData()[_index];
     var _question_type = _get_question_type(_ui_questions.QUESTION_ID);
@@ -590,36 +613,35 @@ function _evaluate_answer(_index) {
     }
     _ui_questions.UI_QUESTION_EVALUATED = true;
 
-    ModelData.Update(ListQuestionsUI, 'QUESTION_ID', _ui_questions.QUESTION_ID, _ui_questions);
-
     // Calculate next progress
     if (_is_correct) {
-        _progress = ModelData.LookupValue(ListQuestionsLS, ["LS_TEST_ID", "QUESTION_ID"], [_ui_tests.UI_TEST_ID, _ui_questions.QUESTION_ID], "LS_PROGRESS");
-        switch (_progress) {
+        switch (_ui_questions.UI_PROGRESS) {
             case _PROGRESS_UNANSWERED:
             case _PROGRESS_IMPROVED3:
-                _progress = _PROGRESS_CORRECT;
+                _ui_questions.UI_PROGRESS = _PROGRESS_CORRECT;
                 break;
             case _PROGRESS_INCORRECT:
-                _progress = _PROGRESS_IMPROVED1;
+                _ui_questions.UI_PROGRESS = _PROGRESS_IMPROVED1;
                 break;
             case _PROGRESS_IMPROVED1:
-                _progress = _PROGRESS_IMPROVED2;
+                _ui_questions.UI_PROGRESS = _PROGRESS_IMPROVED2;
                 break;
             case _PROGRESS_IMPROVED2:
-                _progress = _PROGRESS_IMPROVED3;
+                _ui_questions.UI_PROGRESS = _PROGRESS_IMPROVED3;
                 break;
         }
     } else {
-        _progress = _PROGRESS_INCORRECT;
+        _ui_questions.UI_PROGRESS = _PROGRESS_INCORRECT;
     }
 
+    // Update current UI
+    ModelData.Update(ListQuestionsUI, 'QUESTION_ID', _ui_questions.QUESTION_ID, _ui_questions);
+
     // Update progress in the current UI
-    ModelData.UpdateField(ListPQSelect, "QUESTION_ID", _ui_questions.QUESTION_ID, "UI_CORRECT_HIGHLIGHT", _get_correct_highlight(_progress));
+    ModelData.UpdateField(ListPQSelect, "QUESTION_ID", _ui_questions.QUESTION_ID, "UI_CORRECT_HIGHLIGHT", _get_correct_highlight(_ui_questions.UI_PROGRESS));
 
     // Cache progress in the local storage
-    ModelData.UpdateField(ListQuestionsLS, ["LS_TEST_ID", "QUESTION_ID"], [_ui_tests.UI_TEST_ID, _ui_questions.QUESTION_ID], ["LS_PROGRESS", "LS_SYNC_METRICS"], [_progress, true]);
-    setCacheListQuestionsLS();
+    _add_metrics(_index, _ui_questions.UI_PROGRESS);
 
     // Refresh progress icon after evaluation
     _set_UI_IconProgress(_index);
@@ -627,6 +649,190 @@ function _evaluate_answer(_index) {
     return _is_correct;
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+function _get_test_id_format(_test_id) {
+
+    var _test_id_new = _test_id.toString();
+    while (_test_id_new.length < _ID_ZERO_TEST.length) _test_id_new = "0" + _test_id_new;
+    return _test_id_new;
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+function _get_sync_id(_test_id, _upload_on, _upload_at) {
+
+    var _ls_sync_id;
+    var _ls_sync;
+
+    for (var i = 0; i < ListSyncMetricsLS.getModel().getData().length; i++) {
+        _ls_sync = ListSyncMetricsLS.getModel().getData()[i];
+        if (_ls_sync.TEST_ID === _test_id && _ls_sync.UPLOAD_ON === _upload_on && _ls_sync.UPLOAD_AT === _upload_at) {
+            _ls_sync_id = _ls_sync.LS_SYNC_ID;
+        }
+    }
+
+    if (typeof _ls_sync_id === 'undefined') {
+
+        var _ls_sync_id_new = 1;
+        for (i = 0; i < ListSyncMetricsLS.getModel().getData().length; i++) {
+            if (ListSyncMetricsLS.getModel().getData()[i].LS_SYNC_ID === _get_test_id_format(_ls_sync_id_new)) {
+                _ls_sync_id_new++;
+                i = 0;
+            }
+        }
+        _ls_sync_id = _get_test_id_format(_ls_sync_id_new);
+
+        _ls_sync = new modelPageSyncLS.getData();
+
+        _ls_sync.TEST_ID = _test_id;
+        _ls_sync.UPLOAD_ON = _upload_on;
+        _ls_sync.UPLOAD_AT = _upload_at;
+
+        _ls_sync.LS_SYNC_ID = _ls_sync_id;
+
+        _ls_sync.LS_SYNC_ON = _INITIAL_DATE;
+        _ls_sync.LS_SYNC_AT = _INITIAL_TIME;
+
+        ModelData.Add(ListSyncMetricsLS, _ls_sync);
+        setCacheListSyncMetricsLS();
+    }
+    return _ls_sync_id;
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+function _get_test_id(_test_id, _upload_on, _upload_at) {
+
+    for (var i = 0; i < ListTestsLS.getModel().getData().length; i++) {
+        var _ls_tests = ListTestsLS.getModel().getData()[i];
+        if (_ls_tests.TEST_ID === _test_id && _ls_tests.UPLOAD_ON === _upload_on && _ls_tests.UPLOAD_AT === _upload_at) {
+            if (_ls_tests.LS_DOWNLOADED && !_ls_tests.LS_DELETED) {
+                return _ls_tests.LS_TEST_ID;
+            } else {
+                return _ID_ZERO_TEST;
+            }
+        }
+    }
+    return _ID_ZERO_TEST;
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+function _get_ui_sync_id() {
+
+    var _ui_tests = PageTestSelect.getModel().getData();
+    var _ls_sync_id = _get_sync_id(_ui_tests.TEST_ID, _ui_tests.UPLOAD_ON, _ui_tests.UPLOAD_AT);
+
+    return _ls_sync_id;
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+function _add_metrics(_index, _progress) {
+
+    var _ls_sync_id = _get_ui_sync_id();
+
+    if (typeof _index !== 'undefined') {
+        var _ui_questions = ListQuestionsUI.getModel().getData()[_index];
+
+        // Remove Metrics with PROGRESS = _PROGRESS_UNANSWERED (in case of already done/received reset) the next activity will be the last
+        ModelData.Delete(ListMetricsLS, ["LS_SYNC_ID", "QUESTION_ID", "PROGRESS"], [_ls_sync_id, _ui_questions.QUESTION_ID, _PROGRESS_UNANSWERED]);
+
+        var _ls_metrics = new modelPageMetricsLS.getData();
+
+        _ls_metrics.LS_SYNC_ID = _ls_sync_id;
+        _ls_metrics.QUESTION_ID = _ui_questions.QUESTION_ID;
+        _ls_metrics.ACTIVE_ON = _get_date();
+        _ls_metrics.ACTIVE_AT = _get_time();
+        _ls_metrics.PROGRESS = _progress;
+
+        ModelData.Add(ListMetricsLS, _ls_metrics);
+        setCacheListMetricsLS();
+
+    } else {
+        for (var i = 0; i < ListQuestionsUI.getModel().getData().length; i++) {
+            _add_metrics(i, _PROGRESS_UNANSWERED);
+        }
+    }
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+function _sort_metrics_ls() {
+
+    ListMetricsLS.getModel().getData().sort(function(_a, _b) {
+        if (_a.ACTIVE_ON > _b.ACTIVE_ON || _a.ACTIVE_ON === _b.ACTIVE_ON && _a.ACTIVE_AT > _b.ACTIVE_AT) {
+            return -1;
+        }
+        if (_a.ACTIVE_ON < _b.ACTIVE_ON || _a.ACTIVE_ON === _b.ACTIVE_ON && _a.ACTIVE_AT < _b.ACTIVE_AT) {
+            return 1;
+        }
+        return 0;
+    });
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+function _get_progress(_ls_sync_id, _question_id) {
+
+    // Metrics local storage must be sorted _sort_metrics_ls before using this function
+    for (var i = 0; i < ListMetricsLS.getModel().getData().length; i++) {
+        var _ls_metrics = ListMetricsLS.getModel().getData()[i];
+        if (_ls_metrics.LS_SYNC_ID === _ls_sync_id && _ls_metrics.QUESTION_ID === _question_id) {
+            return _ls_metrics.PROGRESS;
+        }
+    }
+    return _PROGRESS_UNANSWERED;
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+function _get_ui_progress(_question_id) {
+
+    var _ui_tests = PageTestSelect.getModel().getData();
+    var _ls_sync_id = _get_sync_id(_ui_tests.TEST_ID, _ui_tests.UPLOAD_ON, _ui_tests.UPLOAD_AT);
+
+    return _get_progress(_ls_sync_id, _question_id);
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+function _reset_progress() {
+
+    // Add _PROGRESS_UNANSWERED for all questions
+    _add_metrics();
+
+    // Update current UI
+    ModelData.UpdateField(ListPQSelect, "UI_VISIBLE_QUESTION", true, "UI_CORRECT_HIGHLIGHT", _get_correct_highlight(_PROGRESS_UNANSWERED));
+
+    if (navigator.onLine && !_ajax_error) {
+        setTimeout(function() {
+            _ajax_activities(false);
+        }, _SYNC_DELAY);
+    } else {
+        _set_UI_progress();
+    }
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+function _get_date() {
+
+    const _now = new Date();
+
+    const _day = (_now.getDate().toString().length === 1 ? "0" + _now.getDate().toString() : _now.getDate().toString());
+    const _month = ((_now.getMonth() + 1).toString().length === 1 ? "0" + (_now.getMonth() + 1).toString() : (_now.getMonth() + 1).toString());
+    const _year = _now.getFullYear().toString();
+    const _date = (_year + _month + _day).toString();
+
+    return _date;
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+function _get_time() {
+
+    const _now = new Date();
+
+    const _hour = (_now.getHours().toString().length === 1 ? "0" + _now.getHours().toString() : _now.getHours().toString());
+    const _min = (_now.getMinutes().toString().length === 1 ? "0" + _now.getMinutes().toString() : _now.getMinutes().toString());
+    const _sec = (_now.getSeconds().toString().length === 1 ? "0" + _now.getSeconds().toString() : _now.getSeconds().toString());
+    const _time = (_hour + _min + _sec).toString();
+
+    return _time;
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _is_answer_given(_index) {
 
     var i;
@@ -658,6 +864,7 @@ function _is_answer_given(_index) {
     return _is_given;
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _set_answer_given(_answer_given) {
 
     var _ui_questions = PageQuestion.getModel().getData();
@@ -673,6 +880,7 @@ function _set_answer_given(_answer_given) {
     }
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _bookmark_question() {
 
     var _ui_tests = PageTestSelect.getModel().getData();
@@ -688,13 +896,14 @@ function _bookmark_question() {
     PageQuestion.getModel().setData(_ui_questions);
 
     // Cache progress in the local storage
-    ModelData.UpdateField(ListQuestionsLS, ["LS_TEST_ID", "QUESTION_ID"], [_ui_tests.UI_TEST_ID, _ui_questions.QUESTION_ID], ["LS_BOOKMARK", "LS_SYNC_METRICS"], [_ui_questions.UI_BOOKMARK, true]);
+    ModelData.UpdateField(ListQuestionsLS, ["LS_TEST_ID", "QUESTION_ID"], [_ui_tests.UI_TEST_ID, _ui_questions.QUESTION_ID], ["LS_BOOKMARK", "LS_ACTIVE_ON", "LS_ACTIVE_AT"], [_ui_questions.UI_BOOKMARK, _get_date(), _get_time()]);
     setCacheListQuestionsLS();
 
     // Refresh bookmark button after update
     _set_UI_ButtonBookmark(_current_question);
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _goto_next_question(_bookmark) {
 
     var i;
@@ -706,7 +915,7 @@ function _goto_next_question(_bookmark) {
                 return;
             }
         }
-        for (i = 0; i < _current_question - 1; i++) {
+        for (i = 0; i < _current_question; i++) {
             if (ListQuestionsUI.getModel().getData()[i].UI_BOOKMARK === _ABAP_TRUE) {
                 _goto_question(i);
                 return;
@@ -717,6 +926,7 @@ function _goto_next_question(_bookmark) {
     }
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _goto_previous_question(_bookmark) {
 
     var i;
@@ -728,7 +938,7 @@ function _goto_previous_question(_bookmark) {
                 return;
             }
         }
-        for (i = ListQuestionsUI.getModel().getData().length - 1; i > _current_question + 1; i--) {
+        for (i = ListQuestionsUI.getModel().getData().length - 1; i > _current_question; i--) {
             if (ListQuestionsUI.getModel().getData()[i].UI_BOOKMARK === _ABAP_TRUE) {
                 _goto_question(i);
                 return;
@@ -739,6 +949,7 @@ function _goto_previous_question(_bookmark) {
     }
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _goto_question(_index) {
 
     var _ui_questions = ListQuestionsUI.getModel().getData()[_current_question];
@@ -747,33 +958,34 @@ function _goto_question(_index) {
         if (!_evaluate_answer(_current_question)) {
             _show_answer(_current_question);
             _show_continue(_QUICK_BUTTON_CONTINUE);
-            // _bookmark_question(true); // if we want to "force bookmark" wrong answer
+            // _bookmark_question(true); // if we want to "force bookmark" for wrong answers
             return;
         } else {
             _show_answer(_current_question);
             _show_continue(_QUICK_BUTTON_HIDE);
             setTimeout(function() {
                 _show_question(_index);
-            }, 1500);
+            }, _DELAY_KEEP_CORRECT);
             return;
         }
     }
     _show_question(_index);
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _shuffle_array(_array) {
 
     var _current_index = _array.length;
-    var _random_index;
 
     while (_current_index !== 0) {
-        _random_index = Math.floor(Math.random() * _current_index);
+        var _random_index = Math.floor(Math.random() * _current_index);
         _current_index--;
         [_array[_current_index], _array[_random_index]] = [_array[_random_index], _array[_current_index]];
     }
     return _array;
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _submit_results() {
 
     _practice_mode = _MODE_RESULTS;
@@ -803,6 +1015,7 @@ function _submit_results() {
     oApp.to(PageResults);
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _start_timer(_duration_minutes) {
 
     var _timer = _duration_minutes * 60;
@@ -848,29 +1061,32 @@ function _start_timer(_duration_minutes) {
     }
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _set_UI_reset() {
 
     var _ui_tests = PageTestSelect.getModel().getData();
-    var i;
 
     _practice_mode = _MODE_PREVIEW;
     _current_question = 0;
+
+    // Sort Metrics local storage before using _get_progress
+    _sort_metrics_ls();
 
     // Refresh Question list (different Parts selected / reset Practice trim) and clean UI artifacts after last session
     ListQuestionsUI.getModel().setData([]);
     ListVariantsUI.getModel().setData([]);
 
-    for (i = 0; i < ListQuestionsLS.getModel().getData().length; i++) {
+    for (var i = 0; i < ListQuestionsLS.getModel().getData().length; i++) {
         var _ls_questions = ListQuestionsLS.getModel().getData()[i];
         if (_ls_questions.LS_TEST_ID === _ui_tests.UI_TEST_ID) {
             var _ui_questions = new modelPageQuestionsUI.getData();
 
-            _ui_questions.PART_ID = _ls_questions.PART_ID;
             _ui_questions.QUESTION_ID = _ls_questions.QUESTION_ID;
+            _ui_questions.PART_ID = _ls_questions.PART_ID;
             _ui_questions.QUESTION = _ls_questions.QUESTION;
             _ui_questions.EXPLANATION = _ls_questions.EXPLANATION;
 
-            _ui_questions.UI_PROGRESS = _ls_questions.LS_PROGRESS;
+            _ui_questions.UI_PROGRESS = _get_ui_progress(_ls_questions.QUESTION_ID);
             _ui_questions.UI_BOOKMARK = _ls_questions.LS_BOOKMARK;
             _ui_questions.UI_ANSWER_GIVEN = false;
             _ui_questions.UI_QUESTION_EVALUATED = false;
@@ -880,8 +1096,8 @@ function _set_UI_reset() {
         }
     }
 
-    for (i = 0; i < ListVariantsLS.getModel().getData().length; i++) {
-        var _ls_variants = ListVariantsLS.getModel().getData()[i];
+    for (var j = 0; j < ListVariantsLS.getModel().getData().length; j++) {
+        var _ls_variants = ListVariantsLS.getModel().getData()[j];
         if (_ls_variants.LS_TEST_ID === _ui_tests.UI_TEST_ID) {
             var _ui_variants = new modelPageVariantsUI.getData();
 
@@ -898,6 +1114,7 @@ function _set_UI_reset() {
     }
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _set_UI_progress() {
 
     var _parameters = PageParameters.getModel().getData();
@@ -912,17 +1129,20 @@ function _set_UI_progress() {
         setCachePageParameters();
     }
 
-    var _result_correct;
+    // Sort Metrics local storage before using _get_progress
+    _sort_metrics_ls();
 
     // Refresh UI progress based on latest LS
     for (var i = 0; i < ListTestsUI.getModel().getData().length; i++) {
         var _ui_tests = ListTestsUI.getModel().getData()[i];
 
-        _result_correct = 0;
+        var _ls_sync_id = _get_sync_id(_ui_tests.TEST_ID, _ui_tests.UPLOAD_ON, _ui_tests.UPLOAD_AT);
+
+        var _result_correct = 0;
         for (var j = 0; j < ListQuestionsLS.getModel().getData().length; j++) {
             var _ls_questions = ListQuestionsLS.getModel().getData()[j];
             if (_ls_questions.LS_TEST_ID === _ui_tests.UI_TEST_ID) {
-                switch (_ls_questions.LS_PROGRESS) {
+                switch (_get_progress(_ls_sync_id, _ls_questions.QUESTION_ID)) {
                     case _PROGRESS_IMPROVED1:
                     case _PROGRESS_IMPROVED2:
                     case _PROGRESS_IMPROVED3:
@@ -932,6 +1152,7 @@ function _set_UI_progress() {
                 }
             }
         }
+
         _ui_tests.UI_PERCENTAGE = parseInt((100 / _ui_tests.UI_COUNT_QUESTIONS) * _result_correct);
         if (_ui_tests.UI_PERCENTAGE === 0) {
             _ui_tests.UI_PERCENTAGE_COLOR = 'Neutral'; // sap.m.ValueColor
@@ -947,6 +1168,7 @@ function _set_UI_progress() {
     }
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _set_UI_order() {
 
     for (var i = 0; i < ListTestsUI.getModel().getData().length; i++) {
@@ -1001,9 +1223,9 @@ function _set_UI_order() {
     });
 
     ListTestsUI.getModel().refresh(true);
-
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _set_UI_published() {
 
     for (var i = 0; i < ListTestsUI.getModel().getData().length; i++) {
@@ -1017,6 +1239,7 @@ function _set_UI_published() {
     }
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _set_UI_ActionSheet() {
 
     var _ui_tests = PageTestSelect.getModel().getData();
@@ -1030,6 +1253,7 @@ function _set_UI_ActionSheet() {
     ButtonPublish.setEnabled(_ui_tests.UPLOAD_BY === PageSY.getModel().getData().SAP_USER);
     ButtonRename.setEnabled(_ui_tests.UPLOAD_BY === PageSY.getModel().getData().SAP_USER);
 }
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _ajax_refresh() {
 
     if (navigator.onLine) {
@@ -1055,6 +1279,7 @@ function _ajax_refresh() {
     }
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _ajax_refresh_success() {
 
     var _ls_test_id;
@@ -1070,13 +1295,14 @@ function _ajax_refresh_success() {
 
         switch (_sy_tests.SY_ACTION) {
             case _SYNC_ACTION_INSERT:
-                _ls_test_id = 1;
+                var _ls_test_id_new = 1;
                 for (var j = 0; j < ListTestsLS.getModel().getData().length; j++) {
-                    if (ListTestsLS.getModel().getData()[j].LS_TEST_ID === _ls_test_id) {
-                        _ls_test_id++;
+                    if (ListTestsLS.getModel().getData()[j].LS_TEST_ID === _get_test_id_format(_ls_test_id_new)) {
+                        _ls_test_id_new++;
                         j = 0;
                     }
                 }
+                _ls_test_id = _get_test_id_format(_ls_test_id_new);
                 break;
             case _SYNC_ACTION_UPDATE:
             case _SYNC_ACTION_DELETE:
@@ -1088,12 +1314,10 @@ function _ajax_refresh_success() {
             case _SYNC_ACTION_INSERT:
                 var _ls_tests = new modelPageTestsLS.getData();
 
-                // LS_TEST_ID and UI_TEST_ID are the same (deppends on structure) unique ID representation the content on local device
-                // TEST_ID (with combination of UPLOAD_ON and UPLOAD_AT) is the unique ID representation the content in the backend
                 _ls_tests.LS_TEST_ID = _ls_test_id;
+                _ls_tests.TEST_ID = _sy_tests.TEST_ID;
                 _ls_tests.UPLOAD_ON = _sy_tests.UPLOAD_ON;
                 _ls_tests.UPLOAD_AT = _sy_tests.UPLOAD_AT;
-                _ls_tests.TEST_ID = _sy_tests.TEST_ID;
                 _ls_tests.UPLOAD_BY = _sy_tests.UPLOAD_BY;
                 _ls_tests.PUBLISHED = _sy_tests.PUBLISHED;
                 _ls_tests.DESCRIPTION = _sy_tests.DESCRIPTION;
@@ -1102,8 +1326,16 @@ function _ajax_refresh_success() {
                 _ls_tests.LS_COUNT_QUESTIONS = _sy_tests.SY_COUNT_QUESTIONS;
                 _ls_tests.LS_UPLOAD_BY_NAME = _sy_tests.SY_UPLOAD_BY_NAME;
 
+                _ls_tests.LS_SYNC_ON = _INITIAL_DATE;
+                _ls_tests.LS_SYNC_AT = _INITIAL_TIME;
+
                 _ls_tests.LS_DOWNLOADED = false;
                 _ls_tests.LS_DELETED = false;
+                _ls_tests.LS_FAVORITE = false;
+
+                //                _ls_tests.LS_RATING = '';
+                //                _ls_tests.LS_ACTIVE_ON = _INITIAL_DATE;
+                //                _ls_tests.LS_ACTIVE_AT = _INITIAL_TIME;
 
                 ModelData.Add(ListTestsLS, _ls_tests);
                 break;
@@ -1122,8 +1354,10 @@ function _ajax_refresh_success() {
                 } else {
                     // for content published by others it will delete only yet not downloaded
                     if (ModelData.LookupValue(ListTestsLS, "LS_TEST_ID", _ls_test_id, "LS_DOWNLOADED")) {
+                        // marked as "local" and remain on this device
                         ModelData.UpdateField(ListTestsLS, "LS_TEST_ID", _ls_test_id, "LS_DELETED", true);
                     } else {
+                        // remove from the list
                         ModelData.Delete(ListTestsLS, "LS_TEST_ID", _ls_test_id);
                     }
                 }
@@ -1140,6 +1374,7 @@ function _ajax_refresh_success() {
     // On Refresh we rebuild the landing page (no local UI update)
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _ajax_download() {
 
     if (navigator.onLine) {
@@ -1159,13 +1394,13 @@ function _ajax_download() {
     }
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _ajax_download_success() {
 
     var _ui_tests = PageTestSelect.getModel().getData();
-    var i;
 
     // Update local storage
-    for (i = 0; i < ListPartsSY.getModel().getData().length; i++) {
+    for (var i = 0; i < ListPartsSY.getModel().getData().length; i++) {
         var _sy_parts = ListPartsSY.getModel().getData()[i];
         var _ls_parts = new modelPagePartsLS.getData();
 
@@ -1181,15 +1416,16 @@ function _ajax_download_success() {
         var _sy_questions = ListQuestionsSY.getModel().getData()[i];
         var _ls_questions = new modelPageQuestionsLS.getData();
 
-        _ls_questions.PART_ID = _sy_questions.PART_ID;
         _ls_questions.QUESTION_ID = _sy_questions.QUESTION_ID;
+        _ls_questions.PART_ID = _sy_questions.PART_ID;
         _ls_questions.QUESTION = _sy_questions.QUESTION;
         _ls_questions.EXPLANATION = _sy_questions.EXPLANATION;
 
         _ls_questions.LS_TEST_ID = _ui_tests.UI_TEST_ID;
-        _ls_questions.LS_PROGRESS = _PROGRESS_UNANSWERED;
+
         _ls_questions.LS_BOOKMARK = _BOOKMARK_UNMARKED;
-        _ls_questions.LS_SYNC_METRICS = false;
+        _ls_questions.LS_ACTIVE_ON = _INITIAL_DATE;
+        _ls_questions.LS_ACTIVE_AT = _INITIAL_TIME;
 
         ModelData.Add(ListQuestionsLS, _ls_questions);
     }
@@ -1197,7 +1433,6 @@ function _ajax_download_success() {
         var _sy_variants = ListVariantsSY.getModel().getData()[i];
         var _ls_variants = new modelPageVariantsUI.getData();
 
-        _ls_variants.PART_ID = _sy_variants.PART_ID;
         _ls_variants.QUESTION_ID = _sy_variants.QUESTION_ID;
         _ls_variants.VARIANT_ID = _sy_variants.VARIANT_ID;
         _ls_variants.CORRECT = _sy_variants.CORRECT;
@@ -1219,6 +1454,7 @@ function _ajax_download_success() {
     ModelData.UpdateField(ListTestsUI, "UI_TEST_ID", _ui_tests.UI_TEST_ID, "UI_DOWNLOADED", true);
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _ajax_publish() {
 
     if (navigator.onLine) {
@@ -1244,6 +1480,7 @@ function _ajax_publish() {
     }
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _ajax_publish_success() {
 
     var _ui_tests = PageTestSelect.getModel().getData();
@@ -1264,38 +1501,7 @@ function _ajax_publish_success() {
     ModelData.UpdateField(ListTestsUI, "UI_TEST_ID", _ui_tests.UI_TEST_ID, "PUBLISHED", _sy_tests.PUBLISHED);
 }
 
-function _ajax_reset() {
-
-    var _ui_tests = PageTestSelect.getModel().getData();
-
-    // Update local storage
-    ModelData.UpdateField(ListQuestionsLS, "LS_TEST_ID", _ui_tests.UI_TEST_ID, ["LS_SYNC_METRICS", "LS_PROGRESS", "LS_BOOKMARK"], [false, _PROGRESS_UNANSWERED, _BOOKMARK_UNMARKED]);
-
-    // Cache local storage
-    setCacheListQuestionsLS();
-
-    // Update current UI
-    ModelData.UpdateField(ListPQSelect, "UI_VISIBLE_QUESTION", true, "UI_CORRECT_HIGHLIGHT", _get_correct_highlight(_PROGRESS_UNANSWERED));
-
-    if (navigator.onLine) {
-        var _sy_tests = PageTestsSY.getModel().getData();
-
-        _sy_tests.UPLOAD_ON = _ui_tests.UPLOAD_ON;
-        _sy_tests.UPLOAD_AT = _ui_tests.UPLOAD_AT;
-        _sy_tests.TEST_ID = _ui_tests.TEST_ID;
-
-        PageTestsSY.getModel().setData(_sy_tests);
-
-        _set_UI_busy(true);
-        getOnlineAjaxReset();
-    }
-}
-
-function _ajax_reset_success() {
-    // we are going to reset on the device before ajax call
-    // if the backend returns error the latest statistics will be submited later
-}
-
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _ajax_rename() {
 
     if (navigator.onLine) {
@@ -1317,6 +1523,7 @@ function _ajax_rename() {
     }
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _ajax_rename_success() {
 
     var _ui_tests = PageTestSelect.getModel().getData();
@@ -1338,79 +1545,198 @@ function _ajax_rename_success() {
     ModelData.UpdateField(ListTestsUI, "UI_TEST_ID", _ui_tests.UI_TEST_ID, "DESCRIPTION", _sy_tests.DESCRIPTION);
 }
 
-function _ajax_metrics(_sync_all) {
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+function _ajax_activities(_sync_all) {
 
     if (navigator.onLine) {
         var _ui_tests = PageTestSelect.getModel().getData();
 
-        ListSyncSY.getModel().setData([]);
+        ListSyncMetricsSY.getModel().setData([]);
         ListMetricsSY.getModel().setData([]);
+        ListSyncBookmarksSY.getModel().setData([]);
+        ListBookmarksSY.getModel().setData([]);
 
-        for (var i = 0; i < ListTestsLS.getModel().getData().length; i++) {
-            var _ls_tests = ListTestsLS.getModel().getData()[i];
-            if (_ls_tests.LS_DOWNLOADED && (_sync_all || _ls_tests.LS_TEST_ID === _ui_tests.UI_TEST_ID)) {
-                var _sy_sync = new modelPageSyncSY.getData();
+        for (var i = 0; i < ListSyncMetricsLS.getModel().getData().length; i++) {
+            var _ls_sync = ListSyncMetricsLS.getModel().getData()[i];
+            if (_sync_all || _ls_sync.TEST_ID === _ui_tests.TEST_ID && _ls_sync.UPLOAD_ON === _ui_tests.UPLOAD_ON && _ls_sync.UPLOAD_AT === _ui_tests.UPLOAD_AT) {
+                var _sy_sync_metrics = new modelPageSyncSY.getData();
 
-                _sy_sync.TEST_ID = _ls_tests.TEST_ID;
-                _sy_sync.UPLOAD_ON = _ls_tests.UPLOAD_ON;
-                _sy_sync.UPLOAD_AT = _ls_tests.UPLOAD_AT;
-                _sy_sync.SYNC_ON = _ls_tests.LS_SYNC_ON;
-                _sy_sync.SYNC_AT = _ls_tests.LS_SYNC_AT;
-                _sy_sync.SYNC_ID = _ls_tests.LS_TEST_ID;
+                _sy_sync_metrics.TEST_ID = _ls_sync.TEST_ID;
+                _sy_sync_metrics.UPLOAD_ON = _ls_sync.UPLOAD_ON;
+                _sy_sync_metrics.UPLOAD_AT = _ls_sync.UPLOAD_AT;
 
-                ModelData.Add(ListSyncSY, _sy_sync);
+                _sy_sync_metrics.SYNC_ON = _ls_sync.LS_SYNC_ON;
+                _sy_sync_metrics.SYNC_AT = _ls_sync.LS_SYNC_AT;
 
-                for (var j = 0; j < ListQuestionsLS.getModel().getData().length; j++) {
-                    var _ls_questions = ListQuestionsLS.getModel().getData()[j];
-                    if (_ls_questions.LS_TEST_ID === _ls_tests.LS_TEST_ID && _ls_questions.LS_SYNC_METRICS) {
-                        var _sy_metrics = new modelPageMetricsSY.getData();
+                if (_sync_all) {
+                    _sy_sync_metrics.SYNC_ID = _ls_sync.LS_SYNC_ID;
+                } else {
+                    _sy_sync_metrics.SYNC_ID = _ID_ZERO_TEST;
+                }
 
-                        _sy_metrics.SYNC_ID = _ls_tests.LS_TEST_ID;
-                        _sy_metrics.QUESTION_ID = _ls_questions.QUESTION_ID;
-                        _sy_metrics.PROGRESS = _ls_questions.LS_PROGRESS;
-                        _sy_metrics.BOOKMARK = _ls_questions.LS_BOOKMARK;
+                ModelData.Add(ListSyncMetricsSY, _sy_sync_metrics);
 
-                        ModelData.Add(ListMetricsSY, _sy_metrics);
+                for (var j = 0; j < ListMetricsLS.getModel().getData().length; j++) {
+                    var _ls_metrics = ListMetricsLS.getModel().getData()[j];
+                    if (_ls_metrics.LS_SYNC_ID === _ls_sync.LS_SYNC_ID) {
+                        if (_sy_sync_metrics.SYNC_ON === '' && _sy_sync_metrics.SYNC_AT === '' ||
+                            _ls_metrics.ACTIVE_ON > _sy_sync_metrics.SYNC_ON ||
+                            _ls_metrics.ACTIVE_ON === _sy_sync_metrics.SYNC_ON && _ls_metrics.ACTIVE_AT > _sy_sync_metrics.SYNC_AT) {
+
+                            var _sy_metrics = new modelPageMetricsSY.getData();
+
+                            _sy_metrics.SYNC_ID = _sy_sync_metrics.SYNC_ID;
+                            _sy_metrics.QUESTION_ID = _ls_metrics.QUESTION_ID;
+                            _sy_metrics.ACTIVE_ON = _ls_metrics.ACTIVE_ON;
+                            _sy_metrics.ACTIVE_AT = _ls_metrics.ACTIVE_AT;
+                            _sy_metrics.PROGRESS = _ls_metrics.PROGRESS;
+
+                            ModelData.Add(ListMetricsSY, _sy_metrics);
+                        }
                     }
                 }
             }
         }
 
-        if (ListSyncSY.getModel().getData().length > 0 && (_sync_all || _navigate_after_metrics || ListMetricsSY.getModel().getData().length > 0)) {
+        for (i = 0; i < ListTestsLS.getModel().getData().length; i++) {
+            var _ls_tests = ListTestsLS.getModel().getData()[i];
+            if (_ls_tests.LS_DOWNLOADED && !_ls_tests.LS_DELETED) {
+                if (_sync_all || _ls_tests.LS_TEST_ID === _ui_tests.UI_TEST_ID) {
+                    var _sy_sync_bookmarks = new modelPageSyncSY.getData();
+
+                    _sy_sync_bookmarks.TEST_ID = _ls_tests.TEST_ID;
+                    _sy_sync_bookmarks.UPLOAD_ON = _ls_tests.UPLOAD_ON;
+                    _sy_sync_bookmarks.UPLOAD_AT = _ls_tests.UPLOAD_AT;
+
+                    _sy_sync_bookmarks.SYNC_ON = _ls_tests.LS_SYNC_ON;
+                    _sy_sync_bookmarks.SYNC_AT = _ls_tests.LS_SYNC_AT;
+
+                    if (_sync_all) {
+                        _sy_sync_bookmarks.SYNC_ID = _ls_tests.LS_TEST_ID;
+                    } else {
+                        _sy_sync_bookmarks.SYNC_ID = _ID_ZERO_TEST;
+                    }
+
+                    ModelData.Add(ListSyncBookmarksSY, _sy_sync_bookmarks);
+
+                    for (var k = 0; k < ListQuestionsLS.getModel().getData().length; k++) {
+                        var _ls_questions = ListQuestionsLS.getModel().getData()[k];
+
+                        if (_ls_questions.LS_TEST_ID === _ls_tests.LS_TEST_ID) {
+                            if (_ls_tests.LS_SYNC_ON === '' && _ls_tests.LS_SYNC_AT === '' ||
+                                _ls_questions.LS_ACTIVE_ON > _ls_tests.LS_SYNC_ON ||
+                                _ls_questions.LS_ACTIVE_ON === _ls_tests.LS_SYNC_ON && _ls_questions.LS_ACTIVE_AT > _ls_tests.LS_SYNC_AT) {
+
+                                var _sy_bookmarks = new modelPageBookmarksSY.getData();
+
+                                _sy_bookmarks.SYNC_ID = _sy_sync_bookmarks.SYNC_ID;
+                                _sy_bookmarks.QUESTION_ID = _ls_questions.QUESTION_ID;
+                                _sy_bookmarks.BOOKMARK = _ls_questions.LS_BOOKMARK;
+                                _sy_bookmarks.ACTIVE_ON = _ls_questions.LS_ACTIVE_ON;
+                                _sy_bookmarks.ACTIVE_AT = _ls_questions.LS_ACTIVE_AT;
+
+                                ModelData.Add(ListBookmarksSY, _sy_bookmarks);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // . all - pull to refresh / app started
+        // . single - fetch after downloading new quiz
+        // . single - if any data (metrics or bookmarks) is for sync (after using a quiz)
+
+        if (_sync_all || _navigate_after_metrics ||
+            ListMetricsSY.getModel().getData().length > 0 || ListBookmarksSY.getModel().getData().length > 0) {
+
             _set_UI_busy(true);
-            getOnlineAjaxMetrics();
+            getOnlineAjaxActivities();
         }
     }
 }
 
-function _ajax_metrics_success() {
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+function _ajax_activities_success() {
 
-    // Update local storage
-    for (var i = 0; i < ListSyncSY.getModel().getData().length; i++) {
-        var _sy_sync = ListSyncSY.getModel().getData()[i];
+    // it will only add metrics
+    for (var i = 0; i < ListSyncMetricsSY.getModel().getData().length; i++) {
+        var _sy_sync_metrics = ListSyncMetricsSY.getModel().getData()[i];
 
-        var _ls_test_id = ModelData.LookupValue(ListTestsLS, ["TEST_ID", "UPLOAD_ON", "UPLOAD_AT"], [_sy_sync.TEST_ID, _sy_sync.UPLOAD_ON, _sy_sync.UPLOAD_AT], "LS_TEST_ID");
-        ModelData.UpdateField(ListTestsLS, "LS_TEST_ID", _ls_test_id, ["LS_SYNC_AT", "LS_SYNC_ON"], [_sy_sync.SYNC_AT, _sy_sync.SYNC_ON]);
+        // it will create new ListSyncMetricsLS if does not exist on this device
+        var _ls_sync_id = _get_sync_id(_sy_sync_metrics.TEST_ID, _sy_sync_metrics.UPLOAD_ON, _sy_sync_metrics.UPLOAD_AT);
+        ModelData.UpdateField(ListSyncMetricsLS, "LS_SYNC_ID", _ls_sync_id, ["LS_SYNC_ON", "LS_SYNC_AT"], [_sy_sync_metrics.SYNC_ON, _sy_sync_metrics.SYNC_AT]);
 
-        ModelData.UpdateField(ListQuestionsLS, "LS_TEST_ID", _ls_test_id, "LS_SYNC_METRICS", false);
-
-        if (ModelData.Find(ListMetricsSY, "SYNC_ID", _sy_sync.SYNC_ID).length > 0) {
-            ModelData.UpdateField(ListQuestionsLS, "LS_TEST_ID", _ls_test_id, ["LS_PROGRESS", "LS_BOOKMARK"], [_PROGRESS_UNANSWERED, _BOOKMARK_UNMARKED]);
+        if (ModelData.Find(ListMetricsSY, "SYNC_ID", _sy_sync_metrics.SYNC_ID).length > 0) {
             for (var j = 0; j < ListMetricsSY.getModel().getData().length; j++) {
                 var _sy_metrics = ListMetricsSY.getModel().getData()[j];
-                // check for _ID_ZERO_QUESTION dummy record to reset other devices
-                if (_sy_metrics.SYNC_ID === _sy_sync.SYNC_ID && _sy_metrics.QUESTION_ID !== _ID_ZERO_QUESTION) {
-                    ModelData.UpdateField(ListQuestionsLS, ["LS_TEST_ID", "QUESTION_ID"], [_ls_test_id, _sy_metrics.QUESTION_ID], ["LS_PROGRESS", "LS_BOOKMARK"], [_sy_metrics.PROGRESS, _sy_metrics.BOOKMARK]);
+
+                if (_sy_metrics.SYNC_ID === _sy_sync_metrics.SYNC_ID) {
+
+                    // Remove Metrics with PROGRESS = _PROGRESS_UNANSWERED if we received any updated
+                    var _ls_metrics_unanswered = ModelData.Find(ListMetricsLS, ["LS_SYNC_ID", "QUESTION_ID", "PROGRESS"], [_ls_sync_id, _sy_metrics.QUESTION_ID, _PROGRESS_UNANSWERED]);
+                    if (_ls_metrics_unanswered.length > 0) {
+                        // we expect _PROGRESS_UNANSWERED to be unique
+                        if (_ls_metrics_unanswered[0].ACTIVE_ON < _sy_metrics.ACTIVE_ON ||
+                            _ls_metrics_unanswered[0].ACTIVE_ON === _sy_metrics.ACTIVE_ON && _ls_metrics_unanswered[0].ACTIVE_AT < _sy_metrics.ACTIVE_AT) {
+                            ModelData.Delete(ListMetricsLS, ["LS_SYNC_ID", "QUESTION_ID", "PROGRESS"], [_ls_sync_id, _sy_metrics.QUESTION_ID, _PROGRESS_UNANSWERED]);
+                        }
+                    }
+
+                    var _ls_metrics = new modelPageMetricsLS.getData();
+
+                    _ls_metrics.LS_SYNC_ID = _ls_sync_id;
+                    _ls_metrics.QUESTION_ID = _sy_metrics.QUESTION_ID;
+                    _ls_metrics.ACTIVE_ON = _sy_metrics.ACTIVE_ON;
+                    _ls_metrics.ACTIVE_AT = _sy_metrics.ACTIVE_AT;
+                    _ls_metrics.PROGRESS = _sy_metrics.PROGRESS;
+
+                    ModelData.Add(ListMetricsLS, _ls_metrics);
                 }
             }
         }
     }
 
+    for (i = 0; i < ListSyncBookmarksSY.getModel().getData().length; i++) {
+        var _sy_sync_bookmarks = ListSyncBookmarksSY.getModel().getData()[i];
+
+        var _ls_test_id = _get_test_id(_sy_sync_bookmarks.TEST_ID, _sy_sync_bookmarks.UPLOAD_ON, _sy_sync_bookmarks.UPLOAD_AT);
+        if (_ls_test_id !== _ID_ZERO_TEST) {
+            ModelData.UpdateField(ListTestsLS, "LS_TEST_ID", _ls_test_id, ["LS_SYNC_ON", "LS_SYNC_AT"], [_sy_sync_bookmarks.SYNC_ON, _sy_sync_bookmarks.SYNC_AT]);
+
+            for (var k = 0; k < ListBookmarksSY.getModel().getData().length; k++) {
+                var _sy_bookmarks = ListBookmarksSY.getModel().getData()[k];
+
+                if (_sy_bookmarks.SYNC_ID === _sy_sync_bookmarks.SYNC_ID) {
+                    var _ls_questions = ModelData.Find(ListQuestionsLS, ["LS_TEST_ID", "QUESTION_ID"], [_ls_test_id, _sy_bookmarks.QUESTION_ID]);
+                    if (_ls_questions.length > 0) {
+                        if (_sy_bookmarks.ACTIVE_ON > _ls_questions[0].LS_ACTIVE_ON ||
+                            _sy_bookmarks.ACTIVE_ON === _ls_questions[0].LS_ACTIVE_ON && _sy_bookmarks.ACTIVE_AT > _ls_questions[0].LS_ACTIVE_AT) {
+                            ModelData.UpdateField(ListQuestionsLS, ["LS_TEST_ID", "QUESTION_ID"], [_ls_test_id, _sy_bookmarks.QUESTION_ID], ["LS_BOOKMARK", "LS_ACTIVE_ON", "LS_ACTIVE_AT"], [_sy_bookmarks.BOOKMARK,
+                                _sy_bookmarks.ACTIVE_ON,
+                                _sy_bookmarks.ACTIVE_AT
+                            ]);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Clean processed sync
+    ListSyncMetricsSY.getModel().setData([]);
+    ListMetricsSY.getModel().setData([]);
+    ListSyncBookmarksSY.getModel().setData([]);
+    ListBookmarksSY.getModel().setData([]);
+
     // Cache local storage
-    setCacheListTestsLS();
+    setCacheListSyncMetricsLS();
+    setCacheListMetricsLS();
     setCacheListQuestionsLS();
+    setCacheListTestsLS();
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _ajax_delete() {
 
     if (navigator.onLine) {
@@ -1430,6 +1756,7 @@ function _ajax_delete() {
     }
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _ajax_delete_success() {
 
     // Only your own content will be deleted in the backend
@@ -1460,6 +1787,7 @@ function _ajax_delete_success() {
     }
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _ajax_toast_offline() {
     jQuery.sap.require("sap.m.MessageToast");
     sap.m.MessageToast.show(TextAjaxOffline.getText());

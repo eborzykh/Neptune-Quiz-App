@@ -143,10 +143,10 @@
     "field_id": "00190",
     "bind_object": "DATA",
     "bind_type": "h",
-    "binding": "GT_SY_SYNC",
+    "binding": "GT_SY_SYNC_METRICS",
     "binding_root_type": "APPL_CLASS",
     "binding_root_field_id": "00000",
-    "binding_path": "APPL_CLASS|GT_SY_SYNC!h",
+    "binding_path": "APPL_CLASS|GT_SY_SYNC_METRICS!h",
     "bind_build_origin": "TREE_SEL"
   },
   {
@@ -283,10 +283,10 @@
     "field_id": "00300",
     "bind_object": "DATA",
     "bind_type": "u",
-    "binding": "GS_PARAMETERS",
+    "binding": "GS_UI_PARAMETERS",
     "binding_root_type": "APPL_CLASS",
     "binding_root_field_id": "00000",
-    "binding_path": "APPL_CLASS|GS_PARAMETERS!u",
+    "binding_path": "APPL_CLASS|GS_UI_PARAMETERS!u",
     "bind_build_origin": "TREE_SEL"
   },
   {
@@ -317,6 +317,76 @@
     "binding_root_type": "APPL_CLASS",
     "binding_root_field_id": "00000",
     "binding_path": "APPL_CLASS|GS_SY_METRICS!u",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00327",
+    "bind_object": "DATA",
+    "bind_type": "h",
+    "binding": "GT_SY_BOOKMARKS",
+    "binding_root_type": "APPL_CLASS",
+    "binding_root_field_id": "00000",
+    "binding_path": "APPL_CLASS|GT_SY_BOOKMARKS!h",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00328",
+    "bind_object": "DATA",
+    "bind_type": "u",
+    "binding": "GS_SY_BOOKMARKS",
+    "binding_root_type": "APPL_CLASS",
+    "binding_root_field_id": "00000",
+    "binding_path": "APPL_CLASS|GS_SY_BOOKMARKS!u",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00329",
+    "bind_object": "DATA",
+    "bind_type": "h",
+    "binding": "GT_LS_METRICS",
+    "binding_root_type": "APPL_CLASS",
+    "binding_root_field_id": "00000",
+    "binding_path": "APPL_CLASS|GT_LS_METRICS!h",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00330",
+    "bind_object": "DATA",
+    "bind_type": "u",
+    "binding": "GS_LS_METRICS",
+    "binding_root_type": "APPL_CLASS",
+    "binding_root_field_id": "00000",
+    "binding_path": "APPL_CLASS|GS_LS_METRICS!u",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00331",
+    "bind_object": "DATA",
+    "bind_type": "h",
+    "binding": "GT_LS_SYNC_METRICS",
+    "binding_root_type": "APPL_CLASS",
+    "binding_root_field_id": "00000",
+    "binding_path": "APPL_CLASS|GT_LS_SYNC_METRICS!h",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00332",
+    "bind_object": "DATA",
+    "bind_type": "u",
+    "binding": "GS_LS_SYNC",
+    "binding_root_type": "APPL_CLASS",
+    "binding_root_field_id": "00000",
+    "binding_path": "APPL_CLASS|GS_LS_SYNC!u",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00345",
+    "bind_object": "DATA",
+    "bind_type": "h",
+    "binding": "GT_SY_SYNC_BOOKMARKS",
+    "binding_root_type": "APPL_CLASS",
+    "binding_root_field_id": "00000",
+    "binding_path": "APPL_CLASS|GT_SY_SYNC_BOOKMARKS!h",
     "bind_build_origin": "TREE_SEL"
   }
 ]

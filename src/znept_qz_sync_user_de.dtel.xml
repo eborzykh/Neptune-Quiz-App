@@ -10,11 +10,11 @@
     <SCRLEN1>10</SCRLEN1>
     <SCRLEN2>20</SCRLEN2>
     <SCRLEN3>40</SCRLEN3>
-    <DDTEXT>Neptune Quiz App: Usage Sync User</DDTEXT>
-    <REPTEXT>Sync User</REPTEXT>
+    <DDTEXT>Neptune Quiz App: Activity Sync User</DDTEXT>
+    <REPTEXT>Activity Sync User</REPTEXT>
     <SCRTEXT_S>Sync By</SCRTEXT_S>
-    <SCRTEXT_M>Sync User</SCRTEXT_M>
-    <SCRTEXT_L>Sync User</SCRTEXT_L>
+    <SCRTEXT_M>Activity Sync User</SCRTEXT_M>
+    <SCRTEXT_L>Activity Sync User</SCRTEXT_L>
     <DTELMASTER>E</DTELMASTER>
     <REFKIND>D</REFKIND>
    </DD04V>

@@ -6,7 +6,7 @@
     <TABNAME>ZNEPT_QZ_SY_S</TABNAME>
     <DDLANGUAGE>E</DDLANGUAGE>
     <TABCLASS>INTTAB</TABCLASS>
-    <DDTEXT>Neptune Quiz App: Backend Sync Info</DDTEXT>
+    <DDTEXT>Neptune Quiz App: SY Backend Sync Info</DDTEXT>
     <EXCLASS>1</EXCLASS>
    </DD02V>
    <DD03P_TABLE>

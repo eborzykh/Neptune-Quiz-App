@@ -7,12 +7,24 @@ function OpenMessageBox() {
         }, "");
 }
 
+if (_practice_mode === _MODE_LEARN || _practice_mode === _MODE_PREVIEW) {
+    _set_UI_reset();
+
+    // Sync Bookmarks
+    if (navigator.onLine && !_ajax_error) {
+        setTimeout(function() {
+            _ajax_activities(false);
+        }, _SYNC_DELAY);
+    }
+}
+
 if (_practice_mode === _MODE_PREPARE) {
     _set_UI_reset();
 
+    // Sync Metrics and Bookmarks
     if (navigator.onLine && !_ajax_error) {
         setTimeout(function() {
-            _ajax_metrics(false);
+            _ajax_activities(false);
         }, _SYNC_DELAY);
     } else {
         _set_UI_progress();

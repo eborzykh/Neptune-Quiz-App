@@ -162,30 +162,6 @@
     "value": "ContentRight"
   },
   {
-    "field_id": "00017",
-    "attribute": "icon",
-    "grouping": "Properties",
-    "value": "sap-icon://upload"
-  },
-  {
-    "field_id": "00017",
-    "attribute": "iconFirst",
-    "grouping": "Properties",
-    "value": "false"
-  },
-  {
-    "field_id": "00017",
-    "attribute": "press",
-    "grouping": "Events",
-    "value": "Anonymous Function"
-  },
-  {
-    "field_id": "00017",
-    "attribute": "text",
-    "grouping": "Properties",
-    "value": "Upload"
-  },
-  {
     "field_id": "00041",
     "attribute": "design",
     "grouping": "Properties",
@@ -988,78 +964,6 @@
     "value": "Close"
   },
   {
-    "field_id": "00100",
-    "attribute": "iconFirst",
-    "grouping": "Properties",
-    "value": "false"
-  },
-  {
-    "field_id": "00100",
-    "attribute": "press",
-    "grouping": "Events",
-    "value": "Anonymous Function"
-  },
-  {
-    "field_id": "00100",
-    "attribute": "text",
-    "grouping": "Properties",
-    "value": "Reset progress"
-  },
-  {
-    "field_id": "00101",
-    "attribute": "iconFirst",
-    "grouping": "Properties",
-    "value": "false"
-  },
-  {
-    "field_id": "00101",
-    "attribute": "press",
-    "grouping": "Events",
-    "value": "Anonymous Function"
-  },
-  {
-    "field_id": "00101",
-    "attribute": "text",
-    "grouping": "Properties",
-    "value": "Download a copy"
-  },
-  {
-    "field_id": "00102",
-    "attribute": "iconFirst",
-    "grouping": "Properties",
-    "value": "false"
-  },
-  {
-    "field_id": "00102",
-    "attribute": "press",
-    "grouping": "Events",
-    "value": "Anonymous Function"
-  },
-  {
-    "field_id": "00102",
-    "attribute": "text",
-    "grouping": "Properties",
-    "value": "Change title"
-  },
-  {
-    "field_id": "00103",
-    "attribute": "icon",
-    "grouping": "Properties",
-    "value": "sap-icon://delete"
-  },
-  {
-    "field_id": "00103",
-    "attribute": "press",
-    "grouping": "Events",
-    "value": "Anonymous Function"
-  },
-  {
-    "field_id": "00103",
-    "attribute": "text",
-    "grouping": "Properties",
-    "value": "Delete"
-  },
-  {
     "field_id": "00118",
     "attribute": "max",
     "grouping": "Properties",
@@ -1146,12 +1050,6 @@
     "attribute": "width",
     "grouping": "Properties",
     "value": "100%"
-  },
-  {
-    "field_id": "00135",
-    "attribute": "press",
-    "grouping": "Events",
-    "value": "Anonymous Function"
   },
   {
     "field_id": "00137",
@@ -1439,7 +1337,7 @@
     "field_id": "00179",
     "attribute": "text",
     "grouping": "Properties",
-    "value": "Publish"
+    "value": "Upload new content"
   },
   {
     "field_id": "00180",
@@ -1464,12 +1362,6 @@
     "attribute": "refresh",
     "grouping": "Events",
     "value": "Anonymous Function"
-  },
-  {
-    "field_id": "00182",
-    "attribute": "position",
-    "grouping": "Parent",
-    "value": "ContentLeft"
   },
   {
     "field_id": "00183",
@@ -1506,24 +1398,6 @@
     "attribute": "iconFirst",
     "grouping": "Properties",
     "value": "false"
-  },
-  {
-    "field_id": "00187",
-    "attribute": "ajaxError",
-    "grouping": "Events",
-    "value": "Anonymous Function"
-  },
-  {
-    "field_id": "00187",
-    "attribute": "ajaxSuccess",
-    "grouping": "Events",
-    "value": "Anonymous Function"
-  },
-  {
-    "field_id": "00187",
-    "attribute": "timeout",
-    "grouping": "Properties",
-    "value": "5000"
   },
   {
     "field_id": "00188",
@@ -2367,7 +2241,7 @@
     "field_id": "00323",
     "attribute": "text",
     "grouping": "Properties",
-    "value": "Deleted or Private"
+    "value": "Local"
   },
   {
     "field_id": "00323",
@@ -2406,5 +2280,179 @@
     "attribute": "text",
     "grouping": "Properties",
     "value": "Action failed"
+  },
+  {
+    "field_id": "00329",
+    "attribute": "setEnableCache",
+    "grouping": "Model",
+    "value": "true"
+  },
+  {
+    "field_id": "00329",
+    "attribute": "setInitLoad",
+    "grouping": "Model",
+    "value": "cache"
+  },
+  {
+    "field_id": "00331",
+    "attribute": "setEnableCache",
+    "grouping": "Model",
+    "value": "true"
+  },
+  {
+    "field_id": "00331",
+    "attribute": "setInitLoad",
+    "grouping": "Model",
+    "value": "cache"
+  },
+  {
+    "field_id": "00333",
+    "attribute": "design",
+    "grouping": "Properties",
+    "value": "Header"
+  },
+  {
+    "field_id": "00333",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "setCustomHeader"
+  },
+  {
+    "field_id": "00335",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "ContentMiddle"
+  },
+  {
+    "field_id": "00336",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Quiz App"
+  },
+  {
+    "field_id": "00336",
+    "attribute": "textAlign",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00336",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00337",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "ContentRight"
+  },
+  {
+    "field_id": "00338",
+    "attribute": "icon",
+    "grouping": "Properties",
+    "value": "sap-icon://navigation-down-arrow"
+  },
+  {
+    "field_id": "00338",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00339",
+    "attribute": "cancelButtonText",
+    "grouping": "Properties",
+    "value": "Close"
+  },
+  {
+    "field_id": "00340",
+    "attribute": "iconFirst",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00340",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00340",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Publish"
+  },
+  {
+    "field_id": "00341",
+    "attribute": "iconFirst",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00341",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00341",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Download a copy"
+  },
+  {
+    "field_id": "00342",
+    "attribute": "iconFirst",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00342",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00342",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Reset progress"
+  },
+  {
+    "field_id": "00343",
+    "attribute": "iconFirst",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00343",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00343",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Change title"
+  },
+  {
+    "field_id": "00344",
+    "attribute": "icon",
+    "grouping": "Properties",
+    "value": "sap-icon://delete"
+  },
+  {
+    "field_id": "00344",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00344",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Delete"
   }
 ]

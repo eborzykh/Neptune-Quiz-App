@@ -1,7 +1,10 @@
-
 var message_box_callback = function(_action) {
     if (_action == "Reset") {
-        _ajax_reset();
+        _reset_progress();
+
+        // it will always reset this device and then sync
+        jQuery.sap.require("sap.m.MessageToast");
+        sap.m.MessageToast.show("Reset successful");
     }
 };
 

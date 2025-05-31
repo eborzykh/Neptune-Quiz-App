@@ -1,0 +1,2 @@
+_ajax_publish();
+

@@ -1,2 +1,0 @@
-
-TestFilter.openBy(this);

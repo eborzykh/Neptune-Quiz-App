@@ -1,0 +1,19 @@
+[
+  {
+    "version": "0001",
+    "app_type": "A",
+    "clsname": "ZCL_NEPT_QZ_APP_CLASS",
+    "descr": "Neptune Quiz Application",
+    "descr_mc": "NEPTUNE QUIZ APPLICATION",
+    "use_css_desktop": "X",
+    "library": "5",
+    "ui5_m": "X",
+    "ui5_viz": "X",
+    "ui5_suite": "X",
+    "ui5_language": "EN",
+    "ui5_suite_ui": "X",
+    "sapui5_version": "1.96 (CDN)",
+    "origin": "023100008",
+    "sqlite_type": 0
+  }
+]

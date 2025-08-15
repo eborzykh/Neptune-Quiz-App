@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CLAS" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <VSEOCLASS>
+    <CLSNAME>ZCL_NEPT_QZ_DATA_PROVIDER</CLSNAME>
+    <LANGU>E</LANGU>
+    <DESCRIPT>Neptune Quiz App: Data Provider Class</DESCRIPT>
+    <STATE>1</STATE>
+    <CLSCCINCL>X</CLSCCINCL>
+    <FIXPT>X</FIXPT>
+    <UNICODE>X</UNICODE>
+   </VSEOCLASS>
+   <DESCRIPTIONS>
+    <SEOCOMPOTX>
+     <CMPNAME>KEY_CHECK</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Check for calling from CDS</DESCRIPT>
+    </SEOCOMPOTX>
+   </DESCRIPTIONS>
+   <DESCRIPTIONS_SUB>
+    <SEOSUBCOTX>
+     <CMPNAME>ADD</CMPNAME>
+     <SCONAME>ES_DB_TESTS</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Neptune Quiz App: Quiz ID</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>ADD</CMPNAME>
+     <SCONAME>IT_DB_PARTS</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Neptune Test Prep App: Parts DB</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>ADD</CMPNAME>
+     <SCONAME>IT_DB_QUESTIONS</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Neptune Test Prep App: Questions DB</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>ADD</CMPNAME>
+     <SCONAME>IT_DB_VARIANTS</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Neptune Test Prep App: Variants DB</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>ADD</CMPNAME>
+     <SCONAME>IV_DESCRIPTION</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Neptune Test Prep App: Test Name</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>ADD</CMPNAME>
+     <SCONAME>IV_PUBLISHED</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Neptune Test Prep App: Is Test Published</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>DELETE</CMPNAME>
+     <SCONAME>IS_DB_TESTS_KEY</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Neptune Test Prep App: Tests</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>GET</CMPNAME>
+     <SCONAME>ET_DB_CHECK</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Neptune Quiz App: DB Check Key</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>GET</CMPNAME>
+     <SCONAME>ET_DB_PARTS</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Neptune Test Prep App: Test Parts (Table)</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>GET</CMPNAME>
+     <SCONAME>ET_DB_QUESTIONS</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Neptune Test Prep App: Questions (Table)</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>GET</CMPNAME>
+     <SCONAME>ET_DB_VARIANTS</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Neptune Test Prep App: Variants for Answer (Table)</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>GET</CMPNAME>
+     <SCONAME>EV_VERSION</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Neptune Quiz App: Version Counter</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>GET</CMPNAME>
+     <SCONAME>IS_DB_TESTS_KEY</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Neptune Test Prep App: Tests (Table)</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>GET</CMPNAME>
+     <SCONAME>IV_VERSION</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Neptune Quiz App: Version Counter</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>INFO</CMPNAME>
+     <SCONAME>EV_TOTAL_PARTS</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>2 Byte Signed Integer</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>INFO</CMPNAME>
+     <SCONAME>EV_TOTAL_QUESTIONS</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>2 Byte Signed Integer</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>INFO</CMPNAME>
+     <SCONAME>IS_DB_TESTS_KEY</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Neptune Test Prep App: Tests Key</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>KEY_CHECK</CMPNAME>
+     <SCONAME>IS_DB_TESTS_KEY</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Neptune Test Prep App: Tests Key</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>PUBLISH</CMPNAME>
+     <SCONAME>IS_DB_TESTS_KEY</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Neptune Test Prep App: Tests</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>PUBLISH</CMPNAME>
+     <SCONAME>IV_PUBLISHED</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Neptune Test Prep App: Is Test Published</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>READ_AVAILABLE_METRICS</CMPNAME>
+     <SCONAME>ET_DB_TESTS_KEY</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Neptune Test Prep App: Tests DB</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>READ_AVAILABLE_TEST</CMPNAME>
+     <SCONAME>ET_DB_TESTS</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Neptune Test Prep App: Tests DB</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>RENAME</CMPNAME>
+     <SCONAME>IS_DB_TESTS_KEY</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Neptune Test Prep App: Tests</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>RENAME</CMPNAME>
+     <SCONAME>IV_DESCRIPTION</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Neptune Test Prep App: Test Name</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>SYNC_BOOKMARKS</CMPNAME>
+     <SCONAME>IS_DB_TESTS_KEY</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Neptune Quiz App: DB Quiz Key</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>SYNC_BOOKMARKS</CMPNAME>
+     <SCONAME>IV_NEW_SYNC_AT</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Neptune Quiz App: Activity Sync Time</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>SYNC_BOOKMARKS</CMPNAME>
+     <SCONAME>IV_NEW_SYNC_ON</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Neptune Quiz App: Activity Sync Date</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>SYNC_METRICS</CMPNAME>
+     <SCONAME>IV_NEW_SYNC_AT</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Neptune Quiz App: Activity Sync Time</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>SYNC_METRICS</CMPNAME>
+     <SCONAME>IV_NEW_SYNC_ON</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Neptune Quiz App: Activity Sync Date</DESCRIPT>
+    </SEOSUBCOTX>
+   </DESCRIPTIONS_SUB>
+  </asx:values>
+ </asx:abap>
+</abapGit>

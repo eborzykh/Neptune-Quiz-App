@@ -1,0 +1,3456 @@
+[
+  {
+    "field_id": "00005",
+    "version": "0001",
+    "attribute": "ajaxError",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00005",
+    "version": "0001",
+    "attribute": "ajaxSuccess",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00005",
+    "version": "0001",
+    "attribute": "timeout",
+    "grouping": "Properties",
+    "value": "5000"
+  },
+  {
+    "field_id": "00006",
+    "version": "0001",
+    "attribute": "backgroundDesign",
+    "grouping": "Properties",
+    "value": "Solid"
+  },
+  {
+    "field_id": "00006",
+    "version": "0001",
+    "attribute": "setEnableCache",
+    "grouping": "Model",
+    "value": "true"
+  },
+  {
+    "field_id": "00006",
+    "version": "0001",
+    "attribute": "setInitLoad",
+    "grouping": "Model",
+    "value": "cache"
+  },
+  {
+    "field_id": "00006",
+    "version": "0001",
+    "attribute": "showFooter",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00006",
+    "version": "0001",
+    "attribute": "showHeader",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00007",
+    "version": "0001",
+    "attribute": "alignContent",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00007",
+    "version": "0001",
+    "attribute": "alignItems",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00007",
+    "version": "0001",
+    "attribute": "height",
+    "grouping": "Properties",
+    "value": "40%"
+  },
+  {
+    "field_id": "00007",
+    "version": "0001",
+    "attribute": "justifyContent",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00008",
+    "version": "0001",
+    "attribute": "alignItems",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00009",
+    "version": "0001",
+    "attribute": "src",
+    "grouping": "Properties",
+    "value": "sap-icon://fa-solid/cloud-download-alt"
+  },
+  {
+    "field_id": "00009",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "IconLoading"
+  },
+  {
+    "field_id": "00010",
+    "version": "0001",
+    "attribute": "ajaxError",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00010",
+    "version": "0001",
+    "attribute": "ajaxSuccess",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00010",
+    "version": "0001",
+    "attribute": "timeout",
+    "grouping": "Properties",
+    "value": "5000"
+  },
+  {
+    "field_id": "00011",
+    "version": "0001",
+    "attribute": "ajaxError",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00011",
+    "version": "0001",
+    "attribute": "ajaxSuccess",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00011",
+    "version": "0001",
+    "attribute": "timeout",
+    "grouping": "Properties",
+    "value": "5000"
+  },
+  {
+    "field_id": "00012",
+    "version": "0001",
+    "attribute": "showSubHeader",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00012",
+    "version": "0001",
+    "attribute": "title",
+    "grouping": "Properties",
+    "value": "Quiz App"
+  },
+  {
+    "field_id": "00012",
+    "version": "0001",
+    "attribute": "titleAlignment",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00015",
+    "version": "0001",
+    "attribute": "design",
+    "grouping": "Properties",
+    "value": "Footer"
+  },
+  {
+    "field_id": "00015",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "setFooter"
+  },
+  {
+    "field_id": "00016",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "ContentRight"
+  },
+  {
+    "field_id": "00041",
+    "version": "0001",
+    "attribute": "design",
+    "grouping": "Properties",
+    "value": "Header"
+  },
+  {
+    "field_id": "00041",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "setCustomHeader"
+  },
+  {
+    "field_id": "00041",
+    "version": "0001",
+    "attribute": "titleAlignment",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00042",
+    "version": "0001",
+    "attribute": "alignItems",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00042",
+    "version": "0001",
+    "attribute": "backgroundDesign",
+    "grouping": "Properties",
+    "value": "Solid"
+  },
+  {
+    "field_id": "00042",
+    "version": "0001",
+    "attribute": "justifyContent",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00042",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "oHBoxQuestionTestPart"
+  },
+  {
+    "field_id": "00042",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00043",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "TextQuestionTestPart"
+  },
+  {
+    "field_id": "00043",
+    "version": "0001",
+    "attribute": "textAlign",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00043",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00044",
+    "version": "0001",
+    "attribute": "alignItems",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00044",
+    "version": "0001",
+    "attribute": "justifyContent",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00044",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "oHBoxQuestion"
+  },
+  {
+    "field_id": "00044",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00046",
+    "version": "0001",
+    "attribute": "mode",
+    "grouping": "Properties",
+    "value": "None"
+  },
+  {
+    "field_id": "00047",
+    "version": "0001",
+    "attribute": "mode",
+    "grouping": "Properties",
+    "value": "None"
+  },
+  {
+    "field_id": "00048",
+    "version": "0001",
+    "attribute": "mode",
+    "grouping": "Properties",
+    "value": "None"
+  },
+  {
+    "field_id": "00049",
+    "version": "0001",
+    "attribute": "highlight",
+    "grouping": "Properties",
+    "value": "{UI_CORRECT_HIGHLIGHT}",
+    "binding_path": "APPL_CLASS|GT_UI_VARIANTS!h|UI_CORRECT_HIGHLIGHT!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00050",
+    "version": "0001",
+    "attribute": "alignContent",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00050",
+    "version": "0001",
+    "attribute": "alignItems",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00050",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "answer_variant_box"
+  },
+  {
+    "field_id": "00050",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00051",
+    "version": "0001",
+    "attribute": "editable",
+    "grouping": "Properties",
+    "value": "{UI_EDITABLE}",
+    "binding_path": "APPL_CLASS|GT_UI_VARIANTS!h|UI_EDITABLE!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00051",
+    "version": "0001",
+    "attribute": "fieldWidth",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00051",
+    "version": "0001",
+    "attribute": "liveChange",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00051",
+    "version": "0001",
+    "attribute": "maxLength",
+    "grouping": "Properties",
+    "value": "25"
+  },
+  {
+    "field_id": "00051",
+    "version": "0001",
+    "attribute": "value",
+    "grouping": "Properties",
+    "value": "{UI_TYPE_ANSWER}",
+    "binding_path": "APPL_CLASS|GT_UI_VARIANTS!h|UI_TYPE_ANSWER!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00051",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00052",
+    "version": "0001",
+    "attribute": "highlight",
+    "grouping": "Properties",
+    "value": "{UI_CORRECT_HIGHLIGHT}",
+    "binding_path": "APPL_CLASS|GT_UI_VARIANTS!h|UI_CORRECT_HIGHLIGHT!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00052",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00052",
+    "version": "0001",
+    "attribute": "type",
+    "grouping": "Properties",
+    "value": "Active"
+  },
+  {
+    "field_id": "00053",
+    "version": "0001",
+    "attribute": "alignItems",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00053",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "answer_variant_box"
+  },
+  {
+    "field_id": "00053",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00054",
+    "version": "0001",
+    "attribute": "editable",
+    "grouping": "Properties",
+    "value": "{UI_EDITABLE}",
+    "binding_path": "APPL_CLASS|GT_UI_VARIANTS!h|UI_EDITABLE!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00054",
+    "version": "0001",
+    "attribute": "select",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00054",
+    "version": "0001",
+    "attribute": "selected",
+    "grouping": "Properties",
+    "value": "{UI_SELECTED}",
+    "binding_path": "APPL_CLASS|GT_UI_VARIANTS!h|UI_SELECTED!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00054",
+    "version": "0001",
+    "attribute": "valueState",
+    "grouping": "Properties",
+    "value": "{UI_SELECT_HIGHLIGHT}",
+    "binding_path": "APPL_CLASS|GT_UI_VARIANTS!h|UI_SELECT_HIGHLIGHT!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00055",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "answer_variant_text"
+  },
+  {
+    "field_id": "00055",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "{VARIANT}",
+    "binding_path": "APPL_CLASS|GT_UI_VARIANTS!h|VARIANT!g",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00055",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00056",
+    "version": "0001",
+    "attribute": "highlight",
+    "grouping": "Properties",
+    "value": "{UI_CORRECT_HIGHLIGHT}",
+    "binding_path": "APPL_CLASS|GT_UI_VARIANTS!h|UI_CORRECT_HIGHLIGHT!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00056",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00056",
+    "version": "0001",
+    "attribute": "type",
+    "grouping": "Properties",
+    "value": "Active"
+  },
+  {
+    "field_id": "00057",
+    "version": "0001",
+    "attribute": "alignItems",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00057",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "answer_variant_box"
+  },
+  {
+    "field_id": "00057",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00058",
+    "version": "0001",
+    "attribute": "editable",
+    "grouping": "Properties",
+    "value": "{UI_EDITABLE}",
+    "binding_path": "APPL_CLASS|GT_UI_VARIANTS!h|UI_EDITABLE!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00058",
+    "version": "0001",
+    "attribute": "select",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00058",
+    "version": "0001",
+    "attribute": "selected",
+    "grouping": "Properties",
+    "value": "{UI_SELECTED}",
+    "binding_path": "APPL_CLASS|GT_UI_VARIANTS!h|UI_SELECTED!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00058",
+    "version": "0001",
+    "attribute": "valueState",
+    "grouping": "Properties",
+    "value": "{UI_SELECT_HIGHLIGHT}",
+    "binding_path": "APPL_CLASS|GT_UI_VARIANTS!h|UI_SELECT_HIGHLIGHT!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00058",
+    "version": "0001",
+    "attribute": "wrapping",
+    "grouping": "Properties",
+    "value": "true"
+  },
+  {
+    "field_id": "00059",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "answer_variant_text"
+  },
+  {
+    "field_id": "00059",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "{VARIANT}",
+    "binding_path": "APPL_CLASS|GT_UI_VARIANTS!h|VARIANT!g",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00059",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00060",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "TextQuestion"
+  },
+  {
+    "field_id": "00060",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "{/QUESTION}",
+    "binding_path": "APPL_CLASS|GS_UI_QUESTIONS!v|QUESTION!g",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00060",
+    "version": "0001",
+    "attribute": "textAlign",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00060",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00061",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "ContentLeft"
+  },
+  {
+    "field_id": "00062",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "ContentMiddle"
+  },
+  {
+    "field_id": "00064",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "ContentRight"
+  },
+  {
+    "field_id": "00065",
+    "version": "0001",
+    "attribute": "icon",
+    "grouping": "Properties",
+    "value": "sap-icon://fa-solid/flag-checkered"
+  },
+  {
+    "field_id": "00065",
+    "version": "0001",
+    "attribute": "iconFirst",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00065",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00065",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Submit"
+  },
+  {
+    "field_id": "00066",
+    "version": "0001",
+    "attribute": "icon",
+    "grouping": "Properties",
+    "value": "sap-icon://nav-back"
+  },
+  {
+    "field_id": "00066",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00067",
+    "version": "0001",
+    "attribute": "design",
+    "grouping": "Properties",
+    "value": "Footer"
+  },
+  {
+    "field_id": "00067",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "setFooter"
+  },
+  {
+    "field_id": "00068",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "ContentLeft"
+  },
+  {
+    "field_id": "00069",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "ContentMiddle"
+  },
+  {
+    "field_id": "00070",
+    "version": "0001",
+    "attribute": "icon",
+    "grouping": "Properties",
+    "value": "sap-icon://fa-solid/angle-left"
+  },
+  {
+    "field_id": "00070",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00071",
+    "version": "0001",
+    "attribute": "icon",
+    "grouping": "Properties",
+    "value": "sap-icon://favorite"
+  },
+  {
+    "field_id": "00071",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00072",
+    "version": "0001",
+    "attribute": "icon",
+    "grouping": "Properties",
+    "value": "sap-icon://fa-solid/angle-right"
+  },
+  {
+    "field_id": "00072",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00073",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "ContentRight"
+  },
+  {
+    "field_id": "00074",
+    "version": "0001",
+    "attribute": "icon",
+    "grouping": "Properties",
+    "value": "sap-icon://fa-solid/angle-right"
+  },
+  {
+    "field_id": "00074",
+    "version": "0001",
+    "attribute": "iconFirst",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00074",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "_goto_next_question();"
+  },
+  {
+    "field_id": "00074",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Next"
+  },
+  {
+    "field_id": "00075",
+    "version": "0001",
+    "attribute": "icon",
+    "grouping": "Properties",
+    "value": "sap-icon://fa-solid/angle-left"
+  },
+  {
+    "field_id": "00075",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "_goto_previous_question();"
+  },
+  {
+    "field_id": "00075",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Previous"
+  },
+  {
+    "field_id": "00076",
+    "version": "0001",
+    "attribute": "beginButton",
+    "grouping": "Associations",
+    "value": "ButtonUpload"
+  },
+  {
+    "field_id": "00076",
+    "version": "0001",
+    "attribute": "endButton",
+    "grouping": "Associations",
+    "value": "ButtonUploadClose"
+  },
+  {
+    "field_id": "00076",
+    "version": "0001",
+    "attribute": "icon",
+    "grouping": "Properties",
+    "value": "sap-icon://upload"
+  },
+  {
+    "field_id": "00076",
+    "version": "0001",
+    "attribute": "title",
+    "grouping": "Properties",
+    "value": "Upload new content"
+  },
+  {
+    "field_id": "00078",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00078",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Upload"
+  },
+  {
+    "field_id": "00079",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00079",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Close"
+  },
+  {
+    "field_id": "00080",
+    "version": "0001",
+    "attribute": "alignItems",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00080",
+    "version": "0001",
+    "attribute": "justifyContent",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00080",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "dialog_upload_box"
+  },
+  {
+    "field_id": "00080",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00081",
+    "version": "0001",
+    "attribute": "uploadComplete",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00082",
+    "version": "0001",
+    "attribute": "beginButton",
+    "grouping": "Associations",
+    "value": "ButtonRenameSave"
+  },
+  {
+    "field_id": "00082",
+    "version": "0001",
+    "attribute": "endButton",
+    "grouping": "Associations",
+    "value": "ButtonRenameClose"
+  },
+  {
+    "field_id": "00082",
+    "version": "0001",
+    "attribute": "title",
+    "grouping": "Properties",
+    "value": "Change title"
+  },
+  {
+    "field_id": "00084",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00084",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Save"
+  },
+  {
+    "field_id": "00085",
+    "version": "0001",
+    "attribute": "iconFirst",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00085",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00085",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Close"
+  },
+  {
+    "field_id": "00086",
+    "version": "0001",
+    "attribute": "alignItems",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00086",
+    "version": "0001",
+    "attribute": "justifyContent",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00086",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00087",
+    "version": "0001",
+    "attribute": "fieldWidth",
+    "grouping": "Properties",
+    "value": "80%"
+  },
+  {
+    "field_id": "00087",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00088",
+    "version": "0001",
+    "attribute": "beginButton",
+    "grouping": "Associations",
+    "value": "ButtonParametersStart"
+  },
+  {
+    "field_id": "00088",
+    "version": "0001",
+    "attribute": "endButton",
+    "grouping": "Associations",
+    "value": "ButtonParametersCancel"
+  },
+  {
+    "field_id": "00088",
+    "version": "0001",
+    "attribute": "icon",
+    "grouping": "Properties",
+    "value": "sap-icon://customize"
+  },
+  {
+    "field_id": "00088",
+    "version": "0001",
+    "attribute": "title",
+    "grouping": "Properties",
+    "value": "Practice"
+  },
+  {
+    "field_id": "00090",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00090",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Start"
+  },
+  {
+    "field_id": "00091",
+    "version": "0001",
+    "attribute": "iconFirst",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00091",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00091",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Close"
+  },
+  {
+    "field_id": "00094",
+    "version": "0001",
+    "attribute": "max",
+    "grouping": "Properties",
+    "value": "99"
+  },
+  {
+    "field_id": "00094",
+    "version": "0001",
+    "attribute": "min",
+    "grouping": "Properties",
+    "value": "0"
+  },
+  {
+    "field_id": "00095",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "TextParameters"
+  },
+  {
+    "field_id": "00095",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Time for practice (minutes)"
+  },
+  {
+    "field_id": "00097",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "TextParameters"
+  },
+  {
+    "field_id": "00097",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Number of questions"
+  },
+  {
+    "field_id": "00098",
+    "version": "0001",
+    "attribute": "cancelButtonText",
+    "grouping": "Properties",
+    "value": "Close"
+  },
+  {
+    "field_id": "00101",
+    "version": "0001",
+    "attribute": "iconFirst",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00101",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00101",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Reset device"
+  },
+  {
+    "field_id": "00118",
+    "version": "0001",
+    "attribute": "max",
+    "grouping": "Properties",
+    "value": "1000"
+  },
+  {
+    "field_id": "00118",
+    "version": "0001",
+    "attribute": "min",
+    "grouping": "Properties",
+    "value": "5"
+  },
+  {
+    "field_id": "00118",
+    "version": "0001",
+    "attribute": "step",
+    "grouping": "Properties",
+    "value": "5"
+  },
+  {
+    "field_id": "00120",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "VBoxParameters"
+  },
+  {
+    "field_id": "00121",
+    "version": "0001",
+    "attribute": "showFooter",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00121",
+    "version": "0001",
+    "attribute": "showSubHeader",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00130",
+    "version": "0001",
+    "attribute": "highlight",
+    "grouping": "Properties",
+    "value": "{UI_CORRECT_HIGHLIGHT}",
+    "binding_path": "APPL_CLASS|GT_UI_QUESTIONS!h|UI_CORRECT_HIGHLIGHT!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00130",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00130",
+    "version": "0001",
+    "attribute": "type",
+    "grouping": "Properties",
+    "value": "Active"
+  },
+  {
+    "field_id": "00131",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "HBoxResultsQuestion"
+  },
+  {
+    "field_id": "00131",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00132",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "ResultsQuestionText"
+  },
+  {
+    "field_id": "00132",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "{QUESTION}",
+    "binding_path": "APPL_CLASS|GT_UI_QUESTIONS!h|QUESTION!g",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00132",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00137",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "TextParameters"
+  },
+  {
+    "field_id": "00137",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Success percentage (%)"
+  },
+  {
+    "field_id": "00138",
+    "version": "0001",
+    "attribute": "max",
+    "grouping": "Properties",
+    "value": "100"
+  },
+  {
+    "field_id": "00138",
+    "version": "0001",
+    "attribute": "min",
+    "grouping": "Properties",
+    "value": "5"
+  },
+  {
+    "field_id": "00138",
+    "version": "0001",
+    "attribute": "step",
+    "grouping": "Properties",
+    "value": "5"
+  },
+  {
+    "field_id": "00140",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "ProgressResults"
+  },
+  {
+    "field_id": "00141",
+    "version": "0001",
+    "attribute": "alignItems",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00141",
+    "version": "0001",
+    "attribute": "justifyContent",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00143",
+    "version": "0001",
+    "attribute": "alignItems",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00143",
+    "version": "0001",
+    "attribute": "justifyContent",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00145",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "ResultsPassText"
+  },
+  {
+    "field_id": "00145",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "PASSED"
+  },
+  {
+    "field_id": "00145",
+    "version": "0001",
+    "attribute": "textAlign",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00145",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00146",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "ResultsFailedText"
+  },
+  {
+    "field_id": "00146",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "FAILED"
+  },
+  {
+    "field_id": "00146",
+    "version": "0001",
+    "attribute": "textAlign",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00146",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00147",
+    "version": "0001",
+    "attribute": "height",
+    "grouping": "Properties",
+    "value": "0.5rem"
+  },
+  {
+    "field_id": "00148",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "answer_variant_type_text"
+  },
+  {
+    "field_id": "00148",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Type your answer:"
+  },
+  {
+    "field_id": "00148",
+    "version": "0001",
+    "attribute": "textAlign",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00149",
+    "version": "0001",
+    "attribute": "alignItems",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00149",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "oHBoxExplanation"
+  },
+  {
+    "field_id": "00149",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00150",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "TextExplanation"
+  },
+  {
+    "field_id": "00150",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "{/EXPLANATION}",
+    "binding_path": "APPL_CLASS|GS_UI_QUESTIONS!v|EXPLANATION!g",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00160",
+    "version": "0001",
+    "attribute": "alignContent",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00160",
+    "version": "0001",
+    "attribute": "alignItems",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00160",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "answer_variant_box"
+  },
+  {
+    "field_id": "00160",
+    "version": "0001",
+    "attribute": "visible",
+    "grouping": "Properties",
+    "value": "{UI_SHOW_ANSWER}",
+    "binding_path": "APPL_CLASS|GT_UI_VARIANTS!h|UI_SHOW_ANSWER!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00160",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00161",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "answer_variant_type_text"
+  },
+  {
+    "field_id": "00161",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Correct answer:"
+  },
+  {
+    "field_id": "00161",
+    "version": "0001",
+    "attribute": "textAlign",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00162",
+    "version": "0001",
+    "attribute": "editable",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00162",
+    "version": "0001",
+    "attribute": "fieldWidth",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00162",
+    "version": "0001",
+    "attribute": "maxLength",
+    "grouping": "Properties",
+    "value": "25"
+  },
+  {
+    "field_id": "00162",
+    "version": "0001",
+    "attribute": "value",
+    "grouping": "Properties",
+    "value": "{VARIANT}",
+    "binding_path": "APPL_CLASS|GT_UI_VARIANTS!h|VARIANT!g",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00162",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00163",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00168",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "_goto_next_question();"
+  },
+  {
+    "field_id": "00168",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Continue"
+  },
+  {
+    "field_id": "00169",
+    "version": "0001",
+    "attribute": "height",
+    "grouping": "Properties",
+    "value": "20px"
+  },
+  {
+    "field_id": "00179",
+    "version": "0001",
+    "attribute": "iconFirst",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00179",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00179",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Upload new content"
+  },
+  {
+    "field_id": "00180",
+    "version": "0001",
+    "attribute": "ajaxError",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00180",
+    "version": "0001",
+    "attribute": "ajaxSuccess",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00180",
+    "version": "0001",
+    "attribute": "timeout",
+    "grouping": "Properties",
+    "value": "5000"
+  },
+  {
+    "field_id": "00181",
+    "version": "0001",
+    "attribute": "refresh",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00183",
+    "version": "0001",
+    "attribute": "icon",
+    "grouping": "Properties",
+    "value": "sap-icon://tag"
+  },
+  {
+    "field_id": "00183",
+    "version": "0001",
+    "attribute": "iconFirst",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00183",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00186",
+    "version": "0001",
+    "attribute": "enabled",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00186",
+    "version": "0001",
+    "attribute": "icon",
+    "grouping": "Properties",
+    "value": "sap-icon://message-warning"
+  },
+  {
+    "field_id": "00186",
+    "version": "0001",
+    "attribute": "iconFirst",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00188",
+    "version": "0001",
+    "attribute": "ajaxError",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00188",
+    "version": "0001",
+    "attribute": "ajaxSuccess",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00188",
+    "version": "0001",
+    "attribute": "timeout",
+    "grouping": "Properties",
+    "value": "5000"
+  },
+  {
+    "field_id": "00189",
+    "version": "0001",
+    "attribute": "ajaxError",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00189",
+    "version": "0001",
+    "attribute": "ajaxSuccess",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00189",
+    "version": "0001",
+    "attribute": "timeout",
+    "grouping": "Properties",
+    "value": "5000"
+  },
+  {
+    "field_id": "00194",
+    "version": "0001",
+    "attribute": "noDataText",
+    "grouping": "Properties",
+    "value": "Pull to refresh the list"
+  },
+  {
+    "field_id": "00195",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00195",
+    "version": "0001",
+    "attribute": "type",
+    "grouping": "Properties",
+    "value": "Navigation"
+  },
+  {
+    "field_id": "00196",
+    "version": "0001",
+    "attribute": "alignContent",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00196",
+    "version": "0001",
+    "attribute": "alignItems",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00196",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "HBoxTestOut"
+  },
+  {
+    "field_id": "00196",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00199",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "TextTestHeader"
+  },
+  {
+    "field_id": "00199",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "{DESCRIPTION}",
+    "binding_path": "APPL_CLASS|GT_UI_TESTS!h|DESCRIPTION!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00201",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "textListTestInfo"
+  },
+  {
+    "field_id": "00201",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "{UI_INFO_LINE_1}",
+    "binding_path": "APPL_CLASS|GT_UI_TESTS!h|UI_INFO_LINE_1!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00202",
+    "version": "0001",
+    "attribute": "justifyContent",
+    "grouping": "Properties",
+    "value": "SpaceBetween"
+  },
+  {
+    "field_id": "00202",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00203",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "textListTestInfo"
+  },
+  {
+    "field_id": "00203",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "{UI_INFO_LINE_2}",
+    "binding_path": "APPL_CLASS|GT_UI_TESTS!h|UI_INFO_LINE_2!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00206",
+    "version": "0001",
+    "attribute": "percentage",
+    "grouping": "Properties",
+    "value": "{UI_PERCENTAGE}",
+    "binding_path": "APPL_CLASS|GT_UI_TESTS!h|UI_PERCENTAGE!b",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00206",
+    "version": "0001",
+    "attribute": "size",
+    "grouping": "Properties",
+    "value": "M"
+  },
+  {
+    "field_id": "00206",
+    "version": "0001",
+    "attribute": "total",
+    "grouping": "Properties",
+    "value": "100"
+  },
+  {
+    "field_id": "00206",
+    "version": "0001",
+    "attribute": "valueColor",
+    "grouping": "Properties",
+    "value": "{UI_PERCENTAGE_COLOR}",
+    "binding_path": "APPL_CLASS|GT_UI_TESTS!h|UI_PERCENTAGE_COLOR!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00206",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "5rem"
+  },
+  {
+    "field_id": "00222",
+    "version": "0001",
+    "attribute": "visible",
+    "grouping": "Properties",
+    "value": "{UI_DOWNLOADED}",
+    "binding_path": "APPL_CLASS|GT_UI_TESTS!h|UI_DOWNLOADED!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00222",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "5rem"
+  },
+  {
+    "field_id": "00265",
+    "version": "0001",
+    "attribute": "design",
+    "grouping": "Properties",
+    "value": "Header"
+  },
+  {
+    "field_id": "00265",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "setCustomHeader"
+  },
+  {
+    "field_id": "00266",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "ContentLeft"
+  },
+  {
+    "field_id": "00267",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "ContentMiddle"
+  },
+  {
+    "field_id": "00268",
+    "version": "0001",
+    "attribute": "textAlign",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00268",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00269",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "ContentRight"
+  },
+  {
+    "field_id": "00270",
+    "version": "0001",
+    "attribute": "icon",
+    "grouping": "Properties",
+    "value": "sap-icon://navigation-down-arrow"
+  },
+  {
+    "field_id": "00270",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00271",
+    "version": "0001",
+    "attribute": "icon",
+    "grouping": "Properties",
+    "value": "sap-icon://nav-back"
+  },
+  {
+    "field_id": "00271",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00272",
+    "version": "0001",
+    "attribute": "design",
+    "grouping": "Properties",
+    "value": "Footer"
+  },
+  {
+    "field_id": "00272",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "setFooter"
+  },
+  {
+    "field_id": "00273",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "ContentMiddle"
+  },
+  {
+    "field_id": "00274",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00274",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Learn"
+  },
+  {
+    "field_id": "00274",
+    "version": "0001",
+    "attribute": "type",
+    "grouping": "Properties",
+    "value": "Emphasized"
+  },
+  {
+    "field_id": "00274",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "5rem"
+  },
+  {
+    "field_id": "00275",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00275",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Prepare"
+  },
+  {
+    "field_id": "00275",
+    "version": "0001",
+    "attribute": "type",
+    "grouping": "Properties",
+    "value": "Emphasized"
+  },
+  {
+    "field_id": "00275",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "5rem"
+  },
+  {
+    "field_id": "00276",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00276",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Practice"
+  },
+  {
+    "field_id": "00276",
+    "version": "0001",
+    "attribute": "type",
+    "grouping": "Properties",
+    "value": "Emphasized"
+  },
+  {
+    "field_id": "00276",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "5rem"
+  },
+  {
+    "field_id": "00277",
+    "version": "0001",
+    "attribute": "growing",
+    "grouping": "Properties",
+    "value": "true"
+  },
+  {
+    "field_id": "00277",
+    "version": "0001",
+    "attribute": "growingThreshold",
+    "grouping": "Properties",
+    "value": "9999"
+  },
+  {
+    "field_id": "00278",
+    "version": "0001",
+    "attribute": "highlight",
+    "grouping": "Properties",
+    "value": "{UI_CORRECT_HIGHLIGHT}",
+    "binding_path": "APPL_CLASS|GT_UI_PQ!h|UI_CORRECT_HIGHLIGHT!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00278",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00278",
+    "version": "0001",
+    "attribute": "type",
+    "grouping": "Properties",
+    "value": "Active"
+  },
+  {
+    "field_id": "00278",
+    "version": "0001",
+    "attribute": "visible",
+    "grouping": "Properties",
+    "value": "{UI_VISIBLE_ITEM}",
+    "binding_path": "APPL_CLASS|GT_UI_PQ!h|UI_VISIBLE_ITEM!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00279",
+    "version": "0001",
+    "attribute": "alignItems",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00279",
+    "version": "0001",
+    "attribute": "justifyContent",
+    "grouping": "Properties",
+    "value": "SpaceBetween"
+  },
+  {
+    "field_id": "00279",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "HBoxPartSelect"
+  },
+  {
+    "field_id": "00279",
+    "version": "0001",
+    "attribute": "visible",
+    "grouping": "Properties",
+    "value": "{UI_VISIBLE_PART}",
+    "binding_path": "APPL_CLASS|GT_UI_PQ!h|UI_VISIBLE_PART!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00280",
+    "version": "0001",
+    "attribute": "select",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00280",
+    "version": "0001",
+    "attribute": "selected",
+    "grouping": "Properties",
+    "value": "{UI_SELECTED}",
+    "binding_path": "APPL_CLASS|GT_UI_PQ!h|UI_SELECTED!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00281",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "TextPartSelectName"
+  },
+  {
+    "field_id": "00281",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "{DESCRIPTION}",
+    "binding_path": "APPL_CLASS|GT_UI_PQ!h|DESCRIPTION!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00281",
+    "version": "0001",
+    "attribute": "wrappingType",
+    "grouping": "Properties",
+    "value": "Hyphenated"
+  },
+  {
+    "field_id": "00283",
+    "version": "0001",
+    "attribute": "alignContent",
+    "grouping": "Properties",
+    "value": "Start"
+  },
+  {
+    "field_id": "00283",
+    "version": "0001",
+    "attribute": "alignItems",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00283",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "HBoxQuestionSelect"
+  },
+  {
+    "field_id": "00283",
+    "version": "0001",
+    "attribute": "visible",
+    "grouping": "Properties",
+    "value": "{UI_VISIBLE_QUESTION}",
+    "binding_path": "APPL_CLASS|GT_UI_PQ!h|UI_VISIBLE_QUESTION!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00284",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "TextQuestionSelect"
+  },
+  {
+    "field_id": "00284",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "{DESCRIPTION}",
+    "binding_path": "APPL_CLASS|GT_UI_PQ!h|DESCRIPTION!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00284",
+    "version": "0001",
+    "attribute": "wrappingType",
+    "grouping": "Properties",
+    "value": "Hyphenated"
+  },
+  {
+    "field_id": "00286",
+    "version": "0001",
+    "attribute": "color",
+    "grouping": "Properties",
+    "value": "Neutral"
+  },
+  {
+    "field_id": "00286",
+    "version": "0001",
+    "attribute": "src",
+    "grouping": "Properties",
+    "value": "{UI_SRC_ICON}",
+    "binding_path": "APPL_CLASS|GT_UI_PQ!h|UI_SRC_ICON!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00286",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "ListPQSelectItemIcon"
+  },
+  {
+    "field_id": "00287",
+    "version": "0001",
+    "attribute": "alignItems",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00292",
+    "version": "0001",
+    "attribute": "setEnableCache",
+    "grouping": "Model",
+    "value": "true"
+  },
+  {
+    "field_id": "00292",
+    "version": "0001",
+    "attribute": "setInitLoad",
+    "grouping": "Model",
+    "value": "cache"
+  },
+  {
+    "field_id": "00293",
+    "version": "0001",
+    "attribute": "setEnableCache",
+    "grouping": "Model",
+    "value": "true"
+  },
+  {
+    "field_id": "00293",
+    "version": "0001",
+    "attribute": "setInitLoad",
+    "grouping": "Model",
+    "value": "cache"
+  },
+  {
+    "field_id": "00294",
+    "version": "0001",
+    "attribute": "setEnableCache",
+    "grouping": "Model",
+    "value": "true"
+  },
+  {
+    "field_id": "00294",
+    "version": "0001",
+    "attribute": "setInitLoad",
+    "grouping": "Model",
+    "value": "cache"
+  },
+  {
+    "field_id": "00295",
+    "version": "0001",
+    "attribute": "setEnableCache",
+    "grouping": "Model",
+    "value": "true"
+  },
+  {
+    "field_id": "00295",
+    "version": "0001",
+    "attribute": "setInitLoad",
+    "grouping": "Model",
+    "value": "cache"
+  },
+  {
+    "field_id": "00300",
+    "version": "0001",
+    "attribute": "setEnableCache",
+    "grouping": "Model",
+    "value": "true"
+  },
+  {
+    "field_id": "00300",
+    "version": "0001",
+    "attribute": "setInitLoad",
+    "grouping": "Model",
+    "value": "cache"
+  },
+  {
+    "field_id": "00301",
+    "version": "0001",
+    "attribute": "setEnableCache",
+    "grouping": "Model",
+    "value": "true"
+  },
+  {
+    "field_id": "00301",
+    "version": "0001",
+    "attribute": "setInitLoad",
+    "grouping": "Model",
+    "value": "cache"
+  },
+  {
+    "field_id": "00306",
+    "version": "0001",
+    "attribute": "alignItems",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00306",
+    "version": "0001",
+    "attribute": "justifyContent",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00306",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "dialog_upload_box"
+  },
+  {
+    "field_id": "00306",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00307",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "dialog_upload_text"
+  },
+  {
+    "field_id": "00307",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "New content will not be visible for everyone until you publish it."
+  },
+  {
+    "field_id": "00307",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00308",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "- / -"
+  },
+  {
+    "field_id": "00308",
+    "version": "0001",
+    "attribute": "textAlign",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00308",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00309",
+    "version": "0001",
+    "attribute": "alignContent",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00309",
+    "version": "0001",
+    "attribute": "alignItems",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00309",
+    "version": "0001",
+    "attribute": "justifyContent",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00309",
+    "version": "0001",
+    "attribute": "visible",
+    "grouping": "Properties",
+    "value": "{= ${UI_DOWNLOADED} === false }",
+    "binding_type": "EXPR",
+    "bind_build_origin": "MANUAL"
+  },
+  {
+    "field_id": "00309",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "5rem"
+  },
+  {
+    "field_id": "00310",
+    "version": "0001",
+    "attribute": "color",
+    "grouping": "Properties",
+    "value": "Neutral"
+  },
+  {
+    "field_id": "00310",
+    "version": "0001",
+    "attribute": "size",
+    "grouping": "Properties",
+    "value": "3rem"
+  },
+  {
+    "field_id": "00310",
+    "version": "0001",
+    "attribute": "src",
+    "grouping": "Properties",
+    "value": "sap-icon://download-from-cloud"
+  },
+  {
+    "field_id": "00310",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "5rem"
+  },
+  {
+    "field_id": "00312",
+    "version": "0001",
+    "attribute": "design",
+    "grouping": "Properties",
+    "value": "Header"
+  },
+  {
+    "field_id": "00312",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "setCustomHeader"
+  },
+  {
+    "field_id": "00313",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "ContentLeft"
+  },
+  {
+    "field_id": "00316",
+    "version": "0001",
+    "attribute": "icon",
+    "grouping": "Properties",
+    "value": "sap-icon://nav-back"
+  },
+  {
+    "field_id": "00316",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00316",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Done"
+  },
+  {
+    "field_id": "00317",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "textListTestInfo"
+  },
+  {
+    "field_id": "00317",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "{UI_INFO_LINE_3}",
+    "binding_path": "APPL_CLASS|GT_UI_TESTS!h|UI_INFO_LINE_3!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00317",
+    "version": "0001",
+    "attribute": "visible",
+    "grouping": "Properties",
+    "value": "{UI_VIS_INFO_LINE_3}",
+    "binding_path": "APPL_CLASS|GT_UI_TESTS!h|UI_VIS_INFO_LINE_3!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00318",
+    "version": "0001",
+    "attribute": "justifyContent",
+    "grouping": "Properties",
+    "value": "SpaceBetween"
+  },
+  {
+    "field_id": "00320",
+    "version": "0001",
+    "attribute": "icon",
+    "grouping": "Properties",
+    "value": "{UI_FAVORITE_ICON}",
+    "binding_path": "APPL_CLASS|GT_UI_TESTS!h|UI_FAVORITE_ICON!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00320",
+    "version": "0001",
+    "attribute": "iconFirst",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00320",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00320",
+    "version": "0001",
+    "attribute": "type",
+    "grouping": "Properties",
+    "value": "Transparent"
+  },
+  {
+    "field_id": "00321",
+    "version": "0001",
+    "attribute": "design",
+    "grouping": "Properties",
+    "value": "StatusIconHidden"
+  },
+  {
+    "field_id": "00321",
+    "version": "0001",
+    "attribute": "status",
+    "grouping": "Properties",
+    "value": "Information"
+  },
+  {
+    "field_id": "00321",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Published"
+  },
+  {
+    "field_id": "00321",
+    "version": "0001",
+    "attribute": "visible",
+    "grouping": "Properties",
+    "value": "{UI_VIS_PUBLISHED}",
+    "binding_path": "APPL_CLASS|GT_UI_TESTS!h|UI_VIS_PUBLISHED!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00322",
+    "version": "0001",
+    "attribute": "design",
+    "grouping": "Properties",
+    "value": "StatusIconHidden"
+  },
+  {
+    "field_id": "00322",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Private"
+  },
+  {
+    "field_id": "00322",
+    "version": "0001",
+    "attribute": "visible",
+    "grouping": "Properties",
+    "value": "{UI_VIS_PRIVATE}",
+    "binding_path": "APPL_CLASS|GT_UI_TESTS!h|UI_VIS_PRIVATE!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00323",
+    "version": "0001",
+    "attribute": "status",
+    "grouping": "Properties",
+    "value": "Warning"
+  },
+  {
+    "field_id": "00323",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Local"
+  },
+  {
+    "field_id": "00323",
+    "version": "0001",
+    "attribute": "visible",
+    "grouping": "Properties",
+    "value": "{UI_DELETED}",
+    "binding_path": "APPL_CLASS|GT_UI_TESTS!h|UI_DELETED!C",
+    "bind_build_origin": "TREE_SEL"
+  },
+  {
+    "field_id": "00324",
+    "version": "0001",
+    "attribute": "styleClass",
+    "grouping": "Properties",
+    "value": "textLoadingLogo"
+  },
+  {
+    "field_id": "00324",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Loading Quiz .."
+  },
+  {
+    "field_id": "00324",
+    "version": "0001",
+    "attribute": "textAlign",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00325",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "You need to be online"
+  },
+  {
+    "field_id": "00326",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Action failed"
+  },
+  {
+    "field_id": "00329",
+    "version": "0001",
+    "attribute": "setEnableCache",
+    "grouping": "Model",
+    "value": "true"
+  },
+  {
+    "field_id": "00329",
+    "version": "0001",
+    "attribute": "setInitLoad",
+    "grouping": "Model",
+    "value": "cache"
+  },
+  {
+    "field_id": "00331",
+    "version": "0001",
+    "attribute": "setEnableCache",
+    "grouping": "Model",
+    "value": "true"
+  },
+  {
+    "field_id": "00331",
+    "version": "0001",
+    "attribute": "setInitLoad",
+    "grouping": "Model",
+    "value": "cache"
+  },
+  {
+    "field_id": "00333",
+    "version": "0001",
+    "attribute": "design",
+    "grouping": "Properties",
+    "value": "Header"
+  },
+  {
+    "field_id": "00333",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "setCustomHeader"
+  },
+  {
+    "field_id": "00335",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "ContentMiddle"
+  },
+  {
+    "field_id": "00336",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Quiz App"
+  },
+  {
+    "field_id": "00336",
+    "version": "0001",
+    "attribute": "textAlign",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00336",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00337",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "ContentRight"
+  },
+  {
+    "field_id": "00338",
+    "version": "0001",
+    "attribute": "icon",
+    "grouping": "Properties",
+    "value": "sap-icon://navigation-down-arrow"
+  },
+  {
+    "field_id": "00338",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00339",
+    "version": "0001",
+    "attribute": "cancelButtonText",
+    "grouping": "Properties",
+    "value": "Close"
+  },
+  {
+    "field_id": "00340",
+    "version": "0001",
+    "attribute": "iconFirst",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00340",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00340",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Publish"
+  },
+  {
+    "field_id": "00341",
+    "version": "0001",
+    "attribute": "iconFirst",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00341",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00341",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Download a copy"
+  },
+  {
+    "field_id": "00343",
+    "version": "0001",
+    "attribute": "iconFirst",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00343",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00343",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Change title"
+  },
+  {
+    "field_id": "00344",
+    "version": "0001",
+    "attribute": "icon",
+    "grouping": "Properties",
+    "value": "sap-icon://delete"
+  },
+  {
+    "field_id": "00344",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00344",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Delete"
+  },
+  {
+    "field_id": "00352",
+    "version": "0001",
+    "attribute": "showFooter",
+    "grouping": "Properties",
+    "value": "true"
+  },
+  {
+    "field_id": "00352",
+    "version": "0001",
+    "attribute": "showSubHeader",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00353",
+    "version": "0001",
+    "attribute": "design",
+    "grouping": "Properties",
+    "value": "Header"
+  },
+  {
+    "field_id": "00353",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "setCustomHeader"
+  },
+  {
+    "field_id": "00360",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "ContentLeft"
+  },
+  {
+    "field_id": "00361",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "ContentMiddle"
+  },
+  {
+    "field_id": "00362",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "ContentRight"
+  },
+  {
+    "field_id": "00363",
+    "version": "0001",
+    "attribute": "icon",
+    "grouping": "Properties",
+    "value": "sap-icon://navigation-down-arrow"
+  },
+  {
+    "field_id": "00363",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "ActionSheetReport.openBy(this);"
+  },
+  {
+    "field_id": "00364",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Progress and activity"
+  },
+  {
+    "field_id": "00364",
+    "version": "0001",
+    "attribute": "textAlign",
+    "grouping": "Properties",
+    "value": "Center"
+  },
+  {
+    "field_id": "00364",
+    "version": "0001",
+    "attribute": "width",
+    "grouping": "Properties",
+    "value": "100%"
+  },
+  {
+    "field_id": "00365",
+    "version": "0001",
+    "attribute": "icon",
+    "grouping": "Properties",
+    "value": "sap-icon://nav-back"
+  },
+  {
+    "field_id": "00365",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "oApp.back();"
+  },
+  {
+    "field_id": "00366",
+    "version": "0001",
+    "attribute": "iconFirst",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00366",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00366",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Progress and activity"
+  },
+  {
+    "field_id": "00367",
+    "version": "0001",
+    "attribute": "busy",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00367",
+    "version": "0001",
+    "attribute": "busyIndicatorDelay",
+    "grouping": "Properties",
+    "value": "1000"
+  },
+  {
+    "field_id": "00367",
+    "version": "0001",
+    "attribute": "busyIndicatorSize",
+    "grouping": "Properties",
+    "value": "Medium"
+  },
+  {
+    "field_id": "00367",
+    "version": "0001",
+    "attribute": "height",
+    "grouping": "Properties",
+    "value": "30%"
+  },
+  {
+    "field_id": "00367",
+    "version": "0001",
+    "attribute": "legendVisible",
+    "grouping": "Properties",
+    "value": "true"
+  },
+  {
+    "field_id": "00367",
+    "version": "0001",
+    "attribute": "visible",
+    "grouping": "Properties",
+    "value": "true"
+  },
+  {
+    "field_id": "00367",
+    "version": "0001",
+    "attribute": "vizType",
+    "grouping": "Properties",
+    "value": "donut"
+  },
+  {
+    "field_id": "00373",
+    "version": "0001",
+    "attribute": "busy",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00373",
+    "version": "0001",
+    "attribute": "busyIndicatorDelay",
+    "grouping": "Properties",
+    "value": "1000"
+  },
+  {
+    "field_id": "00373",
+    "version": "0001",
+    "attribute": "busyIndicatorSize",
+    "grouping": "Properties",
+    "value": "Medium"
+  },
+  {
+    "field_id": "00373",
+    "version": "0001",
+    "attribute": "height",
+    "grouping": "Properties",
+    "value": "34%"
+  },
+  {
+    "field_id": "00373",
+    "version": "0001",
+    "attribute": "legendVisible",
+    "grouping": "Properties",
+    "value": "true"
+  },
+  {
+    "field_id": "00373",
+    "version": "0001",
+    "attribute": "visible",
+    "grouping": "Properties",
+    "value": "true"
+  },
+  {
+    "field_id": "00373",
+    "version": "0001",
+    "attribute": "vizType",
+    "grouping": "Properties",
+    "value": "stacked_column"
+  },
+  {
+    "field_id": "00391",
+    "version": "0001",
+    "attribute": "busy",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00391",
+    "version": "0001",
+    "attribute": "busyIndicatorDelay",
+    "grouping": "Properties",
+    "value": "1000"
+  },
+  {
+    "field_id": "00391",
+    "version": "0001",
+    "attribute": "busyIndicatorSize",
+    "grouping": "Properties",
+    "value": "Medium"
+  },
+  {
+    "field_id": "00391",
+    "version": "0001",
+    "attribute": "height",
+    "grouping": "Properties",
+    "value": "38%"
+  },
+  {
+    "field_id": "00391",
+    "version": "0001",
+    "attribute": "legendVisible",
+    "grouping": "Properties",
+    "value": "true"
+  },
+  {
+    "field_id": "00391",
+    "version": "0001",
+    "attribute": "visible",
+    "grouping": "Properties",
+    "value": "true"
+  },
+  {
+    "field_id": "00391",
+    "version": "0001",
+    "attribute": "vizType",
+    "grouping": "Properties",
+    "value": "100_stacked_column"
+  },
+  {
+    "field_id": "00412",
+    "version": "0001",
+    "attribute": "cancelButtonText",
+    "grouping": "Properties",
+    "value": "Close"
+  },
+  {
+    "field_id": "00416",
+    "version": "0001",
+    "attribute": "iconFirst",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00416",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00416",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Reset progress"
+  },
+  {
+    "field_id": "00455",
+    "version": "0001",
+    "attribute": "cancelButtonText",
+    "grouping": "Properties",
+    "value": "Close"
+  },
+  {
+    "field_id": "00456",
+    "version": "0001",
+    "attribute": "iconFirst",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00456",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00456",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Day"
+  },
+  {
+    "field_id": "00457",
+    "version": "0001",
+    "attribute": "iconFirst",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00457",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00457",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Week"
+  },
+  {
+    "field_id": "00458",
+    "version": "0001",
+    "attribute": "iconFirst",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00458",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00458",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Month"
+  },
+  {
+    "field_id": "00459",
+    "version": "0001",
+    "attribute": "iconFirst",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00459",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00459",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Year"
+  },
+  {
+    "field_id": "00462",
+    "version": "0001",
+    "attribute": "cancelButtonText",
+    "grouping": "Properties",
+    "value": "Close"
+  },
+  {
+    "field_id": "00463",
+    "version": "0001",
+    "attribute": "iconFirst",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00463",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00463",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Day"
+  },
+  {
+    "field_id": "00464",
+    "version": "0001",
+    "attribute": "iconFirst",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00464",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00464",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Week"
+  },
+  {
+    "field_id": "00465",
+    "version": "0001",
+    "attribute": "iconFirst",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00465",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00465",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Month"
+  },
+  {
+    "field_id": "00466",
+    "version": "0001",
+    "attribute": "iconFirst",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00466",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00466",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Year"
+  },
+  {
+    "field_id": "00481",
+    "version": "0001",
+    "attribute": "design",
+    "grouping": "Properties",
+    "value": "Footer"
+  },
+  {
+    "field_id": "00481",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "setFooter"
+  },
+  {
+    "field_id": "00482",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "ContentLeft"
+  },
+  {
+    "field_id": "00483",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "ContentMiddle"
+  },
+  {
+    "field_id": "00485",
+    "version": "0001",
+    "attribute": "position",
+    "grouping": "Parent",
+    "value": "ContentRight"
+  },
+  {
+    "field_id": "00486",
+    "version": "0001",
+    "attribute": "icon",
+    "grouping": "Properties",
+    "value": "sap-icon://fa-solid/angle-right"
+  },
+  {
+    "field_id": "00486",
+    "version": "0001",
+    "attribute": "iconFirst",
+    "grouping": "Properties",
+    "value": "false"
+  },
+  {
+    "field_id": "00486",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00487",
+    "version": "0001",
+    "attribute": "icon",
+    "grouping": "Properties",
+    "value": "sap-icon://fa-solid/angle-left"
+  },
+  {
+    "field_id": "00487",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00494",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00494",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Day"
+  },
+  {
+    "field_id": "00495",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00495",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Week"
+  },
+  {
+    "field_id": "00496",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00496",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Month"
+  },
+  {
+    "field_id": "00497",
+    "version": "0001",
+    "attribute": "press",
+    "grouping": "Events",
+    "value": "Anonymous Function"
+  },
+  {
+    "field_id": "00497",
+    "version": "0001",
+    "attribute": "text",
+    "grouping": "Properties",
+    "value": "Year"
+  }
+]

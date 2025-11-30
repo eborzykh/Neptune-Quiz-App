@@ -802,6 +802,8 @@ function _reset_progress() {
     // Update current UI
     ModelData.UpdateField(ListPQSelect, "UI_VISIBLE_QUESTION", true, "UI_CORRECT_HIGHLIGHT", _get_correct_highlight(_PROGRESS_UNANSWERED));
 
+    _set_UI_reset();
+
     if (navigator.onLine && !_ajax_error) {
         setTimeout(function() {
             _ajax_activities(false);

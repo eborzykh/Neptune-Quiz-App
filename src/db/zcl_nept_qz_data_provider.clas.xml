@@ -56,6 +56,12 @@
      <DESCRIPT>Neptune Test Prep App: Is Test Published</DESCRIPT>
     </SEOSUBCOTX>
     <SEOSUBCOTX>
+     <CMPNAME>ADD</CMPNAME>
+     <SCONAME>IV_TEST_ID</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Neptune Quiz App: Quiz ID</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
      <CMPNAME>DELETE</CMPNAME>
      <SCONAME>IS_DB_TESTS_KEY</SCONAME>
      <LANGU>E</LANGU>

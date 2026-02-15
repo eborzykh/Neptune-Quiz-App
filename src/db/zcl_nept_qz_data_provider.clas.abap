@@ -1,197 +1,225 @@
-class ZCL_NEPT_QZ_DATA_PROVIDER definition
-  public
-  final
-  create public .
+CLASS zcl_nept_qz_data_provider DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
 
-public section.
+  PUBLIC SECTION.
 
-  constants GC_PROGRESS_UNANSWERED type ZNEPT_QZ_PROGRESS_DE value '0' ##NO_TEXT.
-  constants GC_PROGRESS_INCORRECT type ZNEPT_QZ_PROGRESS_DE value '1' ##NO_TEXT.
-  constants GC_PROGRESS_IMPROVED_LOW type ZNEPT_QZ_PROGRESS_DE value '2' ##NO_TEXT.
-  constants GC_PROGRESS_IMPROVED_MEDIUM type ZNEPT_QZ_PROGRESS_DE value '3' ##NO_TEXT.
-  constants GC_PROGRESS_IMPROVED_HIGH type ZNEPT_QZ_PROGRESS_DE value '4' ##NO_TEXT.
-  constants GC_PROGRESS_CORRECT type ZNEPT_QZ_PROGRESS_DE value '5' ##NO_TEXT.
-  constants GC_BOOKMARK_UNMARKED type ZNEPT_QZ_BOOKMARK_DE value ' ' ##NO_TEXT.
-  constants GC_BOOKMARK_BOOKMARKED type ZNEPT_QZ_BOOKMARK_DE value 'X' ##NO_TEXT.
-  constants GC_SYNC_DATE_INITIAL type ZNEPT_QZ_SYNC_DATE_DE value '00000000' ##NO_TEXT.
-  constants GC_SYNC_TIME_INITIAL type ZNEPT_QZ_SYNC_TIME_DE value '000000' ##NO_TEXT.
-  constants GC_SYNC_DATE_FINAL type ZNEPT_QZ_SYNC_DATE_DE value '99991231' ##NO_TEXT.
-  constants GC_QUIZ_PUBLISHED type ZNEPT_QZ_PUBLISHED_DE value 'X' ##NO_TEXT.
-  constants GC_QUIZ_PRIVATE type ZNEPT_QZ_PUBLISHED_DE value ' ' ##NO_TEXT.
+    CONSTANTS gc_progress_unanswered TYPE znept_qz_progress_de VALUE '0' ##NO_TEXT.
+    CONSTANTS gc_progress_incorrect TYPE znept_qz_progress_de VALUE '1' ##NO_TEXT.
+    CONSTANTS gc_progress_improved_low TYPE znept_qz_progress_de VALUE '2' ##NO_TEXT.
+    CONSTANTS gc_progress_improved_medium TYPE znept_qz_progress_de VALUE '3' ##NO_TEXT.
+    CONSTANTS gc_progress_improved_high TYPE znept_qz_progress_de VALUE '4' ##NO_TEXT.
+    CONSTANTS gc_progress_correct TYPE znept_qz_progress_de VALUE '5' ##NO_TEXT.
+    CONSTANTS gc_bookmark_unmarked TYPE znept_qz_bookmark_de VALUE ' ' ##NO_TEXT.
+    CONSTANTS gc_bookmark_bookmarked TYPE znept_qz_bookmark_de VALUE 'X' ##NO_TEXT.
+    CONSTANTS gc_sync_date_initial TYPE znept_qz_sync_date_de VALUE '00000000' ##NO_TEXT.
+    CONSTANTS gc_sync_time_initial TYPE znept_qz_sync_time_de VALUE '000000' ##NO_TEXT.
+    CONSTANTS gc_sync_date_final TYPE znept_qz_sync_date_de VALUE '99991231' ##NO_TEXT.
+    CONSTANTS gc_quiz_published TYPE znept_qz_published_de VALUE 'X' ##NO_TEXT.
+    CONSTANTS gc_quiz_private TYPE znept_qz_published_de VALUE ' ' ##NO_TEXT.
 
-  class-methods READ_AVAILABLE_METRICS
-    exporting
-      !ET_DB_TESTS_KEY type ZNEPT_QZ_DB_TESTS_KEY_T .
-  class-methods READ_AVAILABLE_TEST
-    exporting
-      !ET_DB_TESTS type ZNEPT_QZ_DB_TESTS_T .
-  class-methods PUBLISH
-    importing
-      !IS_DB_TESTS_KEY type ZNEPT_QZ_DB_TESTS_KEY_S
-      !IV_PUBLISHED type ZNEPT_QZ_PUBLISHED_DE
-    exporting
-      !EV_DB_ERROR type ABAP_BOOL
-      !EV_DO_COMMIT type ABAP_BOOL .
-  class-methods DELETE
-    importing
-      !IS_DB_TESTS_KEY type ZNEPT_QZ_DB_TESTS_KEY_S
-    exporting
-      !EV_DB_ERROR type ABAP_BOOL
-      !EV_DO_COMMIT type ABAP_BOOL .
-  class-methods ADD
-    importing
-      !IV_DESCRIPTION type ZNEPT_QZ_TEST_NAME_DE
-      !IV_PUBLISHED type ZNEPT_QZ_PUBLISHED_DE
-      !IT_DB_PARTS type ZNEPT_QZ_DB_PARTS_T
-      !IT_DB_QUESTIONS type ZNEPT_QZ_DB_QUESTIONS_T
-      !IT_DB_VARIANTS type ZNEPT_QZ_DB_VARIANTS_T
-    exporting
-      !ES_DB_TESTS type ZNEPT_QZ_DB_TESTS_S
-      !EV_DB_ERROR type ABAP_BOOL
-      !EV_DO_COMMIT type ABAP_BOOL .
-  class-methods RENAME
-    importing
-      !IS_DB_TESTS_KEY type ZNEPT_QZ_DB_TESTS_KEY_S
-      !IV_DESCRIPTION type ZNEPT_QZ_TEST_NAME_DE
-    exporting
-      !EV_DB_ERROR type ABAP_BOOL
-      !EV_DO_COMMIT type ABAP_BOOL .
-  class-methods GET
-    importing
-      !IS_DB_TESTS_KEY type ZNEPT_QZ_DB_TESTS_KEY_S
-      !IV_VERSION type ZNEPT_QZ_COUNT_VERSION_DE
-    exporting
-      !EV_VERSION type ZNEPT_QZ_COUNT_VERSION_DE
-      !ET_DB_PARTS type ZNEPT_QZ_DB_PARTS_T
-      !ET_DB_QUESTIONS type ZNEPT_QZ_DB_QUESTIONS_T
-      !ET_DB_VARIANTS type ZNEPT_QZ_DB_VARIANTS_T
-      !ET_DB_CHECK type ZNEPT_QZ_DB_CHECK_T
-      !EV_DB_ERROR type ABAP_BOOL .
-  class-methods CHECK .
-  class-methods SYNC_BOOKMARKS
-    importing
-      value(IV_OLD_SYNC_ON) type ZNEPT_QZ_SYNC_DATE_DE
-      value(IV_OLD_SYNC_AT) type ZNEPT_QZ_SYNC_TIME_DE
-      value(IV_NEW_SYNC_ON) type ZNEPT_QZ_SYNC_DATE_DE
-      value(IV_NEW_SYNC_AT) type ZNEPT_QZ_SYNC_TIME_DE
-      value(IS_DB_TESTS_KEY) type ZNEPT_QZ_DB_TESTS_KEY_S
-      value(IT_DB_BOOKMARKS) type ZNEPT_QZ_DB_BOOKMARKS_T
-    exporting
-      !ET_DB_BOOKMARKS type ZNEPT_QZ_DB_BOOKMARKS_T
-      !EV_DB_ERROR type ABAP_BOOL
-      !EV_DO_COMMIT type ABAP_BOOL .
-  class-methods SYNC_METRICS
-    importing
-      value(IV_OLD_SYNC_ON) type ZNEPT_QZ_SYNC_DATE_DE
-      value(IV_OLD_SYNC_AT) type ZNEPT_QZ_SYNC_TIME_DE
-      value(IV_NEW_SYNC_ON) type ZNEPT_QZ_SYNC_DATE_DE
-      value(IV_NEW_SYNC_AT) type ZNEPT_QZ_SYNC_TIME_DE
-      value(IS_DB_TESTS_KEY) type ZNEPT_QZ_DB_TESTS_KEY_S
-      value(IT_DB_METRICS) type ZNEPT_QZ_DB_METRICS_T
-    exporting
-      !ET_DB_METRICS type ZNEPT_QZ_DB_METRICS_T
-      !EV_DB_ERROR type ABAP_BOOL
-      !EV_DO_COMMIT type ABAP_BOOL .
-  class-methods INFO
-    importing
-      !IS_DB_TESTS_KEY type ZNEPT_QZ_DB_TESTS_KEY_S
-    exporting
-      !EV_TOTAL_PARTS type INT2
-      !EV_TOTAL_QUESTIONS type INT2 .
-protected section.
-private section.
+    CLASS-METHODS read_available_metrics
+      EXPORTING
+        !et_db_tests_key TYPE znept_qz_db_tests_key_t .
+    CLASS-METHODS read_available_test
+      EXPORTING
+        !et_db_tests TYPE znept_qz_db_tests_t .
+    CLASS-METHODS publish
+      IMPORTING
+        !is_db_tests_key TYPE znept_qz_db_tests_key_s
+        !iv_published    TYPE znept_qz_published_de
+      EXPORTING
+        !ev_db_error     TYPE abap_bool
+        !ev_do_commit    TYPE abap_bool .
+    CLASS-METHODS delete
+      IMPORTING
+        !is_db_tests_key TYPE znept_qz_db_tests_key_s
+      EXPORTING
+        !ev_db_error     TYPE abap_bool
+        !ev_do_commit    TYPE abap_bool .
+    CLASS-METHODS add
+      IMPORTING
+        !iv_test_id      TYPE znept_qz_test_id_de OPTIONAL
+        !iv_description  TYPE znept_qz_test_name_de
+        !iv_published    TYPE znept_qz_published_de
+        !it_db_parts     TYPE znept_qz_db_parts_t
+        !it_db_questions TYPE znept_qz_db_questions_t
+        !it_db_variants  TYPE znept_qz_db_variants_t
+      EXPORTING
+        !es_db_tests     TYPE znept_qz_db_tests_s
+        !ev_db_error     TYPE abap_bool
+        !ev_do_commit    TYPE abap_bool .
+    CLASS-METHODS rename
+      IMPORTING
+        !is_db_tests_key TYPE znept_qz_db_tests_key_s
+        !iv_description  TYPE znept_qz_test_name_de
+      EXPORTING
+        !ev_db_error     TYPE abap_bool
+        !ev_do_commit    TYPE abap_bool .
+    CLASS-METHODS get
+      IMPORTING
+        !is_db_tests_key TYPE znept_qz_db_tests_key_s
+        !iv_version      TYPE znept_qz_count_version_de
+      EXPORTING
+        !ev_version      TYPE znept_qz_count_version_de
+        !et_db_parts     TYPE znept_qz_db_parts_t
+        !et_db_questions TYPE znept_qz_db_questions_t
+        !et_db_variants  TYPE znept_qz_db_variants_t
+        !et_db_check     TYPE znept_qz_db_check_t
+        !ev_db_error     TYPE abap_bool .
+    CLASS-METHODS check .
+    CLASS-METHODS sync_bookmarks
+      IMPORTING
+        VALUE(iv_old_sync_on)  TYPE znept_qz_sync_date_de
+        VALUE(iv_old_sync_at)  TYPE znept_qz_sync_time_de
+        VALUE(iv_new_sync_on)  TYPE znept_qz_sync_date_de
+        VALUE(iv_new_sync_at)  TYPE znept_qz_sync_time_de
+        VALUE(is_db_tests_key) TYPE znept_qz_db_tests_key_s
+        VALUE(it_db_bookmarks) TYPE znept_qz_db_bookmarks_t
+      EXPORTING
+        !et_db_bookmarks       TYPE znept_qz_db_bookmarks_t
+        !ev_db_error           TYPE abap_bool
+        !ev_do_commit          TYPE abap_bool .
+    CLASS-METHODS sync_metrics
+      IMPORTING
+        VALUE(iv_old_sync_on)  TYPE znept_qz_sync_date_de
+        VALUE(iv_old_sync_at)  TYPE znept_qz_sync_time_de
+        VALUE(iv_new_sync_on)  TYPE znept_qz_sync_date_de
+        VALUE(iv_new_sync_at)  TYPE znept_qz_sync_time_de
+        VALUE(is_db_tests_key) TYPE znept_qz_db_tests_key_s
+        VALUE(it_db_metrics)   TYPE znept_qz_db_metrics_t
+      EXPORTING
+        !et_db_metrics         TYPE znept_qz_db_metrics_t
+        !ev_db_error           TYPE abap_bool
+        !ev_do_commit          TYPE abap_bool .
+    CLASS-METHODS info
+      IMPORTING
+        !is_db_tests_key    TYPE znept_qz_db_tests_key_s
+      EXPORTING
+        !ev_total_parts     TYPE int2
+        !ev_total_questions TYPE int2 .
+  PROTECTED SECTION.
+  PRIVATE SECTION.
 
-  class-methods KEY_CHECK
-    importing
-      !IS_DB_TESTS_KEY type ZNEPT_QZ_DB_TESTS_KEY_S
-    returning
-      value(RV_RESULT) type ABAP_BOOL .
+    CLASS-METHODS key_check
+      IMPORTING
+        !is_db_tests_key TYPE znept_qz_db_tests_key_s
+      RETURNING
+        VALUE(rv_result) TYPE abap_bool .
 ENDCLASS.
 
 
 
-CLASS ZCL_NEPT_QZ_DATA_PROVIDER IMPLEMENTATION.
+CLASS zcl_nept_qz_data_provider IMPLEMENTATION.
 
 
   METHOD add.
 
-    DATA: ls_db_tests     TYPE znept_qz_db_tests_s,
-          lt_db_parts     TYPE znept_qz_db_parts_t,
-          lt_db_questions TYPE znept_qz_db_questions_t,
-          lt_db_variants  TYPE znept_qz_db_variants_t.
+    DATA: ls_db_tests        TYPE znept_qz_db_tests_s,
+          lt_db_parts        TYPE znept_qz_db_parts_t,
+          lt_db_questions    TYPE znept_qz_db_questions_t,
+          lt_db_variants     TYPE znept_qz_db_variants_t,
+          ls_db_tests_key    TYPE znept_qz_db_tests_key_s,
+          lv_count_parts     TYPE int2,
+          lv_count_questions TYPE int2.
 
     CLEAR: ev_db_error, ev_do_commit.
 
     CLEAR es_db_tests.
 
+    IF it_db_questions[] IS INITIAL OR it_db_variants[] IS INITIAL.
+      ev_db_error = abap_true.
+      RETURN.
+    ENDIF.
+
     lt_db_parts[] = it_db_parts[].
     lt_db_questions[] = it_db_questions[].
     lt_db_variants[] = it_db_variants[].
 
-    DO.
-      ls_db_tests-test_id = ls_db_tests-test_id + 1.
-      SELECT test_id UP TO 1 ROWS FROM znept_qz_tst INTO ls_db_tests-test_id
-        WHERE test_id = ls_db_tests-test_id.
-      ENDSELECT.
+    CLEAR ls_db_tests.
+
+    IF iv_test_id IS INITIAL.
+      DO.
+        ls_db_tests-test_id = ls_db_tests-test_id + 1.
+        SELECT test_id UP TO 1 ROWS FROM znept_qz_tst INTO ls_db_tests-test_id
+          WHERE test_id = ls_db_tests-test_id.
+        ENDSELECT.
+
+        IF sy-subrc <> 0.
+          EXIT.
+        ENDIF.
+      ENDDO.
+
+      ls_db_tests-upload_on = sy-datum.
+      ls_db_tests-upload_at = sy-uzeit.
+      ls_db_tests-upload_by = sy-uname.
+      ls_db_tests-description = iv_description.
+      ls_db_tests-published = iv_published.
+
+      INSERT znept_qz_tst FROM ls_db_tests.
 
       IF sy-subrc <> 0.
-        EXIT.
+        ev_db_error = abap_true.
+        RETURN.
       ENDIF.
-    ENDDO.
+      ev_do_commit = abap_true.
 
-    ls_db_tests-upload_on = sy-datum.
-    ls_db_tests-upload_at = sy-uzeit.
-    ls_db_tests-upload_by = sy-uname.
-    ls_db_tests-description = iv_description.
-    ls_db_tests-published = iv_published.
+    ELSE.
+      ls_db_tests-test_id = iv_test_id.
+      MOVE-CORRESPONDING ls_db_tests TO ls_db_tests_key.
+
+      zcl_nept_qz_data_provider=>info( EXPORTING is_db_tests_key    = ls_db_tests_key
+                                       IMPORTING ev_total_parts     = lv_count_parts
+                                                 ev_total_questions = lv_count_questions ).
+
+      IF lv_count_parts > 0 OR lv_count_questions > 0.
+        ev_db_error = abap_true.
+        RETURN.
+      ENDIF.
+    ENDIF.
+
+* Insert Parts
 
     LOOP AT lt_db_parts ASSIGNING FIELD-SYMBOL(<fs_db_parts>).
       <fs_db_parts>-test_id = ls_db_tests-test_id.
     ENDLOOP.
-
-    LOOP AT lt_db_questions ASSIGNING FIELD-SYMBOL(<fs_db_questions>).
-      <fs_db_questions>-test_id = ls_db_tests-test_id.
-    ENDLOOP.
-
-    LOOP AT lt_db_variants ASSIGNING FIELD-SYMBOL(<fs_db_variants>).
-      <fs_db_variants>-test_id = ls_db_tests-test_id.
-    ENDLOOP.
-
-    INSERT znept_qz_tst FROM ls_db_tests.
-
-    IF sy-subrc <> 0.
-      ev_db_error = abap_true.
-      RETURN.
-    ELSE.
-      ev_do_commit = abap_true.
-    ENDIF.
 
     INSERT znept_qz_prt FROM TABLE lt_db_parts.
 
     IF sy-subrc <> 0.
       ev_db_error = abap_true.
       RETURN.
-    ELSE.
-      ev_do_commit = abap_true.
     ENDIF.
+    ev_do_commit = abap_true.
+
+* Insert Question
+
+    LOOP AT lt_db_questions ASSIGNING FIELD-SYMBOL(<fs_db_questions>).
+      <fs_db_questions>-test_id = ls_db_tests-test_id.
+    ENDLOOP.
 
     INSERT znept_qz_qst FROM TABLE lt_db_questions.
 
     IF sy-subrc <> 0.
       ev_db_error = abap_true.
       RETURN.
-    ELSE.
-      ev_do_commit = abap_true.
     ENDIF.
+    ev_do_commit = abap_true.
+
+* Insert Variants
+
+    LOOP AT lt_db_variants ASSIGNING FIELD-SYMBOL(<fs_db_variants>).
+      <fs_db_variants>-test_id = ls_db_tests-test_id.
+    ENDLOOP.
 
     INSERT znept_qz_var FROM TABLE lt_db_variants.
 
     IF sy-subrc <> 0.
       ev_db_error = abap_true.
       RETURN.
-    ELSE.
-      ev_do_commit = abap_true.
     ENDIF.
+    ev_do_commit = abap_true.
 
     es_db_tests = ls_db_tests.
 
@@ -660,9 +688,9 @@ CLASS ZCL_NEPT_QZ_DATA_PROVIDER IMPLEMENTATION.
 
   METHOD sync_metrics.
 
-    DATA: ls_db_sync     TYPE znept_qz_db_sync_s,
-          ls_db_metrics  TYPE znept_qz_db_metrics_s,
-          lt_db_metrics  TYPE znept_qz_db_metrics_t.
+    DATA: ls_db_sync    TYPE znept_qz_db_sync_s,
+          ls_db_metrics TYPE znept_qz_db_metrics_s,
+          lt_db_metrics TYPE znept_qz_db_metrics_t.
 
     CLEAR: ev_db_error, ev_do_commit.
 

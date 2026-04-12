@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>Neptune Quiz App: API</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZNEPT_QZ_APITOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZNEPT_QZ_API</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZNEPT_QZ_API_GET_LIST</FUNCNAME>
+     <SHORT_TEXT>Neptune Quiz App: Get Personalised List</SHORT_TEXT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>ET_API_QUIZ</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZNEPT_QZ_API_QUIZ_T</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>ET_API_QUIZ</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Neptune Quiz App: Quiz List</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZNEPT_QZ_API_GET_QUIZ</FUNCNAME>
+     <SHORT_TEXT>Neptune Quiz App: Get Selected Quiz</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IV_TEST_ID</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZNEPT_QZ_TEST_ID_DE</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>ET_API_QUESTION</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZNEPT_QZ_API_QUESTION_T</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>ET_API_VARIANT</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZNEPT_QZ_API_VARIANT_T</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IV_TEST_ID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Neptune Quiz App: Quiz ID</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ET_API_QUESTION</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Neptune Quiz App: Quiz Questions</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ET_API_VARIANT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Neptune Quiz App: Quiz Variants</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZNEPT_QZ_API_SET_PROGRESS</FUNCNAME>
+     <SHORT_TEXT>Neptune Quiz App: Set Progress</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IV_TEST_ID</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZNEPT_QZ_TEST_ID_DE</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IT_API_PROGRESS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZNEPT_QZ_API_PROGRESS_T</TYP>
+      </RSIMP>
+     </IMPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IV_TEST_ID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Neptune Quiz App: Quiz ID</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_API_PROGRESS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Neptune Quiz App: Quiz Progress</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

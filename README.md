@@ -1,24 +1,31 @@
 # Neptune-Quiz-App
 
-Practice quiz / exam / certification on the go.
+This application is developed on ABAP and Neptune Software (https://www.neptune-software.com). <br>
+It is designed to work in both browser and Neptune mobile client. It supports offline, multi-user, private and public content and synchronization with the backend. <br>
+You can start practicing (quiz / exam / certification) on one device and continue on another and your learning progress will not be lost.
 
-This application is developed on ABAP and Neptune Software (https://www.neptune-software.com). It is designed to work in both browser and Neptune mobile client. 
-It supports offline work (in Neptune mobile client), multi-user, private and public content and synchronization in the ABAP backend. 
-You can start practicing (quiz / exam / certification) on one device and then continue on another and your learning progress will not be lost.
+## Installation
 
-# Installation
+SAP ABAP trial platform: <br> 
+https://hub.docker.com/r/sapse/abap-cloud-developer-trial
 
-SAP ABAP trial platform: https://hub.docker.com/r/sapse/abap-cloud-developer-trial
+Neptune Software SAP edition: <br> 
+https://community.neptune-software.com/topics/planet-8/blogs/installation-of--neptune--d-x-p--s-a-p--edition-on--a-b-a-p--pl 
 
-Neptune Software SAP edition: https://community.neptune-software.com/topics/planet-8/blogs/installation-of--neptune--d-x-p--s-a-p--edition-on--a-b-a-p--pl 
+ABAPGit: <br> 
+https://github.com/abapGit/abapGit 
 
-ABAPGit: https://github.com/abapGit/abapGit 
+Neptune ABAPGit extension: <br> 
+https://github.com/neptune-software/dxp-sap-edition-abapgit-extension 
 
-Neptune ABAPGit extension: https://github.com/neptune-software/dxp-sap-edition-abapgit-extension 
+Neptune mobile client (Optional): <br> 
+https://community.neptune-software.com/documentation/neptune-mobile-client/documentation/neptune-mobile-client-guide 
 
-Neptune mobile client (Optional): https://community.neptune-software.com/documentation/neptune-mobile-client/documentation/neptune-mobile-client-guide 
+## Dependencies 
 
-# Images
+Dictionary Objects and Data Provider methods required from [Neptune-Quiz-App-DB](https://github.com/eborzykh/Neptune-Quiz-App-DB)
+
+## Images
 
 ![](https://github.com/eborzykh/Neptune-Quiz-App/blob/main/images/01_ZNEPT_QZ_APP-PageTestSelect.png)
 ![](https://github.com/eborzykh/Neptune-Quiz-App/blob/main/images/02_ZNEPT_QZ_APP-PagePQSelect.png)
